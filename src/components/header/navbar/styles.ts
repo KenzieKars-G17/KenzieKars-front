@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import GlobalStyles from "../../../styles/GlobalStyles";
-import { NavLink as Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 
 export const NavbarContainer = styled.nav`
