@@ -24,7 +24,7 @@ export const HomePageContext = createContext<iHomePageProviderFunctions>(
 
 export const HomePageProvider = ({ children }: iHomePageProviderProps) => {
 
-  const [showFilterAside, setShowFilterAside] = useState<boolean>(false);
+  const [showFilterAside, setShowFilterAside] = useState<boolean>(true);
   const [showButtonFilter, setShowButtonFilter] = useState<boolean>(false);
   const [showHamburgerMenu, setShowHamburgerMenu] = useState<boolean>(false);
   const [currentWidth, setCurrentWidth] = useState<number>(0);
