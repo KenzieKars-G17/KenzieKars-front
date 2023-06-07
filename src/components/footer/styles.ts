@@ -46,4 +46,10 @@ export const ToTopButton = styled.button`
   width: auto;
   overflow: visible;
   background: transparent;
+  padding: 0%;
+  outline: none;
+
+  &:focus {
+    outline: none;
+  }
 `;

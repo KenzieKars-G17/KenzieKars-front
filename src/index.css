@@ -29,6 +29,13 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #f1f3f5;
+}
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 h1 {
