@@ -1,12 +1,8 @@
 
 const Cards = () => {
   return (
-    <ul>
+    <ul style={{backgroundColor:"#E9ECEF", fontSize:"25pt", textAlign:"center", color:"black", height:"350px", width:"100%"}} >
       cards
-      <li>card</li>
-      <li>card</li>
-      <li>card</li>
-      <li>card</li>
     </ul>
   )
 }

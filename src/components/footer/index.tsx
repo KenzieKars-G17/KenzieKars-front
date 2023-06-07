@@ -1,5 +1,4 @@
 import React from "react";
-import GlobalStyles from "../../styles/GlobalStyles";
 import LogoFooter from "../../assets/LogoFooter.png";
 import ToTopArrow from "../../assets/ToTopArrow.png";
 import {
