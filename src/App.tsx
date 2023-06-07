@@ -8,7 +8,7 @@ function App() {
       <AppRoutes/>
       <GlobalStyles/>
     </>
-  );
+  )
 }
 
-export default App;
+export default App
