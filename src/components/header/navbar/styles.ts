@@ -15,7 +15,7 @@ export const NavbarContainer = styled.nav`
 `;
 
 export const FazerLoginButton = styled.button`
-  width: 133px;
+  min-width: 133px;
   height: 48px;
   background-color: transparent;
   border: none;
@@ -25,6 +25,10 @@ export const FazerLoginButton = styled.button`
   font-size: 16px;
   color: #4529e6;
   text-decoration: none;
+  outline: none;
+  &:focus {
+    outline: none;
+  }
   @media screen and (max-width: 768px) {
     display: none;
   }
@@ -44,10 +48,15 @@ export const CadastrarButton = styled.button`
   font-size: 16px;
   color: #0b0d0d;
   text-decoration: none;
+  outline: none;
 
   &:hover {
     background-color: #0b0d0d;
     color: #fdfdfd;
+  }
+
+  &:focus {
+    outline: none;
   }
   @media screen and (max-width: 768px) {
     display: none;
@@ -113,7 +122,7 @@ export const Hamburger = styled(FaBars)`
     right: 0;
     position: absolute;
     cursor: pointer;
-    transform: translate(-100%, 75%);
+    transform: translate(-100%, 30%);
   }
 `;
 
