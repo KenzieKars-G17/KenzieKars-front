@@ -1,8 +1,30 @@
+import React from "react";
+import LogoFooter from "../../assets/LogoFooter.png";
+import ToTopArrow from "../../assets/ToTopArrow.png";
+import {
+  FooterContainer,
+  FooterInnerContainer,
+  FooterLogoContainer,
+  TradeMark,
+  ToTopButton,
+} from "./styles";
 
 const Footer = () => {
   return (
-    <footer style={{height:"375px", backgroundColor:"#0B0D0D", color: "white", textAlign:"center", width: "100vw"}}>Footer</footer>
-  )
-}
+    <React.Fragment>
+      <FooterContainer>
+        <FooterInnerContainer>
+          <FooterLogoContainer>
+            <img src={LogoFooter} alt="Footer Logo" />
+          </FooterLogoContainer>
+          <TradeMark>© 2022 - Todos os direitos reservados.</TradeMark>
+          <ToTopButton>
+            <img src={ToTopArrow} alt="Scroll to top" />
+          </ToTopButton>
+        </FooterInnerContainer>
+      </FooterContainer>
+    </React.Fragment>
+  );
+};
 
-export default Footer
+export default Footer;

@@ -1,14 +1,15 @@
-import AppRoutes from "./AppRoutes";
-import GlobalStyles from "./styles/GlobalStyles";
+import { useState } from "react";
+import "./App.css";
+import Header from "./components/header";
+import Footer from "./components/footer";
 
 function App() {
-
   return (
     <>
-      <AppRoutes/>
-      <GlobalStyles/>
+      <Header />
+      <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
