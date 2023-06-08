@@ -7,7 +7,9 @@ export const HomePageBase = styled.div`
     flex-wrap: wrap;
 
     main {
+        margin: 10px 0;
         width: 100vw;
         display: flex;
+        gap: 15px;
     }
 `;

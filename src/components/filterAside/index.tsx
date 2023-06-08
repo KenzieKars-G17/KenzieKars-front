@@ -1,7 +1,7 @@
 
 const FilterAside = () => {
   return (
-    <div style={{width:"25vw", backgroundColor:"gray", color:"gold"}}>FilterAside</div>
+    <div style={{width:"35vw", backgroundColor:"gray", color:"gold"}}>FilterAside</div>
   )
 }
 
