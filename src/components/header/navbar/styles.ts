@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { FaBars } from "react-icons/fa";
 
 export const NavbarContainer = styled.nav`
-  position: fixed;
+  /* position: relative; */
   width: 100%;
   height: 80px;
   border-bottom-width: 2px;
