@@ -1,14 +1,9 @@
-import { useState } from "react";
-import React from "react";
-import GlobalStyles from "./styles/GlobalStyles";
-import Header from "./components/header";
-import Footer from "./components/footer";
+import AppRoutes from "./AppRoutes";
 
 function App() {
   return (
     <>
-      <Header />
-      <Footer />
+      <AppRoutes/>
     </>
   );
 }

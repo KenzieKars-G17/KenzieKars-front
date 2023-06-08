@@ -2,7 +2,7 @@ import styled from "styled-components";
 import GlobalStyles from "../../styles/GlobalStyles";
 
 export const FooterContainer = styled.footer`
-  position: fixed;
+  /* position: fixed; */
   left: 0;
   bottom: 0;
   width: 100%;
