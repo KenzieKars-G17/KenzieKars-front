@@ -1,10 +1,8 @@
+import axios from "axios";
 
-const Api2 = () => {
-  return (
-    <div>
-      Api2
-    </div>
-  )
-}
+const api2 = axios.create({
+  baseURL: "https://kenzie-kars.herokuapp.com/",
+  timeout: 5000,
+});
 
-export default Api2
+export default api2
