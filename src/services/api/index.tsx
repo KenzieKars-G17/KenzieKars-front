@@ -1,10 +1,8 @@
+import axios from "axios";
 
-const Api = () => {
-  return (
-    <div>
-      Api
-    </div>
-  )
-}
+const api = axios.create({
+  baseURL: "http://localhost:3000/",
+  timeout: 5000,
+});
 
-export default Api
+export default api;
