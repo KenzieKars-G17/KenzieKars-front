@@ -1,4 +1,4 @@
-import {  BrowserRouter as Router,  Route,  Routes,  Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import HomePage from "./pages/home";
 import LoginPage from "./pages/login";
 import { FilterProvider } from "./contexts/filter.context";
@@ -14,19 +14,20 @@ const AppRoutes = () => {
       <AuthProvider>
         <AdvertisementProvider>
           <ProductPageProvider>
-        <HomePageProvider>
+            <HomePageProvider>
               <FilterProvider>
                 <Routes>
                   <Route path="/" element={<HomePage />}></Route>
-                <Route path="/login" element={<LoginPage />}></Route>
+                  <Route path="/login" element={<LoginPage />}></Route>
                   <Route path="/product-page" element={<ProductPage />}></Route>
-            </Routes>
+                </Routes>
               </FilterProvider>
             </HomePageProvider>
+          </ProductPageProvider>
         </AdvertisementProvider>
       </AuthProvider>
-      </ProductPageProvider>
-    </Router>
+
+    </Router >
   );
 };
 
