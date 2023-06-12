@@ -60,7 +60,14 @@ export const AdvertisementProvider = ({
 
   const createAdvertisement = async (body: any) => {
     try {
-      const response = await api.post("advertisement", body);
+      const jwtToken = localStorage.getItem("@TOKEN");
+      if (!jwtToken) return;
+
+      const response = await api.post("advertisement", body,{
+        headers:{
+          Authorization: `Bearer ${jwtToken}`,
+        }
+      });
 
       return response.data;
     } catch (error) {
@@ -70,7 +77,14 @@ export const AdvertisementProvider = ({
 
   const updateAdvertisement = async (id: number, body: any) => {
     try {
-      const response = await api.patch<Iadvertisement>( `advertisement/${id}`,body);
+      const jwtToken = localStorage.getItem("@TOKEN");
+      if (!jwtToken) return;
+
+      const response = await api.patch<Iadvertisement>( `advertisement/${id}`,body,{
+        headers:{
+          Authorization: `Bearer ${jwtToken}`
+        }
+      });
 
       return response.data;
     } catch (error) {
@@ -79,8 +93,15 @@ export const AdvertisementProvider = ({
   };
 
   const deleteAdvertisement = async (id: number) => {
+    const jwtToken = localStorage.getItem("@TOKEN");
+    if (!jwtToken) return;
+
     try {
-      await api.delete(`advertisement/${id}`);
+      await api.delete(`advertisement/${id}`,{
+        headers:{
+          Authorization: `Bearer ${jwtToken}`
+        }
+      });
 
     } catch (error) {
       console.error("Erro ao deletar o anuncio", error);
