@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Cards from "../../components/cards";
 import FilterAside from "../../components/filterAside";
 import Footer from "../../components/footer";
@@ -6,6 +6,7 @@ import Header from "../../components/header";
 import { HomePageContext } from "../../contexts/homepage.context";
 // import { FilterContext } from "../../contexts/filter.context";
 import { HomePageBase } from "./styles";
+import { ProductPageContext } from "../../contexts/productPage.context";
 // import { useContext } from "react";
 
 const HomePage = () => {
@@ -39,6 +40,12 @@ const HomePage = () => {
   // } = useContext(FilterContext);
 
   const { ShowFilterAside, showFilterAside, showButtonFilter  } = useContext(HomePageContext)
+  const { ShowBannerPicture } = useContext(ProductPageContext)
+
+  useEffect(() => {
+    const condition = true
+    ShowBannerPicture(condition)
+  }, [])
 
   return (
     <HomePageBase>
