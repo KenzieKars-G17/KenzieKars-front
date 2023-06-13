@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 
 interface iHomePageProviderFunctions {
   showHamburgerMenu: boolean;
@@ -40,7 +40,7 @@ export const HomePageProvider = ({ children }: iHomePageProviderProps) => {
   const updateWidth = (): void => {
     setCurrentWidth(window.innerWidth);
     
-    if(currentWidth >= 768) {
+    if(window.innerWidth >= 768) {
       setShowButtonFilter(false)
       setShowFilterAside(true)
     } else {
@@ -48,9 +48,19 @@ export const HomePageProvider = ({ children }: iHomePageProviderProps) => {
       setShowFilterAside(false)
     }
 
+    setCurrentWidth(window.innerWidth);
+    console.log(currentWidth)
+    console.log(window.innerWidth)
+
   };
 
   window.addEventListener('resize', updateWidth);
+
+  useEffect(() => {
+    updateWidth()
+  }, [])
+  
+  
 
   return (
     <HomePageContext.Provider

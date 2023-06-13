@@ -105,7 +105,7 @@ const Cards = () => {
     <UlCards>
       {announcements.map((announcement) => {
         return (
-          <li>
+          <li key={Math.random()}>
             <img src={announcement.imgSource} alt={announcement.alt} />
             <h2>{announcement.name}</h2>
             <p>{announcement.description}</p>
