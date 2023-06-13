@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const IndividualProductBase = styled.section`
-
   display: flex;
   flex-direction: column;
   position: relative;
@@ -36,8 +35,9 @@ export const IndividualProductBase = styled.section`
     justify-content: space-around;
 
     h1 {
-      font-size: 12pt;
+      font-size: 15pt;
       text-align: center;
+      margin: 20px;
     }
 
     .yearAndKm {
@@ -101,7 +101,8 @@ export const IndividualProductBase = styled.section`
     justify-content: center;
     gap: 15px;
 
-    h2, p {
+    h2,
+    p {
       margin: 0 20px 0 20px;
     }
   }
@@ -117,25 +118,52 @@ export const IndividualProductBase = styled.section`
     justify-content: flex-start;
     gap: 15px;
 
-    h2, p {
+    h2,
+    p {
       margin: 20px 0 0 20px;
     }
 
     ul {
-        list-style: none;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        height: 100%;
+      list-style: none;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      height: 100%;
     }
 
     li {
-        width: 32%;
+      width: 32%;
     }
 
-    img{
-        width: 80%;
+    img {
+      width: 80%;
     }
   }
 
+  @media (min-width: 768px) {
+    .mainPicture {
+      width: 50vw;
+      margin-left: -350px;
+
+      img {
+        min-width: 20%;
+        max-height: 60%;
+        border-radius: 10%;
+      }
+    }
+
+    .resume {
+      width: 50vw;
+      margin-left: -350px;
+    }
+
+    .description {
+      width: 50vw;
+      margin-left: -350px;
+    }
+
+    .pictures {
+      display: none;
+    }
+  }
 `;
