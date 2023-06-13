@@ -7,10 +7,11 @@ import { HomePageContext } from "../../contexts/homepage.context";
 // import { FilterContext } from "../../contexts/filter.context";
 import { HomePageBase } from "./styles";
 import { ProductPageContext } from "../../contexts/productPage.context";
+import Modal from "../../components/modal";
 // import { useContext } from "react";
 
 const HomePage = () => {
-  
+
   // const {
   //   showAllBrands,
   //   showAllModels,
@@ -39,32 +40,40 @@ const HomePage = () => {
   //   maxPrice,
   // } = useContext(FilterContext);
 
-  const { ShowFilterAside, showFilterAside, showButtonFilter  } = useContext(HomePageContext)
+  const { ShowFilterAside, showFilterAside, showButtonFilter, currentWidth, updateWidth } = useContext(HomePageContext)
   const { ShowBannerPicture } = useContext(ProductPageContext)
 
   useEffect(() => {
     const condition = true
     ShowBannerPicture(condition)
+    
+    setTimeout(() => {
+      updateWidth()
+    }, 1000);
   }, [])
+
+
 
   return (
     <HomePageBase>
       <Header />
 
       <main>
-        {showFilterAside === true ? <FilterAside/> : null}
+      {showFilterAside === true && currentWidth >= 768 ? <FilterAside /> : null}
+      {showFilterAside === true && currentWidth < 768 ? <Modal><FilterAside /></Modal> : null}
         <Cards />
       </main>
 
-    {/*COMPONENTIZAR E PADRONIZAR ESTE BOTÃO DE FILTROS*/}
-    {showButtonFilter === true ? (
-      <button onClick={ShowFilterAside} style={{ margin: "5px 25vw", width: "50vw", backgroundColor: "#5126EA", color: "white", border: "none"}}>
-        Filtros
-      </button>
-    ) : null}
-    {/*COMPONENTIZAR E PADRONIZAR ESTE BOTÃO DE FILTROS*/}
+      {/*COMPONENTIZAR E PADRONIZAR ESTE BOTÃO DE FILTROS*/}
+      {showButtonFilter === true && currentWidth < 768 ? (
+        <button onClick={ShowFilterAside} style={{ margin: "5px 25vw", width: "50vw", backgroundColor: "#5126EA", color: "white", border: "none" }}>
+          Filtros
+        </button>
+      ) : null}
+      {/*COMPONENTIZAR E PADRONIZAR ESTE BOTÃO DE FILTROS*/}
 
       <Footer />
+
     </HomePageBase>
   );
 };
