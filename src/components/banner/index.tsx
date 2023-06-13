@@ -1,4 +1,9 @@
+import { useContext } from "react";
+import { ProductPageContext } from "../../contexts/productPage.context";
+
 const Banner = () => {
+  const { showBannerPicture } = useContext(ProductPageContext);
+
   return (
     <div
       style={{
@@ -7,30 +12,31 @@ const Banner = () => {
         position: "relative",
         color: "white",
         textAlign: "center",
-        fontSize: "25pt"
+        fontSize: "25pt",
+        opacity: 0.7,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column",
+        backgroundImage:
+          showBannerPicture === true
+            ? `url("https://fotos.jornaldocarro.estadao.com.br/wp-content/uploads/2021/06/12104139/0x0-ModelSPLAID-1.jpg")`
+            : "none",
+        backgroundColor: showBannerPicture === false ? "#4529E6" : undefined,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundAttachment: "fixed",
+        backgroundRepeat: "no-repeat",
       }}
     >
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          backgroundImage:
-            'url("https://fotos.jornaldocarro.estadao.com.br/wp-content/uploads/2021/06/12104139/0x0-ModelSPLAID-1.jpg")',
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          opacity: 0.7,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "column"
-        }}
-      >
-        <h1 style={{ fontSize: "15.5pt" }}>Motors Shop</h1>
-        <p style={{ fontSize: "15.5pt" }}>A melhor plataforma de anúncios de carros do país</p>
-      </div>
+      {showBannerPicture === true && (
+        <>
+          <h1 style={{ fontSize: "15.5pt" }}>Motors Shop</h1>
+          <p style={{ fontSize: "15.5pt" }}>
+            A melhor plataforma de anúncios de carros do país
+          </p>
+        </>
+      )}
     </div>
   );
 };

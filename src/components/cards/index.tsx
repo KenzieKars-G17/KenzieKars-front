@@ -1,6 +1,7 @@
 import { UlCards } from "./styles";
 
 const Cards = () => {
+  
   const announcements = [
     {
       imgSource: "https://img.olx.com.br/images/51/515306396352820.jpg",
