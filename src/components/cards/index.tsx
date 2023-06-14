@@ -2,7 +2,6 @@ import { useContext } from "react";
 import { UlCards } from "./styles";
 import { AuthContext } from "../../contexts/auth.context";
 import { TAdvertisementArray } from "../../interfaces/advertisements.interfaces";
-import { AdvertisementContext } from "../../contexts/advertisements.context";
 
 interface CardsProps {
   arr: TAdvertisementArray;
