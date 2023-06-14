@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { UlCards } from "./styles";
 import { AuthContext } from "../../contexts/auth.context";
-
 import { TAdvertisementArray } from "../../interfaces/advertisements.interfaces";
+import { AdvertisementContext } from "../../contexts/advertisements.context";
 
 interface CardsProps {
   arr: TAdvertisementArray;
@@ -110,18 +110,17 @@ const Cards = ({ arr }: CardsProps) => {
 
   const { user } = useContext(AuthContext);
 
-
   return (
     <UlCards>
       {arr.map((announcement) => {
         return (
           <li key={Math.random()}>
+            {announcement.is_active? <div className="divActive"><p>Ativo</p></div> : <div className="divInactive"><p>Inativo</p></div>}
             <img src={announcement.cover_image} alt={announcement.model} />
             <h2>
               {announcement.brand}-{announcement.model}
             </h2>
             <p>{announcement.description}</p>
-            {announcement.is_active? <div className="divActive"><p>Ativo</p></div> : <div className="divInactive"><p>Inativo</p></div>}
             <div className="announcerDetails">
               <img
                 src={announcements[0].profilePic}
