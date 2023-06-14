@@ -1,5 +1,13 @@
+<<<<<<< Updated upstream
 import { createContext, useEffect, useState } from "react";
 import { Iadvertisement } from "../interfaces/advertisements.interfaces";
+=======
+import { createContext, useState } from "react";
+import {
+  Iadvertisement,
+  IadvertisementStatus,
+} from "../interfaces/advertisements.interfaces";
+>>>>>>> Stashed changes
 import api from "../services/api";
 
 interface advertisementProviderProps {
@@ -119,6 +127,29 @@ export const AdvertisementProvider = ({
     }
   };
 
+  const updateAdvertisementStatus = async (
+    id: number,
+    body: IadvertisementStatus
+  ) => {
+    try {
+      const jwtToken = localStorage.getItem("@TOKEN");
+      if (!jwtToken) return;
+
+      const response = await api.patch<IadvertisementStatus>(
+        `advertisement/status/${id}`,
+        body,
+        {
+          headers: {
+            Authorization: `Bearer ${jwtToken}`,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao atualizar status do anuncio", error);
+    }
+  };
+
   const deleteAdvertisement = async (id: number) => {
     try {
       const jwtToken = localStorage.getItem("@TOKEN");
@@ -145,6 +176,7 @@ export const AdvertisementProvider = ({
         getSellerAdvertisements,
         createAdvertisement,
         updateAdvertisement,
+        updateAdvertisementStatus,
         deleteAdvertisement,
       }}
     >
