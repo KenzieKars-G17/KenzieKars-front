@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { UlCards } from "./styles";
 import { AuthContext } from "../../contexts/auth.context";
+
 import { TAdvertisementArray } from "../../interfaces/advertisements.interfaces";
 
 interface CardsProps {
