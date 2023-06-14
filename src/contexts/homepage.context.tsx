@@ -49,8 +49,6 @@ export const HomePageProvider = ({ children }: iHomePageProviderProps) => {
     }
 
     setCurrentWidth(window.innerWidth);
-    console.log(currentWidth)
-    console.log(window.innerWidth)
 
   };
 

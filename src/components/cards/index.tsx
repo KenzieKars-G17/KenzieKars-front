@@ -9,6 +9,7 @@ interface CardsProps {
 }
 
 const Cards = ({ arr }: CardsProps) => {
+  
   const announcements = [
     {
       imgSource: "https://img.olx.com.br/images/51/515306396352820.jpg",
@@ -107,6 +108,8 @@ const Cards = ({ arr }: CardsProps) => {
       price: 148750,
     },
   ];
+
+  console.log(arr)
 
   const { user } = useContext(AuthContext);
 
