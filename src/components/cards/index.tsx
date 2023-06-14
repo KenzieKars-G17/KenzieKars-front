@@ -1,11 +1,14 @@
 import { useContext } from "react";
 import { UlCards } from "./styles";
 import { AuthContext } from "../../contexts/auth.context";
-import { AdvertisementContext } from "../../contexts/advertisements.context";
 
+import { Iadvertisement } from "../../interfaces/advertisements.interfaces";
 
-const Cards = () => {
-  
+interface CardsProps {
+  arr: Iadvertisement[];
+}
+
+const Cards = ({ arr }: CardsProps) => {
   const announcements = [
     {
       imgSource: "https://img.olx.com.br/images/51/515306396352820.jpg",
@@ -105,18 +108,17 @@ const Cards = () => {
     },
   ];
 
-  
-  const {allAdvertisements} = useContext(AdvertisementContext)
-
-  const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
 
   return (
     <UlCards>
-      {allAdvertisements.map((announcement) => {
+      {arr.map((announcement) => {
         return (
           <li key={Math.random()}>
             <img src={announcement.cover_image} alt={announcement.model} />
-            <h2>{announcement.brand}-{announcement.model}</h2>
+            <h2>
+              {announcement.brand}-{announcement.model}
+            </h2>
             <p>{announcement.description}</p>
             <div className="announcerDetails">
               <img
