@@ -1,12 +1,4 @@
-export interface Iadvertisement{
-    id: number;
-    brand: string;
-    model: string;
-    fuel: string;
-    mileage: string;
-    color: string;
-    table_price: number;
-    price: number;
-    cover_image: string;
-    is_active: boolean;
-}
+import { z } from "zod";
+import { advertisementSchema } from "../schemas/advertisements.schema";
+
+export type Iadvertisement = z.infer<typeof advertisementSchema>

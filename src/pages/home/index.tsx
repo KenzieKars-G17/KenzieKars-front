@@ -43,6 +43,7 @@ const HomePage = () => {
   const { ShowFilterAside, showFilterAside, showButtonFilter, currentWidth, updateWidth } = useContext(HomePageContext)
   const { ShowBannerPicture } = useContext(ProductPageContext)
 
+
   useEffect(() => {
     const condition = true
     ShowBannerPicture(condition)
@@ -61,7 +62,7 @@ const HomePage = () => {
       <main>
       {showFilterAside === true && currentWidth >= 768 ? <FilterAside /> : null}
       {showFilterAside === true && currentWidth < 768 ? <Modal><FilterAside /></Modal> : null}
-        <Cards />
+        <Cards  />
       </main>
 
       {/*COMPONENTIZAR E PADRONIZAR ESTE BOTÃO DE FILTROS*/}
