@@ -9,6 +9,7 @@ import { HomePageBase } from "./styles";
 import { ProductPageContext } from "../../contexts/productPage.context";
 import Modal from "../../components/modal";
 import { AdvertisementContext } from "../../contexts/advertisements.context";
+import FormAddAnnouncement from "../../components/forms/formAddAnnouncement";
 // import { useContext } from "react";
 
 const HomePage = () => {
@@ -91,6 +92,8 @@ const HomePage = () => {
         </button>
       ) : null}
       {/*COMPONENTIZAR E PADRONIZAR ESTE BOTÃO DE FILTROS*/}
+
+      <FormAddAnnouncement/>
 
       <Footer />
     </HomePageBase>
