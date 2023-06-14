@@ -1,13 +1,5 @@
-<<<<<<< Updated upstream
 import { createContext, useEffect, useState } from "react";
-import { Iadvertisement } from "../interfaces/advertisements.interfaces";
-=======
-import { createContext, useState } from "react";
-import {
-  Iadvertisement,
-  IadvertisementStatus,
-} from "../interfaces/advertisements.interfaces";
->>>>>>> Stashed changes
+import { Iadvertisement, IadvertisementStatus } from "../interfaces/advertisements.interfaces";
 import api from "../services/api";
 
 interface advertisementProviderProps {
@@ -23,7 +15,8 @@ interface iAdvertisementValues {
   getSellerAdvertisements: ()=> void,
   createAdvertisement: any,
   updateAdvertisement: any,
-  deleteAdvertisement: any
+  deleteAdvertisement: any,
+  updateAdvertisementStatus: any,
 }
 
 export const AdvertisementContext = createContext({} as iAdvertisementValues);

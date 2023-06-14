@@ -10,3 +10,7 @@ export interface Iadvertisement{
     cover_image: string;
     is_active: boolean;
 }
+
+export type IadvertisementStatus ={
+    is_active: boolean;
+}
