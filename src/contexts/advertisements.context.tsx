@@ -11,11 +11,15 @@ export const AdvertisementContext = createContext({} as any);
 export const AdvertisementProvider = ({
   children,
 }: advertisementProviderProps) => {
-  const [allAdvertisements, setAllAdvertisements] = useState<Iadvertisement[]>([]);
+  const [allAdvertisements, setAllAdvertisements] = useState<Iadvertisement[]>(
+    []
+  );
 
-  const [advertisementById, setAdvertisementById] = useState<Iadvertisement[]>([]);
+  const [advertisementById, setAdvertisementById] = useState<Iadvertisement>();
 
-  const [sellerAdvertisements, setSellerAdvertisements] = useState<Iadvertisement[]>([]);
+  const [sellerAdvertisements, setSellerAdvertisements] = useState<
+    Iadvertisement[]
+  >([]);
 
   const getAllAdvertisements = async () => {
     try {
@@ -31,7 +35,7 @@ export const AdvertisementProvider = ({
       const jwtToken = localStorage.getItem("@TOKEN");
       if (!jwtToken) return;
 
-      const response = await api.get<Iadvertisement[]>(`advertisement/${id}`, {
+      const response = await api.get<Iadvertisement>(`advertisement/${id}`, {
         headers: {
           Authorization: `Bearer ${jwtToken}`,
         },
@@ -63,10 +67,10 @@ export const AdvertisementProvider = ({
       const jwtToken = localStorage.getItem("@TOKEN");
       if (!jwtToken) return;
 
-      const response = await api.post("advertisement", body,{
-        headers:{
+      const response = await api.post("advertisement", body, {
+        headers: {
           Authorization: `Bearer ${jwtToken}`,
-        }
+        },
       });
 
       return response.data;
@@ -80,11 +84,15 @@ export const AdvertisementProvider = ({
       const jwtToken = localStorage.getItem("@TOKEN");
       if (!jwtToken) return;
 
-      const response = await api.patch<Iadvertisement>( `advertisement/${id}`,body,{
-        headers:{
-          Authorization: `Bearer ${jwtToken}`
+      const response = await api.patch<Iadvertisement>(
+        `advertisement/${id}`,
+        body,
+        {
+          headers: {
+            Authorization: `Bearer ${jwtToken}`,
+          },
         }
-      });
+      );
 
       return response.data;
     } catch (error) {
@@ -93,16 +101,15 @@ export const AdvertisementProvider = ({
   };
 
   const deleteAdvertisement = async (id: number) => {
-    const jwtToken = localStorage.getItem("@TOKEN");
-    if (!jwtToken) return;
-
     try {
-      await api.delete(`advertisement/${id}`,{
-        headers:{
-          Authorization: `Bearer ${jwtToken}`
-        }
-      });
+      const jwtToken = localStorage.getItem("@TOKEN");
+      if (!jwtToken) return;
 
+      await api.delete(`advertisement/${id}`, {
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+        },
+      });
     } catch (error) {
       console.error("Erro ao deletar o anuncio", error);
     }
