@@ -2,10 +2,10 @@ import { useContext } from "react";
 import { UlCards } from "./styles";
 import { AuthContext } from "../../contexts/auth.context";
 
-import { Iadvertisement } from "../../interfaces/advertisements.interfaces";
+import { TAdvertisementArray } from "../../interfaces/advertisements.interfaces";
 
 interface CardsProps {
-  arr: Iadvertisement[];
+  arr: TAdvertisementArray;
 }
 
 const Cards = ({ arr }: CardsProps) => {
@@ -126,7 +126,7 @@ const Cards = ({ arr }: CardsProps) => {
                 alt="ProfilePic"
                 className="profilePic"
               />
-              <h3 className="userName">{announcements[0].profileName}</h3>
+              <h3 className="userName">{announcement.user?.name}</h3>
             </div>
             {user && <button>teste</button>}
             <div className="productDetailsPreview">
