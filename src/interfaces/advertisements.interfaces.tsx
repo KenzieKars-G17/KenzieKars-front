@@ -1,4 +1,8 @@
 import { z } from "zod";
-import { advertisementSchema } from "../schemas/advertisements.schema";
+import {
+  advertisementSchema,
+  advertisementAllSchema,
+} from "../schemas/advertisements.schema";
 
-export type Iadvertisement = z.infer<typeof advertisementSchema>
+export type Iadvertisement = z.infer<typeof advertisementSchema>;
+export type TAdvertisementArray = z.infer<typeof advertisementAllSchema>;

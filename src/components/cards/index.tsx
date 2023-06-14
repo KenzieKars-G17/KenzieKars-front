@@ -2,10 +2,10 @@ import { useContext } from "react";
 import { UlCards } from "./styles";
 import { AuthContext } from "../../contexts/auth.context";
 
-import { Iadvertisement } from "../../interfaces/advertisements.interfaces";
+import { TAdvertisementArray } from "../../interfaces/advertisements.interfaces";
 
 interface CardsProps {
-  arr: Iadvertisement[];
+  arr: TAdvertisementArray;
 }
 
 const Cards = ({ arr }: CardsProps) => {
@@ -110,6 +110,7 @@ const Cards = ({ arr }: CardsProps) => {
 
   const { user } = useContext(AuthContext);
 
+
   return (
     <UlCards>
       {arr.map((announcement) => {
@@ -120,20 +121,24 @@ const Cards = ({ arr }: CardsProps) => {
               {announcement.brand}-{announcement.model}
             </h2>
             <p>{announcement.description}</p>
+            {announcement.is_active? <div className="divActive"><p>Ativo</p></div> : <div className="divInactive"><p>Inativo</p></div>}
             <div className="announcerDetails">
               <img
                 src={announcements[0].profilePic}
                 alt="ProfilePic"
                 className="profilePic"
               />
-              <h3 className="userName">{announcements[0].profileName}</h3>
+              <h3 className="userName">{announcement.user?.name}</h3>
             </div>
-            {user && <button>teste</button>}
             <div className="productDetailsPreview">
               <span className="km">{announcement.mileage} KM</span>
               <span className="year">{announcement.year}</span>
               <span className="price">R$ {announcement.price}</span>
             </div>
+            {user && <div className="divButtonsAdmin">
+              <button className="btnEdit">Editar</button>
+              <button className="btnDetails">Ver detalhes</button>
+              </div>}
           </li>
         );
       })}
