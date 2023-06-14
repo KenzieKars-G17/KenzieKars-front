@@ -16,6 +16,7 @@ export const UlCards = styled.ul`
     height: 100%;
     flex-shrink: 0;
     width: 200px;
+    position: relative;
   }
 
   img {
@@ -69,13 +70,86 @@ export const UlCards = styled.ul`
     font-size: 12pt;
   }
 
+  .divActive {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 5px;
+    left: 5px;
+
+    background: #4529e6;
+    color: #ffffff;
+
+    width: 51px;
+    height: 24px;
+
+    p {
+      font-family: "Inter";
+      font-weight: 500;
+      font-size: 14px;
+    }
+  }
+
+  .divInactive {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    width: 61px;
+    height: 24px;
+
+    position: absolute;
+    top: 12px;
+    left: 12px;
+
+    background: #adb5bd;
+    color: #ffffff;
+
+    p {
+      font-family: "Inter";
+      font-weight: 500;
+      font-size: 14px;
+    }
+  }
+
+  .divButtonsAdmin {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+
+    button {
+      border: 1.5px solid #212529;
+      border-radius: 4px;
+      color: #212529;
+      font-family: "Inter";
+      flex-shrink: 1;
+    }
+
+    .btnEdit {
+      width: 80px;
+      height: 38px;
+      font-weight: 600;
+      font-size: 12px;
+    }
+    .btnDetails {
+      width: 126px;
+      height: 38px;
+      font-weight: 600;
+      font-size: 12px;
+    }
+  }
+
   @media (min-width: 768px) {
     flex-wrap: wrap;
     height: 100%;
     gap: 50px;
 
-    li{
-        height: 10%;
+    li {
+      height: 10%;
     }
   }
 `;
