@@ -6,3 +6,7 @@ import {
 
 export type Iadvertisement = z.infer<typeof advertisementSchema>;
 export type TAdvertisementArray = z.infer<typeof advertisementAllSchema>;
+
+export type IadvertisementStatus ={
+    is_active: boolean;
+}
