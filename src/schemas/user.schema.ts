@@ -20,4 +20,10 @@ const returnUserSchema = userSchema
   })
   .omit({ password: true });
 
-export { userSchema, returnUserSchema };
+const returnUserAdSchema = z
+  .object({
+    name: z.string().min(3).max(45),
+  })
+  .partial();
+
+export { userSchema, returnUserSchema, returnUserAdSchema };
