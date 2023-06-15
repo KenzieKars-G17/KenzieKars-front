@@ -30,7 +30,6 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
   const [user, setUser] = useState<IUserReturn | null>(null);
   const navigate = useNavigate();
 
-
   useEffect(() => {
     const loadUser = async () => {
       try {
@@ -63,9 +62,8 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
     }
   };
 
-
   return (
-    <AuthContext.Provider value={{ user, setUser, login }}>
+    <AuthContext.Provider value={{ user, setUser, login}}>
       {children}
     </AuthContext.Provider>
   );
