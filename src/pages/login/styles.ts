@@ -6,8 +6,6 @@ export const StyledLogin = styled.main`
   align-items: center;
   padding: 5.2rem 1.6rem;
   width: 100vw;
-  /* height: calc(100vh - (140px + 80px)); */
-  /* min-height: 665px; */
   background-color: var(--color-grey-8);
   @media (min-width: 700px) {
     padding: 12rem 1.6rem;
@@ -54,7 +52,6 @@ export const StyledLogin = styled.main`
     width: 76.7%;
     min-width: 287px;
     height: 392px;
-    box-sizing: border-box;
 
     .inputs-cont {
       display: flex;
@@ -63,7 +60,6 @@ export const StyledLogin = styled.main`
       align-items: flex-start;
       width: 100%;
       height: 203px;
-      box-sizing: border-box;
 
       .alert-span {
         font-size: 1.2rem;
