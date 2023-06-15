@@ -22,6 +22,7 @@ interface iContextValues {
   user: IUserReturn | null;
   login: (data: iLogin) => Promise<void>;
   setUser: Dispatch<SetStateAction<IUserReturn | null>>;
+  checkAutorization: () => boolean;
 }
 
 export const AuthContext = createContext({} as iContextValues);
@@ -29,7 +30,7 @@ export const AuthContext = createContext({} as iContextValues);
 export const AuthProvider = ({ children }: iAuthProviderProps) => {
   const [user, setUser] = useState<IUserReturn | null>(null);
   const navigate = useNavigate();
-
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     const loadUser = async () => {
@@ -43,6 +44,7 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
           },
         });
         setUser(findUser.data);
+        setIsAuthenticated(true);
       } catch (error) {
         console.log(error);
       }
@@ -57,15 +59,20 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
       const { token } = resp.data;
 
       localStorage.setItem("@TOKEN", token);
+      setIsAuthenticated(true);
       navigate("/");
     } catch (error) {
       console.log(error);
     }
   };
 
+  const checkAutorization = () => {
+    return isAuthenticated;
+  };
+
 
   return (
-    <AuthContext.Provider value={{ user, setUser, login }}>
+    <AuthContext.Provider value={{ user, setUser, login, checkAutorization}}>
       {children}
     </AuthContext.Provider>
   );
