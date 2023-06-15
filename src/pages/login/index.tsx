@@ -1,31 +1,81 @@
-import { useContext, useEffect } from "react";
-import Footer from "../../components/footer";
-import FormLogin from "../../components/forms/formLogin";
+import { zodResolver } from "@hookform/resolvers/zod";
+import GlobalStyles from "../../styles/GlobalStyles";
+
 import Header from "../../components/header";
-import { HomePageContext } from "../../contexts/homepage.context";
-import { ProductPageContext } from "../../contexts/productPage.context";
-import { LoginPageBase } from "./styles";
+import Footer from "../../components/footer";
 
-const LoginPage = () => {
+import { useForm } from "react-hook-form";
+import { LoginSchema } from "./validator";
 
-  const { ShowBanner } = useContext(ProductPageContext)
+import { StyledLogin } from "./styles";
+import { useAuth } from "../../hooks";
 
-  useEffect(()=>{
-    const condition = false
-    ShowBanner(condition)
-  },[])
+import { tLogin } from "./types";
+import { InputComponent } from "../../components/InputComponent";
 
-  
+const Login = () => {
+  const { login } = useAuth();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<tLogin>({
+    resolver: zodResolver(LoginSchema),
+  });
+
   return (
-    <LoginPageBase>
+    <>
+      <GlobalStyles />
       <Header />
-      <main>
-        <FormLogin />
-      </main>
+      <StyledLogin>
+        <section className="login-content">
+          <div className="tittle-box">
+            <h1 className="login-title">Login</h1>
+          </div>
+          <form
+            className="login-form"
+            noValidate
+            onSubmit={handleSubmit(login)}
+          >
+            <div className="inputs-cont">
+              <InputComponent
+                label="Email"
+                placeholder="Digitar email"
+                type="email"
+                {...register("email")}
+              />
+              {errors.email && (
+                <span className="alert-span">{errors.email.message}</span>
+                )}
+                <InputComponent
+                  label="Senha"
+                  placeholder="Digitar senha"
+                  type="password"
+                  {...register("password")}
+                />
+                {errors.password && (
+                  <span className="alert-span">{errors.password.message}</span>
+                )}
+              <a href="">
+                <span>Esqueci minha senha</span>
+              </a>
+            </div>
+            <div className="buttons-cont">
+              <button className="bttn bttn-brand" type="submit">
+                Entrar
+              </button>
+              <p>Ainda não possui uma conta?</p>
+              <button className="bttn bttn-gray" type="button">
+                Cadastrar
+              </button>
+            </div>
+          </form>
+        </section>
+      </StyledLogin>
       <Footer />
-    </LoginPageBase>
+    </>
   );
-
 };
 
-export default LoginPage;
+export default Login;
