@@ -5,7 +5,6 @@ export const UserCardDiv = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   position: absolute;
-  top: 75%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;

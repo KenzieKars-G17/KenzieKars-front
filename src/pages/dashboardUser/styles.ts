@@ -5,6 +5,7 @@ export const DashboardUserPageBase = styled.div`
   justify-content: space-between;
   flex-direction: row;
   width: 100vw;
+  height: 100vh;
   flex-wrap: wrap;
   position: relative;
 
@@ -16,6 +17,10 @@ export const DashboardUserPageBase = styled.div`
     gap: 15px;
     justify-content: center;
     align-items: center;
+
+    .divAdvertisement {
+      margin-top: 200px;
+    }
   }
 
   .pictures {
