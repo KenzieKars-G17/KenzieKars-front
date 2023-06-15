@@ -11,20 +11,30 @@ import {
   CadastrarButton,
 } from "./styles";
 import LogoNav from "../../../assets/LogoNav.png";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+
+  const navigate = useNavigate()
+
   return (
     <React.Fragment>
       <NavbarContainer>
         <NavbarInnerContainer>
           <LeftContainer>
             <NavbarLogoContainer>
-              <img src={LogoNav} alt="Menu Logo" />
+              <img src={LogoNav} alt="Menu Logo" onClick={()=>{
+              navigate("/")
+            }}/>
             </NavbarLogoContainer>
           </LeftContainer>
           <RightContainer>
-            <FazerLoginButton>Fazer Login</FazerLoginButton>
-            <CadastrarButton>Cadastrar</CadastrarButton>
+            <FazerLoginButton onClick={()=>{
+              navigate("/login")
+            }}>Fazer Login</FazerLoginButton>
+            <CadastrarButton onClick={()=>{
+              navigate("/register")
+            }}>Cadastrar</CadastrarButton>
             <Hamburger />
           </RightContainer>
         </NavbarInnerContainer>

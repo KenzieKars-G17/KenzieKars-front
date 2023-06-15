@@ -7,7 +7,7 @@ export const DivBackgroundModal = styled.div`
   top: 0;
   background-color: #808080ba;
   display: flex;
-  justify-content: flex;
+  justify-content: center;
   align-items: center;
 
   .divModalInfo {

@@ -1,15 +1,19 @@
+import { useContext } from "react"
+import { AdvertisementContext } from "../../../contexts/advertisements.context"
 import { InputComponent } from "../../InputComponent"
 import Modal from "../../modal"
 import { FormNewAd } from "./styles"
 
 const FormAddAnnouncement = () => {
+
+  const { SetShowAddAdvertisementForm, showAddAdvertisementForm} = useContext(AdvertisementContext)
   return (
     <Modal>
       <FormNewAd>
 
         <div className="divTitleAndCloseButton">
           <h2>Criar anúncio</h2>
-          <button>X</button>
+          <button onClick={SetShowAddAdvertisementForm}>X</button>
         </div>
 
         <div className="divInputs">
@@ -43,7 +47,8 @@ const FormAddAnnouncement = () => {
           <button className="buttonAddField">Adicionar campo para imagem da galeria</button>
 
           <div className="divButtonCancelAndSubmit">
-            <button className="buttonCancel">Cancelar</button>
+            
+            <button className="buttonCancel" onClick={SetShowAddAdvertisementForm}>Cancelar</button>
             <button type="submit" className="buttonSubmit">Criar Anúncio</button>
           </div>
 

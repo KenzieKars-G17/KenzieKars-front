@@ -90,4 +90,8 @@ export const FormNewAd = styled.form`
 
   }
 
+  @media (min-width: 768px) {
+    width: 30vw;
+  }
+
 `;

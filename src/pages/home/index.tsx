@@ -13,7 +13,10 @@ import FormAddAnnouncement from "../../components/forms/formAddAnnouncement";
 // import { useContext } from "react";
 
 const HomePage = () => {
+
   const { allAdvertisements } = useContext(AdvertisementContext);
+  const { ShowBanner } = useContext(ProductPageContext);
+
   // const {
   //   showAllBrands,
   //   showAllModels,
@@ -41,6 +44,11 @@ const HomePage = () => {
   //   minPrice,
   //   maxPrice,
   // } = useContext(FilterContext);
+
+  useEffect(()=>{
+    const condition = true
+    ShowBanner(condition)
+  },[])
 
   const {
     ShowFilterAside,
@@ -92,8 +100,6 @@ const HomePage = () => {
         </button>
       ) : null}
       {/*COMPONENTIZAR E PADRONIZAR ESTE BOTÃO DE FILTROS*/}
-
-      <FormAddAnnouncement/>
 
       <Footer />
     </HomePageBase>

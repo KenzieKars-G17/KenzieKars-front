@@ -10,6 +10,7 @@ interface advertisementProviderProps {
 }
 
 interface iAdvertisementValues {
+  showAddAdvertisementForm: boolean;
   allAdvertisements: Iadvertisement[];
   getAllAdvertisements: () => void;
   advertisementById: any;
@@ -20,22 +21,24 @@ interface iAdvertisementValues {
   updateAdvertisement: any;
   deleteAdvertisement: any;
   updateAdvertisementStatus: any;
+  SetShowAddAdvertisementForm: () => void;
 }
 
 export const AdvertisementContext = createContext({} as iAdvertisementValues);
 
-export const AdvertisementProvider = ({
-  children,
-}: advertisementProviderProps) => {
-  const [allAdvertisements, setAllAdvertisements] = useState<Iadvertisement[]>(
-    []
-  );
+export const AdvertisementProvider = ({ children }: advertisementProviderProps) => {
+
+  const [showAddAdvertisementForm, setShowAddAdvertisementForm] = useState<boolean>(false);
+
+  const [allAdvertisements, setAllAdvertisements] = useState<Iadvertisement[]>([]);
 
   const [advertisementById, setAdvertisementById] = useState<Iadvertisement>();
 
-  const [sellerAdvertisements, setSellerAdvertisements] = useState<
-    Iadvertisement[]
-  >([]);
+  const [sellerAdvertisements, setSellerAdvertisements] = useState<Iadvertisement[]>([]);
+
+  const SetShowAddAdvertisementForm = () => {
+    setShowAddAdvertisementForm((prevState) => !prevState);
+  }
 
   useEffect(() => {
     getAllAdvertisements();
@@ -162,6 +165,7 @@ export const AdvertisementProvider = ({
   return (
     <AdvertisementContext.Provider
       value={{
+        showAddAdvertisementForm,
         allAdvertisements,
         getAllAdvertisements,
         advertisementById,
@@ -172,6 +176,7 @@ export const AdvertisementProvider = ({
         updateAdvertisement,
         updateAdvertisementStatus,
         deleteAdvertisement,
+        SetShowAddAdvertisementForm
       }}
     >
       {children}
