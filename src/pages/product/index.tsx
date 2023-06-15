@@ -10,11 +10,12 @@ import { ProductPageContext } from "../../contexts/productPage.context";
 
 const ProductPage = () => {
 
-  const { ShowBannerPicture } = useContext(ProductPageContext);
+  const { ShowBannerPicture, ShowBanner } = useContext(ProductPageContext);
 
   useEffect(() => {
     const condition = false
     ShowBannerPicture(condition)
+    ShowBanner(!condition)
   }, [])
 
   return (
