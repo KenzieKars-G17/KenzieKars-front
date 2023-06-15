@@ -34,7 +34,6 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
 
   const navigate = useNavigate();
 
-
   useEffect(() => {
 
     const loadUser = async () => {
@@ -75,6 +74,7 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
     }
   };
 
+<<<<<<< HEAD
   const registerUser = async (data: iRegister) => {
 
     try {
@@ -89,6 +89,10 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
 
   return (
     <AuthContext.Provider value={{ user, setUser, login, registerUser }}>
+=======
+  return (
+    <AuthContext.Provider value={{ user, setUser, login}}>
+>>>>>>> 97d2690c0518188d55591a565703a0ae2c1280be
       {children}
     </AuthContext.Provider>
   );
