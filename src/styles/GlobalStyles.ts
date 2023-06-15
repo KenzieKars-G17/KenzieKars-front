@@ -63,7 +63,7 @@ export default createGlobalStyle`
     color: var(--color-gray-2);
     -webkit-font-smoothing: antialiased;
 
-    overflow-x: hidden;
+    overflow: hidden;
   }
 
   body, input, button, textarea {
