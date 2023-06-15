@@ -114,7 +114,15 @@ const Cards = ({ arr }: CardsProps) => {
       {arr.map((announcement) => {
         return (
           <li key={Math.random()}>
-            {announcement.is_active? <div className="divActive"><p>Ativo</p></div> : <div className="divInactive"><p>Inativo</p></div>}
+            {announcement.is_active ? (
+              <div className="divActive">
+                <p>Ativo</p>
+              </div>
+            ) : (
+              <div className="divInactive">
+                <p>Inativo</p>
+              </div>
+            )}
             <img src={announcement.cover_image} alt={announcement.model} />
             <h2>
               {announcement.brand}-{announcement.model}
@@ -133,10 +141,12 @@ const Cards = ({ arr }: CardsProps) => {
               <span className="year">{announcement.year}</span>
               <span className="price">R$ {announcement.price}</span>
             </div>
-            {user && <div className="divButtonsAdmin">
-              <button className="btnEdit">Editar</button>
-              <button className="btnDetails">Ver detalhes</button>
-              </div>}
+            {user?.name === announcement.user?.name && (
+              <div className="divButtonsAdmin">
+                <button className="btnEdit">Editar</button>
+                <button className="btnDetails">Ver detalhes</button>
+              </div>
+            )}
           </li>
         );
       })}

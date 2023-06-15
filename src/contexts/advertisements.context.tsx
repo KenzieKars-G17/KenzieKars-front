@@ -1,5 +1,8 @@
 import { createContext, useEffect, useState } from "react";
-import { Iadvertisement, IadvertisementStatus } from "../interfaces/advertisements.interfaces";
+import {
+  Iadvertisement,
+  IadvertisementStatus,
+} from "../interfaces/advertisements.interfaces";
 import api from "../services/api";
 
 interface advertisementProviderProps {
@@ -7,16 +10,16 @@ interface advertisementProviderProps {
 }
 
 interface iAdvertisementValues {
-  allAdvertisements : Iadvertisement[],
-  getAllAdvertisements: () => void,
-  advertisementById: any,
-  getAdvertisementById:any,
-  sellerAdvertisements: Iadvertisement[],
-  getSellerAdvertisements: ()=> void,
-  createAdvertisement: any,
-  updateAdvertisement: any,
-  deleteAdvertisement: any,
-  updateAdvertisementStatus: any,
+  allAdvertisements: Iadvertisement[];
+  getAllAdvertisements: () => void;
+  advertisementById: any;
+  getAdvertisementById: any;
+  sellerAdvertisements: Iadvertisement[];
+  getSellerAdvertisements: () => void;
+  createAdvertisement: any;
+  updateAdvertisement: any;
+  deleteAdvertisement: any;
+  updateAdvertisementStatus: any;
 }
 
 export const AdvertisementContext = createContext({} as iAdvertisementValues);
@@ -24,7 +27,6 @@ export const AdvertisementContext = createContext({} as iAdvertisementValues);
 export const AdvertisementProvider = ({
   children,
 }: advertisementProviderProps) => {
-
   const [allAdvertisements, setAllAdvertisements] = useState<Iadvertisement[]>(
     []
   );
@@ -35,11 +37,10 @@ export const AdvertisementProvider = ({
     Iadvertisement[]
   >([]);
 
-
   useEffect(() => {
-     getAllAdvertisements()
-  }, [])
-  
+    getAllAdvertisements();
+    getSellerAdvertisements();
+  }, []);
 
   const getAllAdvertisements = async () => {
     try {
