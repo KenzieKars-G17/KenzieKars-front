@@ -9,10 +9,14 @@ import { HomePageBase } from "./styles";
 import { ProductPageContext } from "../../contexts/productPage.context";
 import Modal from "../../components/modal";
 import { AdvertisementContext } from "../../contexts/advertisements.context";
+import FormAddAnnouncement from "../../components/forms/formAddAnnouncement";
 // import { useContext } from "react";
 
 const HomePage = () => {
+
   const { allAdvertisements } = useContext(AdvertisementContext);
+  const { ShowBanner } = useContext(ProductPageContext);
+
   // const {
   //   showAllBrands,
   //   showAllModels,
@@ -40,6 +44,11 @@ const HomePage = () => {
   //   minPrice,
   //   maxPrice,
   // } = useContext(FilterContext);
+
+  useEffect(()=>{
+    const condition = true
+    ShowBanner(condition)
+  },[])
 
   const {
     ShowFilterAside,

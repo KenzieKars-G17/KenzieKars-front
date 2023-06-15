@@ -1,6 +1,11 @@
+import { useContext } from "react";
 import { Category, NameAndCategoryDiv, UserCardDiv } from "./styles";
+import { AdvertisementContext } from "../../contexts/advertisements.context";
 
 const UserCard = () => {
+
+  const {  SetShowAddAdvertisementForm } = useContext(AdvertisementContext);
+
   return (
     <UserCardDiv>
       <img></img>
@@ -16,7 +21,7 @@ const UserCard = () => {
         since the 1500s
       </p>
 
-      <button>Criar Anuncio</button>
+      <button onClick={SetShowAddAdvertisementForm}>Criar Anuncio</button>
     </UserCardDiv>
   );
 };

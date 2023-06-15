@@ -5,9 +5,11 @@ import UserCard from "../../components/userCard";
 import { DashboardUserPageBase } from "./styles";
 import { useContext } from "react";
 import { AdvertisementContext } from "../../contexts/advertisements.context";
+import FormAddAnnouncement from "../../components/forms/formAddAnnouncement";
 
 const DashboardUser = () => {
-  const { sellerAdvertisements } = useContext(AdvertisementContext);
+
+  const { sellerAdvertisements, showAddAdvertisementForm } = useContext(AdvertisementContext);
 
   console.log(sellerAdvertisements);
 
@@ -25,6 +27,8 @@ const DashboardUser = () => {
         </div>
       </main>
       <Footer />
+      {showAddAdvertisementForm && <FormAddAnnouncement/>}
+      
     </DashboardUserPageBase>
   );
 };

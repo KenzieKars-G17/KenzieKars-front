@@ -1,13 +1,11 @@
 import { DivBackgroundModal } from "./styles"
 import IModal from "../../interfaces/modal.interface"
 
-const Modal = ({children}: IModal) => {
+const Modal = ({ children }: IModal) => {
   return (
     <DivBackgroundModal>
 
-        <div className="divModalInfo">
-            {children}
-        </div>
+      {children}
 
     </DivBackgroundModal>
   )

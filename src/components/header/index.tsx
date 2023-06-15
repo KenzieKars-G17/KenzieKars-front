@@ -1,21 +1,19 @@
+import { useContext } from "react";
 import Banner from "../banner";
 import Navbar from "./navbar";
+import { ProductPageContext } from "../../contexts/productPage.context";
 
 const Header = () => {
-  const path: string = window.location.pathname;
 
-  if (path == "/login" || path == "/register") {
-    return (
-      <header>
-        <Navbar></Navbar>
-      </header>
-    );
-  }
+  
+  const { showBanner } = useContext(ProductPageContext)
+
 
   return (
     <header>
       <Navbar></Navbar>
-      <Banner />
+      {showBanner && <Banner/>}
+
     </header>
   );
 };
