@@ -10,5 +10,6 @@ export const LoginPageBase = styled.div`
   main {
     display: flex;
     justify-content: center;
+
   }
 `;

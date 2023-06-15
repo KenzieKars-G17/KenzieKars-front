@@ -16,8 +16,6 @@ const LoginPage = () => {
   },[])
 
   
-
-
   return (
     <LoginPageBase>
       <Header />
@@ -30,4 +28,4 @@ const LoginPage = () => {
 
 };
 
-export default LoginPage;
+export default Login;
