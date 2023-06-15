@@ -13,6 +13,7 @@ import { ProductPageProvider } from "./contexts/productPage.context";
 import { AuthProvider } from "./contexts/auth.context";
 import { AdvertisementProvider } from "./contexts/advertisements.context";
 import DashboardUser from "./pages/dashboardUser";
+import RegisterPage from "./pages/register";
 
 const AppRoutes = () => {
   return (
@@ -25,6 +26,7 @@ const AppRoutes = () => {
                 <Routes>
                   <Route path="/" element={<HomePage />}></Route>
                   <Route path="/login" element={<LoginPage />}></Route>
+                  <Route path="/register" element={<RegisterPage />}></Route>
                   <Route path="/product-page" element={<ProductPage />}></Route>
                   <Route
                     path="/dashboard-user"
