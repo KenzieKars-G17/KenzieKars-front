@@ -2,7 +2,6 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Navigate,
 } from "react-router-dom";
 import HomePage from "./pages/home";
 import LoginPage from "./pages/login";
@@ -13,6 +12,7 @@ import { ProductPageProvider } from "./contexts/productPage.context";
 import { AuthProvider } from "./contexts/auth.context";
 import { AdvertisementProvider } from "./contexts/advertisements.context";
 import DashboardUser from "./pages/dashboardUser";
+import { ProtectedRoutes } from "./ProtectedRoutes"; 
 
 const AppRoutes = () => {
   return (
@@ -26,10 +26,9 @@ const AppRoutes = () => {
                   <Route path="/" element={<HomePage />}></Route>
                   <Route path="/login" element={<LoginPage />}></Route>
                   <Route path="/product-page" element={<ProductPage />}></Route>
-                  <Route
-                    path="/dashboard-user"
-                    element={<DashboardUser />}
-                  ></Route>
+                  <Route element={<ProtectedRoutes/>}>
+                      <Route path="/dashboard-user" element={<DashboardUser />}></Route>
+                  </Route>
                 </Routes>
               </FilterProvider>
             </HomePageProvider>
