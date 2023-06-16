@@ -27,7 +27,7 @@ const AppRoutes = () => {
                   <Route path="/login" element={<LoginPage />}></Route>
                   <Route path="/register" element={<RegisterPage />}></Route>
                   <Route path="/product-page" element={<ProductPage />}></Route>
-                      <Route path="/dashboard-user" element={<DashboardUser />}></Route>
+                  <Route path="/user" element={<DashboardUser />}></Route>
                 </Routes>
               </FilterProvider>
             </HomePageProvider>

@@ -22,7 +22,6 @@ const DashboardUser = () => {
     <DashboardUserPageBase>
       <Header />
       <main>
-        <div className="divPurpleBackground"></div>
         <UserCard />
         <div className="divAdvertisement">
           {sellerAdvertisements.length === 0 ? (
