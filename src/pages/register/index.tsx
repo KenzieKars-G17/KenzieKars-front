@@ -22,7 +22,7 @@ const Register = () => {
   useEffect(() => {
     ShowBanner(false)
     }, [])
-
+    
   const { registerUser } = useAuth();
 
   const {
