@@ -8,8 +8,8 @@ import { AdvertisementContext } from "../../contexts/advertisements.context";
 import FormAddAnnouncement from "../../components/forms/formAddAnnouncement";
 
 const DashboardUser = () => {
-
-  const { sellerAdvertisements, showAddAdvertisementForm } = useContext(AdvertisementContext);
+  const { sellerAdvertisements, showAddAdvertisementForm } =
+    useContext(AdvertisementContext);
 
   console.log(sellerAdvertisements);
 
@@ -17,6 +17,7 @@ const DashboardUser = () => {
     <DashboardUserPageBase>
       <Header />
       <main>
+        <div className="divPurpleBackground"></div>
         <UserCard />
         <div className="divAdvertisement">
           {sellerAdvertisements.length === 0 ? (
@@ -27,8 +28,7 @@ const DashboardUser = () => {
         </div>
       </main>
       <Footer />
-      {showAddAdvertisementForm && <FormAddAnnouncement/>}
-      
+      {showAddAdvertisementForm && <FormAddAnnouncement />}
     </DashboardUserPageBase>
   );
 };
