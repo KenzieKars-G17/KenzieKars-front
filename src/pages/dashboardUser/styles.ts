@@ -10,7 +10,6 @@ export const DashboardUserPageBase = styled.div`
   position: relative;
 
   main {
-    margin: 10px 0;
     width: 100vw;
     display: flex;
     flex-direction: column;
@@ -19,7 +18,12 @@ export const DashboardUserPageBase = styled.div`
     align-items: center;
 
     .divAdvertisement {
-      margin-top: 200px;
+      margin-top: 240px;
+    }
+    .divPurpleBackground {
+      height: 357px;
+      background-color: #4529e6;
+      width: 100vw;
     }
   }
 

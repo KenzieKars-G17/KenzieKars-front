@@ -1,26 +1,24 @@
 import { useContext } from "react";
 import { Category, NameAndCategoryDiv, UserCardDiv } from "./styles";
 import { AdvertisementContext } from "../../contexts/advertisements.context";
+import { AuthContext } from "../../contexts/auth.context";
 
 const UserCard = () => {
-
-  const {  SetShowAddAdvertisementForm } = useContext(AdvertisementContext);
+  const { SetShowAddAdvertisementForm } = useContext(AdvertisementContext);
+  const { user } = useContext(AuthContext);
 
   return (
     <UserCardDiv>
       <img></img>
       <NameAndCategoryDiv>
-        <h3>Usuário Teste</h3>
-        <Category>
-          <span>Anunciante</span>
-        </Category>
+        <h3>{user?.name}</h3>
+        {user?.seller && (
+          <Category>
+            <span>Anunciante</span>
+          </Category>
+        )}
       </NameAndCategoryDiv>
-      <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s
-      </p>
-
+      <p>{user?.description}</p>
       <button onClick={SetShowAddAdvertisementForm}>Criar Anuncio</button>
     </UserCardDiv>
   );
