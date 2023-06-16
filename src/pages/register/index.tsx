@@ -12,8 +12,16 @@ import { useAuth } from "../../hooks";
 
 import { tRegister } from "./types";
 import { InputComponent } from "../../components/InputComponent";
+import { useContext, useEffect } from "react";
+import { ProductPageContext } from "../../contexts/productPage.context";
 
 const Register = () => {
+
+  const { ShowBanner } = useContext(ProductPageContext)
+
+  useEffect(() => {
+    ShowBanner(false)
+    }, [])
 
   const { registerUser } = useAuth();
 
