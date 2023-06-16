@@ -1,5 +1,6 @@
 import { IUserReturn } from "../interfaces/user.interface";
 import { iLogin } from "../interfaces/login.interfaces";
+import { iRegister } from "../interfaces/register.interfaces";
 
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
@@ -21,19 +22,25 @@ interface iAuthProviderProps {
 interface iContextValues {
   user: IUserReturn | null;
   login: (data: iLogin) => Promise<void>;
+  registerUser: (data: iRegister) => Promise<void>;
   setUser: Dispatch<SetStateAction<IUserReturn | null>>;
 }
 
 export const AuthContext = createContext({} as iContextValues);
 
 export const AuthProvider = ({ children }: iAuthProviderProps) => {
+
   const [user, setUser] = useState<IUserReturn | null>(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
+
     const loadUser = async () => {
+
       try {
         const jwtToken = localStorage.getItem("@TOKEN");
+
         if (!jwtToken) return;
 
         const findUser = await api.get("users", {
@@ -41,12 +48,17 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
             Authorization: `Bearer ${jwtToken}`,
           },
         });
+
         setUser(findUser.data);
+
       } catch (error) {
         console.log(error);
       }
+
     };
+
     loadUser();
+
   }, []);
 
 
@@ -62,8 +74,22 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
     }
   };
 
+  const registerUser = async (data: iRegister) => {
+    try {
+      const resp = await api.post("register", data);
+      const { token } = resp.data;
+
+      localStorage.setItem("@TOKEN", token);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
   return (
-    <AuthContext.Provider value={{ user, setUser, login}}>
+    <AuthContext.Provider value={{ user, setUser, login, registerUser}}>
+
       {children}
     </AuthContext.Provider>
   );

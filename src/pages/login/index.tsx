@@ -13,8 +13,18 @@ import { useAuth } from "../../hooks";
 import { tLogin } from "./types";
 import { InputComponent } from "../../components/InputComponent";
 
+import { useContext, useEffect } from "react"
+import { ProductPageContext } from "../../contexts/productPage.context";
+
 const Login = () => {
+
   const { login } = useAuth();
+
+  const { ShowBanner } = useContext(ProductPageContext)
+
+  useEffect(() => {
+    ShowBanner(false)
+  }, [])
 
   const {
     register,
@@ -47,16 +57,16 @@ const Login = () => {
               />
               {errors.email && (
                 <span className="alert-span">{errors.email.message}</span>
-                )}
-                <InputComponent
-                  label="Senha"
-                  placeholder="Digitar senha"
-                  type="password"
-                  {...register("password")}
-                />
-                {errors.password && (
-                  <span className="alert-span">{errors.password.message}</span>
-                )}
+              )}
+              <InputComponent
+                label="Senha"
+                placeholder="Digitar senha"
+                type="password"
+                {...register("password")}
+              />
+              {errors.password && (
+                <span className="alert-span">{errors.password.message}</span>
+              )}
               <a href="">
                 <span>Esqueci minha senha</span>
               </a>
