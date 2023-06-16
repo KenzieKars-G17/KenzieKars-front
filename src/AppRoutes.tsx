@@ -13,6 +13,7 @@ import { AuthProvider } from "./contexts/auth.context";
 import { AdvertisementProvider } from "./contexts/advertisements.context";
 import DashboardUser from "./pages/dashboardUser";
 import { ProtectedRoutes } from "./ProtectedRoutes"; 
+import RegisterPage from "./pages/register";
 
 const AppRoutes = () => {
   return (
