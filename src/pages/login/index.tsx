@@ -7,7 +7,7 @@ import Footer from "../../components/footer";
 import { useForm } from "react-hook-form";
 import { LoginSchema } from "./validator";
 
-import { LoginPageBase, StyledLogin } from "./styles";
+import { StyledLogin } from "./styles";
 import { useAuth } from "../../hooks";
 
 import { tLogin } from "./types";
@@ -25,7 +25,8 @@ const Login = () => {
   });
 
   return (
-    <LoginPageBase>
+    <>
+      <GlobalStyles />
       <Header />
       <StyledLogin>
         <section className="login-content">
@@ -73,8 +74,7 @@ const Login = () => {
         </section>
       </StyledLogin>
       <Footer />
-      <GlobalStyles />
-    </LoginPageBase>
+    </>
   );
 };
 
