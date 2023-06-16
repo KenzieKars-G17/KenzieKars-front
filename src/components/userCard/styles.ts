@@ -5,6 +5,7 @@ export const UserCardDiv = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   position: absolute;
+  top: 46%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
@@ -59,8 +60,8 @@ export const UserCardDiv = styled.div`
 
   @media (max-width: 768px) {
     position: absolute;
-    top: 448px;
-    width: 25vw;
+    top: 46%;
+    width: 87%;
     right: 143px;
   }
 `;

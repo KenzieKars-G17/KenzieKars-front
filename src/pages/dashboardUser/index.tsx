@@ -9,8 +9,8 @@ import FormAddAnnouncement from "../../components/forms/formAddAnnouncement";
 import { ProductPageContext } from "../../contexts/productPage.context";
 
 const DashboardUser = () => {
-
-  const { sellerAdvertisements, showAddAdvertisementForm } = useContext(AdvertisementContext);
+  const { sellerAdvertisements, showAddAdvertisementForm } =
+    useContext(AdvertisementContext);
 
   const { ShowBanner } = useContext(ProductPageContext)
 
@@ -22,6 +22,7 @@ const DashboardUser = () => {
     <DashboardUserPageBase>
       <Header />
       <main>
+        <div className="divPurpleBackground"></div>
         <UserCard />
         <div className="divAdvertisement">
           {sellerAdvertisements.length === 0 ? (
@@ -32,8 +33,7 @@ const DashboardUser = () => {
         </div>
       </main>
       <Footer />
-      {showAddAdvertisementForm && <FormAddAnnouncement/>}
-      
+      {showAddAdvertisementForm && <FormAddAnnouncement />}
     </DashboardUserPageBase>
   );
 };
