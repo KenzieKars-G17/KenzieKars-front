@@ -74,25 +74,22 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
     }
   };
 
-<<<<<<< HEAD
   const registerUser = async (data: iRegister) => {
-
     try {
       const resp = await api.post("register", data);
       const { token } = resp.data;
 
-      navigate("/login");
+      localStorage.setItem("@TOKEN", token);
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
   };
 
+
   return (
-    <AuthContext.Provider value={{ user, setUser, login, registerUser }}>
-=======
-  return (
-    <AuthContext.Provider value={{ user, setUser, login}}>
->>>>>>> 97d2690c0518188d55591a565703a0ae2c1280be
+    <AuthContext.Provider value={{ user, setUser, login, registerUser}}>
+
       {children}
     </AuthContext.Provider>
   );
