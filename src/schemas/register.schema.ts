@@ -1,12 +1,23 @@
 import { z } from "zod";
 
-export const RegisterSchema = z.object({
-  email: z
-    .string()
-    .email({ message: "Must be a valid email" })
-    .nonempty({ message: "Email is required" }),
-  password: z
-    .string()
-    .min(8, "Password must be at least 8 characters")
-    .nonempty({ message: "Please enter your password" }),
+const AddressSchema = z.object({
+  cep: z.string(),
+  city: z.string(),
+  state: z.string(),
+  street: z.string(),
+  number: z.string()
 });
+
+const RegisterSchema = z.object({
+  name: z.string(),
+  email: z.string().email("Deve ser um e-mail válido"),
+  cpf: z.string(),
+  phone: z.string(),
+  birthdate: z.string(),
+  description: z.string(),
+  seller: z.boolean(),
+  address: AddressSchema,
+  password: z.string().min(8, "A senha deve ter no mínimo 8 caracteres")
+});
+
+export { AddressSchema, RegisterSchema}

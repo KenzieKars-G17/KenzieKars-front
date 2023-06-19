@@ -75,6 +75,9 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
   };
 
   const registerUser = async (data: iRegister) => {
+
+    console.log(data)
+    
     try {
       const resp = await api.post("register", data);
       const { token } = resp.data;
