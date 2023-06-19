@@ -10,15 +10,15 @@ export const DashboardUserPageBase = styled.div`
   position: relative;
 
   main {
+    margin: 10px 0;
     width: 100vw;
     display: flex;
-    flex-direction: column;
     gap: 15px;
-    justify-content: center;
-    align-items: center;
 
     .divAdvertisement {
-      margin-top: 240px;
+      margin-top: 275px;
+      margin-bottom: 75px;
+      max-width: 100%;
     }
     .divPurpleBackground {
       height: 357px;
