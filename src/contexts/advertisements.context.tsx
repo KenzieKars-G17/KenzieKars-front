@@ -18,7 +18,7 @@ interface iAdvertisementValues {
   getAdvertisementById: any;
   sellerAdvertisements: Iadvertisement[];
   getSellerAdvertisements: () => void;
-  createAdvertisement: (body: any) => void;
+  createAdvertisement: (body: Iadvertisement) => Promise<Iadvertisement>;
   updateAdvertisement: any;
   deleteAdvertisement: any;
   updateAdvertisementStatus: any;
@@ -87,7 +87,7 @@ export const AdvertisementProvider = ({ children }: advertisementProviderProps) 
     }
   };
 
-  const createAdvertisement = async (body: any) => {
+  const createAdvertisement = async (body: Iadvertisement) => {
     try {
       const jwtToken = localStorage.getItem("@TOKEN");
       if (!jwtToken) return;
