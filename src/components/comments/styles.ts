@@ -38,12 +38,12 @@ export const CommentsDiv = styled.div`
   }
 
   @media (min-width: 768px) {
-  max-width: 751px;
+  max-width: 680px;
   max-height: 557px;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  margin-left: -280px;
+  margin-left: -350px;
   }
 `;
 
