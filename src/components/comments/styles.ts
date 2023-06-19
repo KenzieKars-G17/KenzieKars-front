@@ -4,6 +4,7 @@ export const CommentsDiv = styled.div`
   background-color: white;
   width: 95vw;
 
+
   .UserDetails {
     display: flex;
     justify-content: flex-start;
@@ -37,7 +38,12 @@ export const CommentsDiv = styled.div`
   }
 
   @media (min-width: 768px) {
-    display: none;
+  max-width: 751px;
+  max-height: 557px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  margin-left: -280px;
   }
 `;
 
