@@ -14,6 +14,7 @@ import { AuthProvider } from "./contexts/auth.context";
 import { AdvertisementProvider } from "./contexts/advertisements.context";
 import DashboardUser from "./pages/dashboardUser";
 
+
 const AppRoutes = () => {
   return (
     <Router>
