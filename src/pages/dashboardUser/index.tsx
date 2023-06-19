@@ -12,11 +12,11 @@ const DashboardUser = () => {
   const { sellerAdvertisements, showAddAdvertisementForm } =
     useContext(AdvertisementContext);
 
-  const { ShowBanner } = useContext(ProductPageContext)
+  const { ShowBanner } = useContext(ProductPageContext);
 
   useEffect(() => {
-    ShowBanner(true)
-    }, [])
+    ShowBanner(true);
+  }, []);
 
   return (
     <DashboardUserPageBase>
@@ -25,7 +25,7 @@ const DashboardUser = () => {
         <UserCard />
         <div className="divAdvertisement">
           {sellerAdvertisements.length === 0 ? (
-            <h2>Sem Anuncios</h2>
+            <div />
           ) : (
             <Cards arr={sellerAdvertisements} />
           )}
