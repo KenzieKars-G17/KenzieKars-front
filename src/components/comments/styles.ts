@@ -40,16 +40,18 @@ export const CommentsDiv = styled.div`
   @media (min-width: 768px) {
   max-width: 680px;
   max-height: 557px;
+  margin-left: -350px;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  margin-left: -350px;
+  overflow-y: auto;
   }
 `;
 
 export const CommentsForm = styled.form`
   background-color: white;
   width: 95vw;
+  margin-top: 20px;
 
   .UserDetailsForm {
     display: flex;

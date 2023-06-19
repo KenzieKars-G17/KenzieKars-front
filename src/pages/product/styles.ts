@@ -57,5 +57,6 @@ export const ProductPageBase = styled.div`
       width: 25vw;
       right: 143px;
     }
+
   }
 `;

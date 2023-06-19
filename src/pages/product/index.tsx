@@ -51,7 +51,9 @@ const ProductPage = () => {
           </ul>
         </section>
         <UserDetails />
-        <Comments />
+        <div className="divComments">
+          <Comments />
+        </div>
 
       </main>
 
