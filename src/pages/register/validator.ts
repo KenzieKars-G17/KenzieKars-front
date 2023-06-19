@@ -15,7 +15,6 @@ const RegisterSchema = z.object({
   phone: z.string(),
   birthdate: z.string(),
   description: z.string(),
-  seller: z.boolean(),
   address: AddressSchema,
   password: z.string().min(8, "A senha deve ter no mínimo 8 caracteres")
 });
