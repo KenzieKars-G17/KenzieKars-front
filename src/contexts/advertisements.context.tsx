@@ -17,7 +17,7 @@ interface iAdvertisementValues {
   getAdvertisementById: any;
   sellerAdvertisements: Iadvertisement[];
   getSellerAdvertisements: () => void;
-  createAdvertisement: any;
+  createAdvertisement: (body: any) => void;
   updateAdvertisement: any;
   deleteAdvertisement: any;
   updateAdvertisementStatus: any;
@@ -87,6 +87,7 @@ export const AdvertisementProvider = ({ children }: advertisementProviderProps) 
   };
 
   const createAdvertisement = async (body: any) => {
+    console.log(body)
     try {
       const jwtToken = localStorage.getItem("@TOKEN");
       if (!jwtToken) return;
@@ -96,7 +97,7 @@ export const AdvertisementProvider = ({ children }: advertisementProviderProps) 
           Authorization: `Bearer ${jwtToken}`,
         },
       });
-
+      console.log(response.data)
       return response.data;
     } catch (error) {
       console.error("Erro ao atualizar o anuncio", error);
