@@ -97,6 +97,7 @@ export const NavbarInnerContainer = styled.div`
 
 export const NavbarLogoContainer = styled.div`
   display: flex;
+  cursor: pointer;
 `;
 
 // export const NavbarLink = styled(Link)`

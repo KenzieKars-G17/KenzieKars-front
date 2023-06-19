@@ -37,7 +37,8 @@ export const CommentsDiv = styled.div`
   }
 
   @media (min-width: 768px) {
-    display: none;
+        width: 50vw;
+    margin-left: -350px;
   }
 `;
 

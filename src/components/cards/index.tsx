@@ -2,12 +2,15 @@ import { useContext } from "react";
 import { UlCards } from "./styles";
 import { AuthContext } from "../../contexts/auth.context";
 import { TAdvertisementArray } from "../../interfaces/advertisements.interfaces";
+import { useNavigate } from "react-router-dom";
 
 interface CardsProps {
   arr: TAdvertisementArray;
 }
 
 const Cards = ({ arr }: CardsProps) => {
+
+  const navigate = useNavigate()
   
   const announcements = [
     {
@@ -108,8 +111,6 @@ const Cards = ({ arr }: CardsProps) => {
     },
   ];
 
-  console.log(arr)
-
   const { user } = useContext(AuthContext);
 
   return (
@@ -126,7 +127,7 @@ const Cards = ({ arr }: CardsProps) => {
                 <p>Inativo</p>
               </div>
             )}
-            <img src={announcement.cover_image} alt={announcement.model} />
+            <img src={announcement.cover_image} alt={announcement.model} onClick={()=>{navigate("/product-page")}}/>
             <h2>
               {announcement.brand}-{announcement.model}
             </h2>
