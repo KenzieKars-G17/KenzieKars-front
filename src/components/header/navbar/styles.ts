@@ -66,27 +66,44 @@ export const CadastrarButton = styled.button`
 export const LeftContainer = styled.div`
   flex: 70%;
   display: flex;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-color: #dee2e6;
   align-items: center;
   padding-left: 5%;
   background-color: #fdfdfd;
-  @media screen and (max-width: 768px) {
-    border-right-style: none;
-  }
 `;
 
 export const RightContainer = styled.div`
-  flex: 25%;
   display: flex;
   justify-content: space-around;
   align-items: center;
   gap: 5%;
+  border-left-style: solid;
+  border-left-width: 2px;
+  border-color: #dee2e6;
   padding-right: 3%;
   padding-left: 3%;
   background-color: salmon;
   background-color: #fdfdfd;
+  @media screen and (max-width: 768px) {
+    border-style: none;
+  }
+
+  .profileInfo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .headerUserName {
+    font-family: "inter", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+  }
+  .headerUserImg {
+    width: 32px;
+    height: 32px;
+    background: #5126ea;
+    border-radius: 150px;
+  }
 `;
 
 export const NavbarInnerContainer = styled.div`
