@@ -1,7 +1,7 @@
 import { IUserReturn } from "../interfaces/user.interface";
 import { iLogin } from "../interfaces/login.interfaces";
 import { iRegister } from "../interfaces/register.interfaces";
-
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 
@@ -20,6 +20,8 @@ interface iAuthProviderProps {
 
 interface iContextValues {
   user: IUserReturn | null;
+  advertiser: boolean;
+  SetAdvertiser: (condition: boolean) => void;
   login: (data: iLogin) => Promise<void>;
   registerUser: (data: iRegister) => Promise<void>;
   setUser: Dispatch<SetStateAction<IUserReturn | null>>;
@@ -30,6 +32,8 @@ interface iContextValues {
 export const AuthContext = createContext({} as iContextValues);
 
 export const AuthProvider = ({ children }: iAuthProviderProps) => {
+
+  const [ advertiser, setAdvertiser ] = useState(false)
   const [loading, setLoading] = useState<boolean>(false);
   const [user, setUser] = useState<IUserReturn | null>(null);
 
@@ -62,6 +66,10 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
     loadUser();
   }, []);
 
+  const SetAdvertiser = (condition: boolean) => {
+    setAdvertiser(condition)
+  }
+
   const login = async (data: iLogin) => {
     try {
       const resp = await api.post("login", data);
@@ -80,22 +88,30 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
 
   const registerUser = async (data: iRegister) => {
 
-    console.log(data)
+    data.seller = advertiser
     
     try {
-      const resp = await api.post("users", data);
-      const { token } = resp.data;
 
-      localStorage.setItem("@TOKEN", token);
-      navigate("/");
+      const resp = await api.post("users", data);
+
+      if (resp.status === 201) {
+        toast.success("Cadastro efetuado com sucesso!")
+        setTimeout(() => {
+          navigate("/login")          
+        }, 3000);
+      } else {
+        toast.error("Ops, alguma coisa deu errado!")
+      }
+
     } catch (error) {
       console.log(error);
+      toast.error("Ops, alguma coisa deu errado!")
     }
   };
 
   return (
     <AuthContext.Provider
-      value={{ user, setUser, login, registerUser, loading, setLoading }}
+      value={{ user, setUser, login, registerUser, loading, setLoading, SetAdvertiser, advertiser }}
     >
       {children}
     </AuthContext.Provider>

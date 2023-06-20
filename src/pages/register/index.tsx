@@ -12,15 +12,18 @@ import { useAuth } from "../../hooks";
 
 import { InputComponent } from "../../components/InputComponent";
 
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ProductPageContext } from "../../contexts/productPage.context";
 import { iRegister } from "../../interfaces/register.interfaces";
+import { AuthContext } from "../../contexts/auth.context";
 
 
 const Register = () => {
 
   const { registerUser } = useAuth();
 
+  const { SetAdvertiser, advertiser} = useContext(AuthContext)
+ 
   const { ShowBanner } = useContext(ProductPageContext);
 
   useEffect(() => {
@@ -34,6 +37,7 @@ const Register = () => {
   } = useForm<iRegister>({
     resolver: zodResolver(RegisterSchema),
   });
+
   console.log(errors);
 
   
@@ -96,15 +100,38 @@ const Register = () => {
                 {/* <InputComponent label="Complemento" placeholder="Digite o complemento" type="text" {...register("address.complement")} />
                 {errors.address?.complement && (<span className="alert-span">{errors.address?.complement.message}</span>)} */}
               </div>
-{/* 
+
               <div className="divTypeAccount">
                 <label>Tipo de conta:</label>
                 <div className="divButtonsType">
-                  <input type="radio" />
-                  <button>Comprador</button>
-                  <button>Anunciante</button>
+
+                  {advertiser === true ? 
+                  <button onClick={(e)=>{
+                    e.preventDefault()
+                    const condition = false
+                    SetAdvertiser(condition)
+                  }}>Comprador</button>
+                   : 
+                   <button style={{backgroundColor:"#4529E6", color:"white"}} onClick={(e)=>{
+                    e.preventDefault()
+                    const condition = false
+                    SetAdvertiser(condition)
+                  }}> Comprador</button>}
+
+                  {advertiser === true ?
+                  <button style={{backgroundColor:"#4529E6", color:"white"}} onClick={(e)=>{
+                    e.preventDefault()
+                    const condition = true
+                    SetAdvertiser(condition)
+                  }}>Anunciante</button> 
+                  :
+                  <button onClick={(e)=>{
+                    e.preventDefault()
+                    const condition = true
+                    SetAdvertiser(condition)
+                  }}>Anunciante</button>}
                 </div>
-              </div> */}
+              </div>
 
               <InputComponent label="Senha" placeholder="Digite a senha" type="password" {...register("password")} />
               {errors.password && (<span className="alert-span">{errors.password.message}</span>)}

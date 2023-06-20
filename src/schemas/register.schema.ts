@@ -12,7 +12,7 @@ const RegisterSchema = z.object({
   name: z.string(),
   email: z.string().email("Deve ser um e-mail válido"),
   cpf: z.string(),
-  phone: z.string(),
+  phone: z.string().max(9),
   birthdate: z.string(),
   description: z.string(),
   seller: z.boolean(),
