@@ -33,6 +33,7 @@ export const FormNewAd = styled.form`
 
     fieldset{
         max-width: 100%;
+        gap: 5px;
     }
 
     label {
@@ -48,7 +49,8 @@ export const FormNewAd = styled.form`
       margin: 0 0 0 10px;
       width: 88%;
       border: 1pt solid #868e96;
-      height: 5px;
+      height: 35px;
+      font-size: 15px;
     }
   }
 

@@ -17,6 +17,16 @@ export const UlCards = styled.ul`
     flex-shrink: 0;
     width: 200px;
     position: relative;
+    transition: 0.3s;
+
+    img{
+      cursor: pointer;
+    }
+
+    :hover{
+      scale: 1.01;
+      transition: 0.3s;
+    }
   }
 
   img {

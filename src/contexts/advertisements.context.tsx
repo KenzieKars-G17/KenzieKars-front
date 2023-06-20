@@ -4,6 +4,7 @@ import {
   IadvertisementStatus,
 } from "../interfaces/advertisements.interfaces";
 import api from "../services/api";
+import { toast } from "react-toastify";
 
 interface advertisementProviderProps {
   children: React.ReactNode;
@@ -17,7 +18,7 @@ interface iAdvertisementValues {
   getAdvertisementById: any;
   sellerAdvertisements: Iadvertisement[];
   getSellerAdvertisements: () => void;
-  createAdvertisement: any;
+  createAdvertisement: (body: Iadvertisement) => Promise<Iadvertisement>;
   updateAdvertisement: any;
   deleteAdvertisement: any;
   updateAdvertisementStatus: any;
@@ -86,7 +87,7 @@ export const AdvertisementProvider = ({ children }: advertisementProviderProps) 
     }
   };
 
-  const createAdvertisement = async (body: any) => {
+  const createAdvertisement = async (body: Iadvertisement) => {
     try {
       const jwtToken = localStorage.getItem("@TOKEN");
       if (!jwtToken) return;
@@ -97,9 +98,18 @@ export const AdvertisementProvider = ({ children }: advertisementProviderProps) 
         },
       });
 
+      toast.success("Anúncio criado com sucesso!",{
+        autoClose: 1000
+      })
+
       return response.data;
     } catch (error) {
-      console.error("Erro ao atualizar o anuncio", error);
+
+      console.log(error);
+      
+      toast.error("Erro ao criar anúncio.",{
+        autoClose: 1000
+      })
     }
   };
 

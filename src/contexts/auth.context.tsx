@@ -14,7 +14,6 @@ import {
   SetStateAction,
 } from "react";
 
-
 interface iAuthProviderProps {
   children: ReactNode;
 }
@@ -24,21 +23,22 @@ interface iContextValues {
   login: (data: iLogin) => Promise<void>;
   registerUser: (data: iRegister) => Promise<void>;
   setUser: Dispatch<SetStateAction<IUserReturn | null>>;
+  loading: boolean;
+  setLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 export const AuthContext = createContext({} as iContextValues);
 
 export const AuthProvider = ({ children }: iAuthProviderProps) => {
-
+  const [loading, setLoading] = useState<boolean>(false);
   const [user, setUser] = useState<IUserReturn | null>(null);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-
     const loadUser = async () => {
-
       try {
+        setLoading(true);
         const jwtToken = localStorage.getItem("@TOKEN");
 
         if (!jwtToken) return;
@@ -50,27 +50,31 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
         });
 
         setUser(findUser.data);
-
       } catch (error) {
         console.log(error);
+      } finally {
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
       }
-
     };
 
     loadUser();
-
   }, []);
-
 
   const login = async (data: iLogin) => {
     try {
       const resp = await api.post("login", data);
       const { token } = resp.data;
-
+      setLoading(true);
       localStorage.setItem("@TOKEN", token);
       navigate("/");
     } catch (error) {
       console.log(error);
+    } finally {
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
     }
   };
 
@@ -89,10 +93,10 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
     }
   };
 
-
   return (
-    <AuthContext.Provider value={{ user, setUser, login, registerUser}}>
-
+    <AuthContext.Provider
+      value={{ user, setUser, login, registerUser, loading, setLoading }}
+    >
       {children}
     </AuthContext.Provider>
   );

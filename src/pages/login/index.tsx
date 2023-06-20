@@ -13,18 +13,17 @@ import { useAuth } from "../../hooks";
 import { tLogin } from "./types";
 import { InputComponent } from "../../components/InputComponent";
 
-import { useContext, useEffect } from "react"
+import { useContext, useEffect } from "react";
 import { ProductPageContext } from "../../contexts/productPage.context";
 
 const Login = () => {
-
   const { login } = useAuth();
 
-  const { ShowBanner } = useContext(ProductPageContext)
+  const { ShowBanner } = useContext(ProductPageContext);
 
   useEffect(() => {
-    ShowBanner(false)
-  }, [])
+    ShowBanner(false);
+  }, []);
 
   const {
     register,

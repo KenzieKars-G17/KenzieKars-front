@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import {
   NavbarContainer,
@@ -12,10 +12,22 @@ import {
 } from "./styles";
 import LogoNav from "../../../assets/LogoNav.png";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../contexts/auth.context";
 
 const Navbar = () => {
+  const { user } = useContext(AuthContext);
+  const [currentWidth, setCurrentWidth] = useState<number>(0);
 
-  const navigate = useNavigate()
+  const updateWidth = (): void => {
+    setCurrentWidth(window.innerWidth);
+    window.addEventListener("resize", updateWidth);
+  };
+
+  useEffect(() => {
+    updateWidth();
+  }, []);
+
+  const navigate = useNavigate();
 
   return (
     <React.Fragment>
@@ -23,18 +35,39 @@ const Navbar = () => {
         <NavbarInnerContainer>
           <LeftContainer>
             <NavbarLogoContainer>
-              <img src={LogoNav} alt="Menu Logo" onClick={()=>{
-              navigate("/")
-            }}/>
+              <img
+                src={LogoNav}
+                alt="Menu Logo"
+                onClick={() => {
+                  navigate("/");
+                }}
+              />
             </NavbarLogoContainer>
           </LeftContainer>
           <RightContainer>
-            <FazerLoginButton onClick={()=>{
-              navigate("/login")
-            }}>Fazer Login</FazerLoginButton>
-            <CadastrarButton onClick={()=>{
-              navigate("/register")
-            }}>Cadastrar</CadastrarButton>
+            {user && currentWidth >= 768 ? (
+              <div className="profileInfo">
+                <div className="headerUserImg"></div>
+                <h2 className="headerUserName">{user.name}</h2>
+              </div>
+            ) : (
+              <FazerLoginButton
+                onClick={() => {
+                  navigate("/login");
+                }}
+              >
+                Fazer Login
+              </FazerLoginButton>
+            )}
+            {!user && (
+              <CadastrarButton
+                onClick={() => {
+                  navigate("/register");
+                }}
+              >
+                Cadastrar
+              </CadastrarButton>
+            )}
             <Hamburger />
           </RightContainer>
         </NavbarInnerContainer>

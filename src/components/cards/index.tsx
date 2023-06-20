@@ -2,13 +2,15 @@ import { useContext } from "react";
 import { UlCards } from "./styles";
 import { AuthContext } from "../../contexts/auth.context";
 import { TAdvertisementArray } from "../../interfaces/advertisements.interfaces";
+import { useNavigate } from "react-router-dom";
 
 interface CardsProps {
   arr: TAdvertisementArray;
 }
 
 const Cards = ({ arr }: CardsProps) => {
-  
+  const navigate = useNavigate();
+
   const announcements = [
     {
       imgSource: "https://img.olx.com.br/images/51/515306396352820.jpg",
@@ -108,9 +110,7 @@ const Cards = ({ arr }: CardsProps) => {
     },
   ];
 
-  console.log(arr)
-
-  const { user } = useContext(AuthContext);
+  const { user, setLoading } = useContext(AuthContext);
 
   return (
     <UlCards>
@@ -126,7 +126,17 @@ const Cards = ({ arr }: CardsProps) => {
                 <p>Inativo</p>
               </div>
             )}
-            <img src={announcement.cover_image} alt={announcement.model} />
+            <img
+              src={announcement.cover_image}
+              alt={announcement.model}
+              onClick={() => {
+                setLoading(true);
+                navigate("/product-page");
+                setTimeout(() => {
+                  setLoading(false);
+                }, 500);
+              }}
+            />
             <h2>
               {announcement.brand}-{announcement.model}
             </h2>
