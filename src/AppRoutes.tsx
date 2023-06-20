@@ -1,8 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/home";
 import LoginPage from "./pages/login";
 import { FilterProvider } from "./contexts/filter.context";
@@ -13,7 +9,6 @@ import { ProductPageProvider } from "./contexts/productPage.context";
 import { AuthProvider } from "./contexts/auth.context";
 import { AdvertisementProvider } from "./contexts/advertisements.context";
 import DashboardUser from "./pages/dashboardUser";
-
 
 const AppRoutes = () => {
   return (

@@ -9,9 +9,8 @@ interface CardsProps {
 }
 
 const Cards = ({ arr }: CardsProps) => {
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
-  
   const announcements = [
     {
       imgSource: "https://img.olx.com.br/images/51/515306396352820.jpg",
@@ -111,7 +110,7 @@ const Cards = ({ arr }: CardsProps) => {
     },
   ];
 
-  const { user } = useContext(AuthContext);
+  const { user, setLoading } = useContext(AuthContext);
 
   return (
     <UlCards>
@@ -127,7 +126,17 @@ const Cards = ({ arr }: CardsProps) => {
                 <p>Inativo</p>
               </div>
             )}
-            <img src={announcement.cover_image} alt={announcement.model} onClick={()=>{navigate("/product-page")}}/>
+            <img
+              src={announcement.cover_image}
+              alt={announcement.model}
+              onClick={() => {
+                setLoading(true);
+                navigate("/product-page");
+                setTimeout(() => {
+                  setLoading(false);
+                }, 500);
+              }}
+            />
             <h2>
               {announcement.brand}-{announcement.model}
             </h2>

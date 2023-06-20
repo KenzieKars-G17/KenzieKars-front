@@ -3,6 +3,7 @@ import Cards from "../../components/cards";
 import FilterAside from "../../components/filterAside";
 import Footer from "../../components/footer";
 import Header from "../../components/header";
+import { useAuth } from "../../hooks";
 import { HomePageContext } from "../../contexts/homepage.context";
 // import { FilterContext } from "../../contexts/filter.context";
 import { HomePageBase } from "./styles";
@@ -11,9 +12,10 @@ import Modal from "../../components/modal";
 import { AdvertisementContext } from "../../contexts/advertisements.context";
 import FormAddAnnouncement from "../../components/forms/formAddAnnouncement";
 // import { useContext } from "react";
+import Loader from "../../components/loader";
 
 const HomePage = () => {
-
+  const { loading } = useAuth();
   const { allAdvertisements } = useContext(AdvertisementContext);
   const { ShowBanner } = useContext(ProductPageContext);
 
@@ -45,10 +47,10 @@ const HomePage = () => {
   //   maxPrice,
   // } = useContext(FilterContext);
 
-  useEffect(()=>{
-    const condition = true
-    ShowBanner(condition)
-  },[])
+  useEffect(() => {
+    const condition = true;
+    ShowBanner(condition);
+  }, []);
 
   const {
     ShowFilterAside,
@@ -68,10 +70,12 @@ const HomePage = () => {
     }, 1000);
   }, []);
 
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <HomePageBase>
       <Header />
-
       <main>
         {showFilterAside === true && currentWidth >= 768 ? (
           <FilterAside />
