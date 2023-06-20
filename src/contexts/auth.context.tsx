@@ -83,7 +83,7 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
     console.log(data)
     
     try {
-      const resp = await api.post("register", data);
+      const resp = await api.post("users", data);
       const { token } = resp.data;
 
       localStorage.setItem("@TOKEN", token);

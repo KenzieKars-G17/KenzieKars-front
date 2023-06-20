@@ -10,12 +10,12 @@ import { RegisterSchema } from "./validator";
 import { StyledRegister } from "./styles";
 import { useAuth } from "../../hooks";
 
-import { tRegister } from "./types";
 import { InputComponent } from "../../components/InputComponent";
 
 import { useContext, useEffect } from "react";
 import { ProductPageContext } from "../../contexts/productPage.context";
 import { iRegister } from "../../interfaces/register.interfaces";
+
 
 const Register = () => {
 
@@ -31,15 +31,12 @@ const Register = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<tRegister>({
+  } = useForm<iRegister>({
     resolver: zodResolver(RegisterSchema),
   });
+  console.log(errors);
 
-  const submit = (data: any) => {
-    console.log("ate aqui chega")
-    console.log(data)
-  }
-
+  
   return (
     <>
       <GlobalStyles />
@@ -52,7 +49,7 @@ const Register = () => {
           <form
             className="register-form"
             noValidate
-            onSubmit={handleSubmit(submit)}
+            onSubmit={handleSubmit(registerUser)}
           >
             <div className="inputs-cont">
 
@@ -99,14 +96,15 @@ const Register = () => {
                 {/* <InputComponent label="Complemento" placeholder="Digite o complemento" type="text" {...register("address.complement")} />
                 {errors.address?.complement && (<span className="alert-span">{errors.address?.complement.message}</span>)} */}
               </div>
-
+{/* 
               <div className="divTypeAccount">
                 <label>Tipo de conta:</label>
                 <div className="divButtonsType">
+                  <input type="radio" />
                   <button>Comprador</button>
                   <button>Anunciante</button>
                 </div>
-              </div>
+              </div> */}
 
               <InputComponent label="Senha" placeholder="Digite a senha" type="password" {...register("password")} />
               {errors.password && (<span className="alert-span">{errors.password.message}</span>)}
