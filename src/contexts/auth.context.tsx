@@ -23,6 +23,7 @@ interface iContextValues {
   advertiser: boolean;
   SetAdvertiser: (condition: boolean) => void;
   login: (data: iLogin) => Promise<void>;
+  logout: () => void;
   registerUser: (data: iRegister) => Promise<void>;
   setUser: Dispatch<SetStateAction<IUserReturn | null>>;
   loading: boolean;
@@ -33,8 +34,7 @@ interface iContextValues {
 export const AuthContext = createContext({} as iContextValues);
 
 export const AuthProvider = ({ children }: iAuthProviderProps) => {
-
-  const [ advertiser, setAdvertiser ] = useState(false)
+  const [advertiser, setAdvertiser] = useState(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [user, setUser] = useState<IUserReturn | null>(null);
 
@@ -68,8 +68,8 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
   }, []);
 
   const SetAdvertiser = (condition: boolean) => {
-    setAdvertiser(condition)
-  }
+    setAdvertiser(condition);
+  };
 
   const login = async (data: iLogin) => {
     try {
@@ -77,6 +77,13 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
       const { token } = resp.data;
       setLoading(true);
       localStorage.setItem("@TOKEN", token);
+      const findUser = await api.get("users", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setUser(findUser.data);
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -87,26 +94,29 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
     }
   };
 
+  const logout = () => {
+    localStorage.removeItem("@TOKEN");
+    setUser(null);
+    navigate("/");
+  };
+
   const registerUser = async (data: iRegister) => {
+    data.seller = advertiser;
 
-    data.seller = advertiser
-    
     try {
-
       const resp = await api.post("users", data);
 
       if (resp.status === 201) {
-        toast.success("Cadastro efetuado com sucesso!")
+        toast.success("Cadastro efetuado com sucesso!");
         setTimeout(() => {
-          navigate("/login")          
+          navigate("/login");
         }, 3000);
       } else {
-        toast.error("Ops, alguma coisa deu errado!")
+        toast.error("Ops, alguma coisa deu errado!");
       }
-
     } catch (error) {
       console.log(error);
-      toast.error("Ops, alguma coisa deu errado!")
+      toast.error("Ops, alguma coisa deu errado!");
     }
   };
 
@@ -122,7 +132,19 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, setUser, login, registerUser, loading, setLoading, SetAdvertiser, advertiser,sendEmailResetPassword}}
+
+      value={{
+        user,
+        setUser,
+        login,
+        logout,
+        registerUser,
+        loading,
+        setLoading,
+        SetAdvertiser,
+        advertiser,
+        sendEmailResetPassword
+      }}
     >
       {children}
     </AuthContext.Provider>
