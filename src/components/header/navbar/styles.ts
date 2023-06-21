@@ -53,6 +53,7 @@ export const CadastrarButton = styled.button`
   &:hover {
     background-color: #0b0d0d;
     color: #fdfdfd;
+    cursor: pointer;
   }
 
   &:focus {
@@ -75,7 +76,7 @@ export const RightContainer = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  gap: 5%;
+  gap: 10%;
   border-left-style: solid;
   border-left-width: 2px;
   border-color: #dee2e6;
@@ -92,6 +93,10 @@ export const RightContainer = styled.div`
     align-items: center;
     gap: 8px;
   }
+  .profileInfo:hover {
+    cursor: pointer;
+  }
+
   .headerUserName {
     font-family: "inter", sans-serif;
     font-style: normal;

@@ -23,6 +23,7 @@ interface iContextValues {
   advertiser: boolean;
   SetAdvertiser: (condition: boolean) => void;
   login: (data: iLogin) => Promise<void>;
+  logout: () => void;
   registerUser: (data: iRegister) => Promise<void>;
   setUser: Dispatch<SetStateAction<IUserReturn | null>>;
   loading: boolean;
@@ -92,6 +93,12 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
     }
   };
 
+  const logout = () => {
+    localStorage.removeItem("@TOKEN");
+    setUser(null);
+    navigate("/");
+  };
+
   const registerUser = async (data: iRegister) => {
     data.seller = advertiser;
 
@@ -118,6 +125,7 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
         user,
         setUser,
         login,
+        logout,
         registerUser,
         loading,
         setLoading,
