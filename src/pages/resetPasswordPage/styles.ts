@@ -6,6 +6,7 @@ export const StyledResetPage = styled.main`
   align-items: center;
   padding: 5.2rem 1.6rem;
   width: 100vw;
+  height: 100vh;
   background-color: var(--color-grey-8);
   @media (min-width: 700px) {
     padding: 12rem 1.6rem;
