@@ -28,7 +28,7 @@ interface iContextValues {
   setUser: Dispatch<SetStateAction<IUserReturn | null>>;
   loading: boolean;
   setLoading: Dispatch<SetStateAction<boolean>>;
-  sendEmailResetPassword: any
+  sendEmailResetPassword: any;
 }
 
 export const AuthContext = createContext({} as iContextValues);
@@ -130,9 +130,10 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
 
   }
 
+
+
   return (
     <AuthContext.Provider
-
       value={{
         user,
         setUser,
@@ -143,7 +144,7 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
         setLoading,
         SetAdvertiser,
         advertiser,
-        sendEmailResetPassword
+        sendEmailResetPassword,
       }}
     >
       {children}
