@@ -15,9 +15,12 @@ import { useContext, useEffect } from "react";
 import { ProductPageContext } from "../../contexts/productPage.context";
 import { iResetPassword } from "../../interfaces/resetPassword.interfaces";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks";
 
-const ResetPasswordPage = () => {
+const SendEmailResetPasswordPage = () => {
   const navigate = useNavigate();
+
+  const {sendEmailResetPassword} = useAuth();
 
   const { ShowBanner } = useContext(ProductPageContext);
 
@@ -42,7 +45,7 @@ const ResetPasswordPage = () => {
           <div className="tittle-box">
             <h1 className="reset-title">Recuperação de senha</h1>
           </div>
-          <form className="reset-form" noValidate onSubmit={handleSubmit()}>
+          <form className="reset-form" noValidate onSubmit={handleSubmit(sendEmailResetPassword)}>
             <div className="inputs-cont">
               <InputComponent
                 label="Ensina seu E-mail para recuperação"
@@ -75,4 +78,4 @@ const ResetPasswordPage = () => {
   );
 };
 
-export default ResetPasswordPage;
+export default SendEmailResetPasswordPage;

@@ -27,6 +27,7 @@ interface iContextValues {
   setUser: Dispatch<SetStateAction<IUserReturn | null>>;
   loading: boolean;
   setLoading: Dispatch<SetStateAction<boolean>>;
+  sendEmailResetPassword: any
 }
 
 export const AuthContext = createContext({} as iContextValues);
@@ -109,9 +110,19 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
     }
   };
 
+  const sendEmailResetPassword = async (email:string) =>{
+    try {
+       await api.post("users/resetPassword", email);
+       toast.success("Email enviado com sucesso!")
+    } catch (error) {
+      toast.error("Ops, alguma coisa deu errado!")
+    }
+
+  }
+
   return (
     <AuthContext.Provider
-      value={{ user, setUser, login, registerUser, loading, setLoading, SetAdvertiser, advertiser }}
+      value={{ user, setUser, login, registerUser, loading, setLoading, SetAdvertiser, advertiser,sendEmailResetPassword}}
     >
       {children}
     </AuthContext.Provider>

@@ -9,7 +9,7 @@ export const StyledResetPage = styled.main`
   height: 100vh;
   background-color: var(--color-grey-8);
   @media (min-width: 700px) {
-    padding: 12rem 1.6rem;
+    padding: unset;
   }
 
   .reset-content {

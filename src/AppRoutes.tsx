@@ -9,7 +9,7 @@ import { ProductPageProvider } from "./contexts/productPage.context";
 import { AuthProvider } from "./contexts/auth.context";
 import { AdvertisementProvider } from "./contexts/advertisements.context";
 import DashboardUser from "./pages/dashboardUser";
-import ResetPasswordPage from "./pages/resetPasswordPage";
+import SendEmailResetPasswordPage from "./pages/sendEmailResetPasswordPage";
 
 const AppRoutes = () => {
   return (
@@ -25,7 +25,7 @@ const AppRoutes = () => {
                   <Route path="/register" element={<RegisterPage />}></Route>
                   <Route path="/product-page" element={<ProductPage />}></Route>
                   <Route path="/user" element={<DashboardUser />}></Route>
-                  <Route path="/users/resetPassword" element={<ResetPasswordPage/>}></Route>
+                  <Route path="/reset-password" element={<SendEmailResetPasswordPage/>}></Route>
                 </Routes>
               </FilterProvider>
             </HomePageProvider>
