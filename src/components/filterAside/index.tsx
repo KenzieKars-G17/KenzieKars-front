@@ -1,88 +1,198 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { AdvertisementContext } from "../../contexts/advertisements.context";
 import StyledFilter from "./styles";
 import api2 from "../../services/api2";
 import { iData } from "./types";
 
 const Filter = (): JSX.Element => {
-  const [dataKeys, setDataKeys] = useState<iData>();
-  const [years] = useState([2022, 2021, 2018, 2015, 2013, 2012, 2010]);
-  const [fuel] = useState(["Diesel", "Etanol", "Gasolina", "Flex"]);
-  const [colors] = useState([
-    "Azul",
-    "Branca",
-    "Cinza",
-    "Prata",
-    "Preta",
-    "Verde",
-  ]);
+  const [brand, setBrand] = useState<string[]>([]);
+  const [model, setModel] = useState<string[]>([]);
+  const [years, setYears] = useState<string[]>([]);
+  const [fuel, setFuel] = useState<string[]>([]);
+  const [colors, setColors] = useState<string[]>([]);
+  const [mileage, setMileage] = useState<string>("");
+  const [maxMileage, setMaxMileage] = useState<string>("");
+  const [price, setPrice] = useState<string[]>([]);
+  const { filteredAd, setFilteredAd, allAdvertisements } =
+    useContext(AdvertisementContext);
+
+  const filterBrandAdvertisements = async (brand: string) => {
+    const filteredCars = allAdvertisements.filter((ad) =>
+      ad.brand.includes(brand)
+    );
+
+    setFilteredAd(filteredCars);
+
+    console.log(filteredCars.length);
+  };
+
+  const filterModelAdvertisements = async (model: string) => {
+    const filteredCars = allAdvertisements.filter((ad) =>
+      ad.model.includes(model)
+    );
+    setFilteredAd(filteredCars);
+    console.log(filteredCars);
+  };
+
+  const filterColorAdvertisements = async (color: string) => {
+    const filteredCars = allAdvertisements.filter((ad) =>
+      ad.color.includes(color)
+    );
+    setFilteredAd(filteredCars);
+    console.log(filteredCars);
+  };
+  const filterYearAdvertisements = async (year: string) => {
+    const filteredCars = allAdvertisements.filter((ad) =>
+      ad.year.includes(year)
+    );
+    setFilteredAd(filteredCars);
+    console.log(filteredCars);
+  };
+
+  const filterFuelAdvertisements = async (fuel: string) => {
+    const filteredCars = allAdvertisements.filter((ad) =>
+      ad.fuel.includes(fuel)
+    );
+    setFilteredAd(filteredCars);
+    console.log(filteredCars);
+  };
+
+  const filterMileageMinAdvertisements = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setMileage(e.target.value);
+    const filteredCars = allAdvertisements.filter(
+      (ad) => +ad.mileage > +mileage
+    );
+    setFilteredAd(filteredCars);
+    console.log(filteredCars);
+  };
+  const filterMileageMaxAdvertisements = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setMaxMileage(e.target.value);
+    const filteredCars = allAdvertisements.filter((ad) => {
+      +ad.mileage < +mileage;
+      console.log(ad);
+    });
+    setFilteredAd(filteredCars);
+    console.log(filteredCars);
+  };
 
   useEffect(() => {
-    (async () => {
-      const resp = await api2.get<iData>("cars");
-      setDataKeys(resp.data); 
-    })();
-  }, []);
+    const filterColor = new Set<string>();
+    const filterBrand = new Set<string>();
+    const filterModel = new Set<string>();
+    const filterYears = new Set<string>();
+    const filterFuel = new Set<string>();
+    const filterMileage = new Set<string>();
+    const filterPrice = new Set<string>();
+    if (filteredAd?.length > 0) {
+      filteredAd.forEach((ad) => {
+        filterBrand.add(ad.brand);
+        filterColor.add(ad.color);
+        filterModel.add(ad.model);
+        filterYears.add(ad.year);
+        filterFuel.add(ad.fuel);
+        filterMileage.add(ad.mileage);
+        filterPrice.add(ad.price + "");
+      });
+    } else {
+      allAdvertisements.forEach((ad) => {
+        filterBrand.add(ad.brand);
+        filterColor.add(ad.color);
+        filterModel.add(ad.model);
+        filterYears.add(ad.year);
+        filterFuel.add(ad.fuel);
+        filterMileage.add(ad.mileage);
+        filterPrice.add(ad.price + "");
+      });
+    }
+
+    setColors(Array.from(filterColor));
+    setBrand(Array.from(filterBrand));
+    setModel(Array.from(filterModel));
+    setFuel(Array.from(filterFuel));
+    setYears(Array.from(filterYears));
+    // setMileage(Array.from(filterMileage));
+    setPrice(Array.from(filterPrice));
+  }, [allAdvertisements, filteredAd]);
 
   return (
     <StyledFilter>
       <div>
         <h3 className="title3">Marca</h3>
         <ul className="filter-options">
-          {dataKeys &&
-            Object.keys(dataKeys).map((x, i) => (
-              <li key={i * Math.random()}>
-                <p className="paragraph">
-                  {x.charAt(0).toUpperCase() + x.slice(1)}
-                </p>
-              </li>
-            ))}
+          {brand.map((x, i) => (
+            <li key={i * Math.random()}>
+              <p
+                className="paragraph"
+                onClick={() => filterBrandAdvertisements(x)}
+              >
+                {x.charAt(0).toUpperCase() + x.slice(1)}
+              </p>
+            </li>
+          ))}
         </ul>
       </div>
       <div>
         <h3 className="title3">Modelo</h3>
         <ul className="filter-options">
-          {dataKeys &&
-            Object.values(dataKeys).map((x, i) => (
-              <li key={i * Math.random()}>
-                <p className="paragraph">
-                  {x[0].name.split(" ")[0].charAt(0).toUpperCase() +
-                    x[0].name.split(" ")[0].slice(1)}
-                </p>
-              </li>
-            ))}
+          {model.map((x, i) => (
+            <li key={i * Math.random()}>
+              <p
+                className="paragraph"
+                onClick={() => filterModelAdvertisements(x)}
+              >
+                {x}
+              </p>
+            </li>
+          ))}
         </ul>
       </div>
       <div>
         <h3 className="title3">Cor</h3>
         <ul className="filter-options">
-          {colors &&
-            Object.values(colors).map((x, i) => (
-              <li key={i * Math.random()}>
-                <p className="paragraph">{x}</p>
-              </li>
-            ))}
+          {colors.map((x, i) => (
+            <li key={i * Math.random()}>
+              <p
+                className="paragraph"
+                onClick={() => filterColorAdvertisements(x)}
+              >
+                {x}
+              </p>
+            </li>
+          ))}
         </ul>
       </div>
       <div>
         <h3 className="title3">Ano</h3>
         <ul className="filter-options">
-          {years &&
-            Object.values(years).map((x, i) => (
-              <li key={i * Math.random()}>
-                <p className="paragraph">{x}</p>
-              </li>
-            ))}
+          {years.map((x, i) => (
+            <li key={i * Math.random()}>
+              <p
+                className="paragraph"
+                onClick={() => filterYearAdvertisements(x)}
+              >
+                {x}
+              </p>
+            </li>
+          ))}
         </ul>
       </div>
       <div>
         <h3 className="title3">Combustível</h3>
         <ul className="filter-options">
-          {fuel &&
-            Object.values(fuel).map((x, i) => (
-              <li key={i * Math.random()}>
-                <p className="paragraph">{x}</p>
-              </li>
-            ))}
+          {fuel.map((x, i) => (
+            <li key={i * Math.random()}>
+              <p
+                className="paragraph"
+                onClick={() => filterFuelAdvertisements(x)}
+              >
+                {x}
+              </p>
+            </li>
+          ))}
         </ul>
       </div>
       <div className="form-box">

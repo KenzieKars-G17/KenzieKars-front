@@ -16,7 +16,7 @@ import Loader from "../../components/loader";
 
 const HomePage = () => {
   const { loading } = useAuth();
-  const { allAdvertisements } = useContext(AdvertisementContext);
+  const { allAdvertisements, filteredAd } = useContext(AdvertisementContext);
   const { ShowBanner } = useContext(ProductPageContext);
 
   // const {
@@ -85,7 +85,7 @@ const HomePage = () => {
             <FilterAside />
           </Modal>
         ) : null}
-        <Cards arr={allAdvertisements} />
+        <Cards arr={filteredAd} />
       </main>
 
       {/*COMPONENTIZAR E PADRONIZAR ESTE BOTÃO DE FILTROS*/}
