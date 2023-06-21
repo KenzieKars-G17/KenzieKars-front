@@ -5,22 +5,22 @@ import Header from "../../components/header";
 import Footer from "../../components/footer";
 
 import { useForm } from "react-hook-form";
-import { ResetPasswordSchema } from "../../schemas/resetPassword.schema";
+import { SendEmailResetPasswordSchema } from "../../schemas/sendEmailResetPassword.schema";
 
-import { StyledResetPage } from "./styles";
+import { StyledEmailResetPage } from "./styles";
 
 import { InputComponent } from "../../components/InputComponent";
 
 import { useContext, useEffect } from "react";
 import { ProductPageContext } from "../../contexts/productPage.context";
-import { iResetPassword } from "../../interfaces/resetPassword.interfaces";
+import { iSendEmailResetPassword } from "../../interfaces/sendEmailResetPassword.interfaces";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks";
 
 const SendEmailResetPasswordPage = () => {
   const navigate = useNavigate();
 
-  const {sendEmailResetPassword} = useAuth();
+  const { sendEmailResetPassword } = useAuth();
 
   const { ShowBanner } = useContext(ProductPageContext);
 
@@ -32,20 +32,24 @@ const SendEmailResetPasswordPage = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<iResetPassword>({
-    resolver: zodResolver(ResetPasswordSchema),
+  } = useForm<iSendEmailResetPassword>({
+    resolver: zodResolver(SendEmailResetPasswordSchema),
   });
 
   return (
     <>
       <GlobalStyles />
       <Header />
-      <StyledResetPage>
-        <section className="reset-content">
+      <StyledEmailResetPage>
+        <section className="email-content">
           <div className="tittle-box">
-            <h1 className="reset-title">Recuperação de senha</h1>
+            <h1 className="email-title">Recuperação de senha</h1>
           </div>
-          <form className="reset-form" noValidate onSubmit={handleSubmit(sendEmailResetPassword)}>
+          <form
+            className="email-form"
+            noValidate
+            onSubmit={handleSubmit(sendEmailResetPassword)}
+          >
             <div className="inputs-cont">
               <InputComponent
                 label="Ensina seu E-mail para recuperação"
@@ -72,7 +76,7 @@ const SendEmailResetPasswordPage = () => {
             </div>
           </form>
         </section>
-      </StyledResetPage>
+      </StyledEmailResetPage>
       <Footer />
     </>
   );

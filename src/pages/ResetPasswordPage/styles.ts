@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledEmailResetPage = styled.main`
+export const StyledResetPage = styled.main`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,7 +12,7 @@ export const StyledEmailResetPage = styled.main`
     padding: unset;
   }
 
-  .email-content {
+  .reset-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -36,7 +36,7 @@ export const StyledEmailResetPage = styled.main`
     min-width: 287px;
   }
 
-  .email-title {
+  .reset-title {
     font-family: "Lexend";
     font-style: normal;
     font-weight: 500;
@@ -45,7 +45,7 @@ export const StyledEmailResetPage = styled.main`
     color: var(--color-grey-0);
   }
 
-  .email-form {
+  .reset-form {
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -61,7 +61,7 @@ export const StyledEmailResetPage = styled.main`
       .alert-span {
         font-size: 1.2rem;
         line-height: 1;
-        margin-top: 1rem;
+        margin: 1rem 0rem;
 
         color: var(--color-alert-1);
       }
@@ -119,23 +119,12 @@ export const StyledEmailResetPage = styled.main`
       }
     }
 
-    .bttn-gray {
-      color: var(--color-grey-0);
-      background: var(--color-grey-10);
-      border: 0.15rem solid var(--color-grey-4);
-      &:hover {
-        background: var(--color-grey-0);
-        color: var(--color-white);
-      }
-    }
-
     .buttons-cont {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
       width: 100%;
-      height: 168px;
 
       > p {
         font-family: "Inter";
@@ -143,7 +132,6 @@ export const StyledEmailResetPage = styled.main`
         font-weight: 400;
         font-size: 1.4rem;
         line-height: 2.4rem;
-
         color: var(--color-grey-2);
       }
     }
