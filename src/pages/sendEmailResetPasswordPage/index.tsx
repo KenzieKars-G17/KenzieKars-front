@@ -5,7 +5,7 @@ import Header from "../../components/header";
 import Footer from "../../components/footer";
 
 import { useForm } from "react-hook-form";
-import { ResetPasswordSchema } from "./validator";
+import { ResetPasswordSchema } from "../../schemas/resetPassword.schema";
 
 import { StyledResetPage } from "./styles";
 
@@ -15,10 +15,12 @@ import { useContext, useEffect } from "react";
 import { ProductPageContext } from "../../contexts/productPage.context";
 import { iResetPassword } from "../../interfaces/resetPassword.interfaces";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks";
 
-const ResetPasswordPage = () => {
-
+const SendEmailResetPasswordPage = () => {
   const navigate = useNavigate();
+
+  const {sendEmailResetPassword} = useAuth();
 
   const { ShowBanner } = useContext(ProductPageContext);
 
@@ -43,11 +45,7 @@ const ResetPasswordPage = () => {
           <div className="tittle-box">
             <h1 className="reset-title">Recuperação de senha</h1>
           </div>
-          <form
-            className="reset-form"
-            noValidate
-            onSubmit={handleSubmit()}
-          >
+          <form className="reset-form" noValidate onSubmit={handleSubmit(sendEmailResetPassword)}>
             <div className="inputs-cont">
               <InputComponent
                 label="Ensina seu E-mail para recuperação"
@@ -64,10 +62,14 @@ const ResetPasswordPage = () => {
                 Confirmar
               </button>
               <p>Ainda não possui uma conta?</p>
-              <button onClick={()=>navigate('/register')} className="bttn bttn-gray" type="button">
+              <button
+                onClick={() => navigate("/register")}
+                className="bttn bttn-gray"
+                type="button"
+              >
                 Cadastrar
               </button>
-              </div>
+            </div>
           </form>
         </section>
       </StyledResetPage>
@@ -76,4 +78,4 @@ const ResetPasswordPage = () => {
   );
 };
 
-export default ResetPasswordPage;
+export default SendEmailResetPasswordPage;
