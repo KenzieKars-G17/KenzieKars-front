@@ -1,4 +1,10 @@
-import { createContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useEffect,
+  useState,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import {
   Iadvertisement,
   IadvertisementStatus,
@@ -23,23 +29,34 @@ interface iAdvertisementValues {
   deleteAdvertisement: any;
   updateAdvertisementStatus: any;
   SetShowAddAdvertisementForm: () => void;
+  filteredAd: Iadvertisement[];
+  setFilteredAd: Dispatch<SetStateAction<Iadvertisement[]>>;
 }
 
 export const AdvertisementContext = createContext({} as iAdvertisementValues);
 
-export const AdvertisementProvider = ({ children }: advertisementProviderProps) => {
+export const AdvertisementProvider = ({
+  children,
+}: advertisementProviderProps) => {
+  const [showAddAdvertisementForm, setShowAddAdvertisementForm] =
+    useState<boolean>(false);
 
-  const [showAddAdvertisementForm, setShowAddAdvertisementForm] = useState<boolean>(false);
-
-  const [allAdvertisements, setAllAdvertisements] = useState<Iadvertisement[]>([]);
+  const [allAdvertisements, setAllAdvertisements] = useState<Iadvertisement[]>(
+    []
+  );
 
   const [advertisementById, setAdvertisementById] = useState<Iadvertisement>();
 
-  const [sellerAdvertisements, setSellerAdvertisements] = useState<Iadvertisement[]>([]);
+  const [sellerAdvertisements, setSellerAdvertisements] = useState<
+    Iadvertisement[]
+  >([]);
+
+  const [filteredAd, setFilteredAd] =
+    useState<Iadvertisement[]>(allAdvertisements);
 
   const SetShowAddAdvertisementForm = () => {
     setShowAddAdvertisementForm((prevState) => !prevState);
-  }
+  };
 
   useEffect(() => {
     getAllAdvertisements();
@@ -50,6 +67,7 @@ export const AdvertisementProvider = ({ children }: advertisementProviderProps) 
     try {
       const response = await api.get<Iadvertisement[]>("advertisement");
       setAllAdvertisements(response.data);
+      setFilteredAd(response.data);
     } catch (error) {
       console.error("Erro ao obter os anuncios", error);
     }
@@ -98,18 +116,17 @@ export const AdvertisementProvider = ({ children }: advertisementProviderProps) 
         },
       });
 
-      toast.success("Anúncio criado com sucesso!",{
-        autoClose: 1000
-      })
+      toast.success("Anúncio criado com sucesso!", {
+        autoClose: 1000,
+      });
 
       return response.data;
     } catch (error) {
-
       console.log(error);
-      
-      toast.error("Erro ao criar anúncio.",{
-        autoClose: 1000
-      })
+
+      toast.error("Erro ao criar anúncio.", {
+        autoClose: 1000,
+      });
     }
   };
 
@@ -186,7 +203,9 @@ export const AdvertisementProvider = ({ children }: advertisementProviderProps) 
         updateAdvertisement,
         updateAdvertisementStatus,
         deleteAdvertisement,
-        SetShowAddAdvertisementForm
+        SetShowAddAdvertisementForm,
+        filteredAd,
+        setFilteredAd,
       }}
     >
       {children}
