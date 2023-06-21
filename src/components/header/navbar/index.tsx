@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/auth.context";
 
 const Navbar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
   const [currentWidth, setCurrentWidth] = useState<number>(0);
 
   const updateWidth = (): void => {
@@ -46,10 +46,18 @@ const Navbar = () => {
           </LeftContainer>
           <RightContainer>
             {user && currentWidth >= 768 ? (
-              <div className="profileInfo">
-                <div className="headerUserImg"></div>
-                <h2 className="headerUserName">{user.name}</h2>
-              </div>
+              <>
+                <div
+                  className="profileInfo"
+                  onClick={() => {
+                    navigate("/user");
+                  }}
+                >
+                  <div className="headerUserImg"></div>
+                  <h2 className="headerUserName">{user.name}</h2>
+                </div>
+                <CadastrarButton onClick={logout}>Logout</CadastrarButton>
+              </>
             ) : (
               <FazerLoginButton
                 onClick={() => {
