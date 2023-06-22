@@ -15,6 +15,7 @@ import { InputComponent } from "../../components/InputComponent";
 
 import { useContext, useEffect } from "react";
 import { ProductPageContext } from "../../contexts/productPage.context";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { login } = useAuth();
@@ -24,6 +25,8 @@ const Login = () => {
   useEffect(() => {
     ShowBanner(false);
   }, []);
+
+  const navigate = useNavigate()
 
   const {
     register,
@@ -67,7 +70,9 @@ const Login = () => {
                 <span className="alert-span">{errors.password.message}</span>
               )}
               <a href="">
-                <span>Esqueci minha senha</span>
+                <span onClick={()=>{
+                  navigate("/reset-password")
+                }}>Esqueci minha senha</span>
               </a>
             </div>
             <div className="buttons-cont">
@@ -75,7 +80,9 @@ const Login = () => {
                 Entrar
               </button>
               <p>Ainda não possui uma conta?</p>
-              <button className="bttn bttn-gray" type="button">
+              <button className="bttn bttn-gray" type="button" onClick={()=>{
+                navigate("/register")
+              }}>
                 Cadastrar
               </button>
             </div>

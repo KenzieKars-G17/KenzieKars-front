@@ -8,6 +8,10 @@ export const StyledRegister = styled.main`
   width: 100vw;
   background-color: var(--color-grey-8);
 
+  button{
+    cursor: pointer;
+  }
+
   .divTypeAccount{
     display: flex;
     flex-direction: column;

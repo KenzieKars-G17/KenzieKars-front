@@ -9,11 +9,14 @@ import { AdvertisementContext } from "../../contexts/advertisements.context";
 import FormAddAnnouncement from "../../components/forms/formAddAnnouncement";
 import { ProductPageContext } from "../../contexts/productPage.context";
 import Loader from "../../components/loader";
+import { AuthContext } from "../../contexts/auth.context";
+import FormEditUserInfo from "../../components/forms/formEditUserInfo";
 
 const DashboardUser = () => {
+
   const { loading } = useAuth();
-  const { sellerAdvertisements, showAddAdvertisementForm } =
-    useContext(AdvertisementContext);
+  const { sellerAdvertisements, showAddAdvertisementForm } = useContext(AdvertisementContext);
+  const { showFormEditUserInfo } = useContext(AuthContext)
 
   const { ShowBanner } = useContext(ProductPageContext);
 
@@ -38,6 +41,7 @@ const DashboardUser = () => {
       </main>
       <Footer />
       {showAddAdvertisementForm && <FormAddAnnouncement />}
+      {showFormEditUserInfo && <FormEditUserInfo />}
     </DashboardUserPageBase>
   );
 };

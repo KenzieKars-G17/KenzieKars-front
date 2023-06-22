@@ -11,6 +11,10 @@ export const StyledLogin = styled.main`
     padding: 12rem 1.6rem;
   }
 
+  button{
+    cursor: pointer;
+  }
+
   .login-content {
     display: flex;
     flex-direction: column;
