@@ -13,6 +13,7 @@ import { AdvertisementContext } from "../../contexts/advertisements.context";
 import FormAddAnnouncement from "../../components/forms/formAddAnnouncement";
 // import { useContext } from "react";
 import Loader from "../../components/loader";
+import { ModalWrapper } from "../../components/modal/filterModal/styles";
 
 const HomePage = () => {
   const { loading } = useAuth();
@@ -50,6 +51,7 @@ const HomePage = () => {
   useEffect(() => {
     const condition = true;
     ShowBanner(condition);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const {
@@ -68,6 +70,7 @@ const HomePage = () => {
     setTimeout(() => {
       updateWidth();
     }, 1000);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) {
@@ -81,9 +84,9 @@ const HomePage = () => {
           <FilterAside />
         ) : null}
         {showFilterAside === true && currentWidth < 768 ? (
-          <Modal>
+          <ModalWrapper>
             <FilterAside />
-          </Modal>
+          </ModalWrapper>
         ) : null}
         <Cards arr={filteredAd} />
       </main>
