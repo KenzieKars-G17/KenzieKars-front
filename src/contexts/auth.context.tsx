@@ -84,7 +84,7 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
       });
 
       setUser(findUser.data);
-      navigate("/");
+      navigate(`/users/${token}`);
     } catch (error) {
       console.log(error);
     } finally {
