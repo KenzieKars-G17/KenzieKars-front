@@ -25,6 +25,7 @@ export const FazerLoginButton = styled.button`
   font-size: 16px;
   color: #4529e6;
   text-decoration: none;
+  cursor: pointer;
   outline: none;
   &:focus {
     outline: none;

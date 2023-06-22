@@ -17,6 +17,22 @@ export const UserCardDiv = styled.div`
   padding-right: 3.3%;
   padding-top: 44px;
 
+  .divButtons {
+    display: flex;
+    gap: 2px;
+
+    button {
+      cursor: pointer;
+      transition: 0.3s;
+
+      :hover {
+        background-color: #4529e6;
+        transition: 0.3s;
+        color: white;
+      }
+    }
+  }
+
   img {
     height: 104px;
     width: 104px;
