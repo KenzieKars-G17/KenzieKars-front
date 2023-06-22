@@ -19,11 +19,11 @@ export const UlCards = styled.ul`
     position: relative;
     transition: 0.3s;
 
-    img{
+    img {
       cursor: pointer;
     }
 
-    :hover{
+    :hover {
       scale: 1.01;
       transition: 0.3s;
     }
