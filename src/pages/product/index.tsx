@@ -8,13 +8,17 @@ import { useContext, useEffect } from "react";
 import { useAuth } from "../../hooks";
 import { ProductPageContext } from "../../contexts/productPage.context";
 import Loader from "../../components/loader";
+import { AdvertisementContext } from "../../contexts/advertisements.context";
 
 const ProductPage = () => {
   const { loading } = useAuth();
-  const { ShowBannerPicture, ShowBanner } = useContext(ProductPageContext);
+  const { ShowBannerPicture, ShowBanner} = useContext(ProductPageContext);
+  const { advertisementById } = useContext(AdvertisementContext)
+
+  const user = advertisementById.user
 
   useEffect(() => {
-    const condition = false;
+    const condition = false; 
     ShowBannerPicture(condition);
     ShowBanner(!condition);
   }, []);
@@ -51,7 +55,7 @@ const ProductPage = () => {
             </li>
           </ul>
         </section>
-        <UserDetails />
+        <UserDetails user={user}/>
         <Comments />
       </main>
 

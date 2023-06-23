@@ -2,119 +2,30 @@ import { useContext } from "react";
 import { UlCards } from "./styles";
 import { AuthContext } from "../../contexts/auth.context";
 import { TAdvertisementArray } from "../../interfaces/advertisements.interfaces";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
+import { AdvertisementContext } from "../../contexts/advertisements.context";
+import avatar from '../../assets/avatar.png';
 
 interface CardsProps {
   arr: TAdvertisementArray;
 }
 
 const Cards = ({ arr }: CardsProps) => {
-  const navigate = useNavigate();
-
-  const announcements = [
-    {
-      imgSource: "https://img.olx.com.br/images/51/515306396352820.jpg",
-      alt: "image car",
-      name: "Tesla model X",
-      description: "Tesla model that rides alone if you want to",
-      profilePic:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKPbmsnR5M4YrRifgCOMvnsQb6sZtDpspVrZjdtCtVkMuYM0QGrF_3nt8co8zdfbY4NYs&usqp=CAU",
-      profileName: "Morlock",
-      km: 21,
-      year: 2014,
-      price: 148750,
-    },
-    {
-      imgSource: "https://img.olx.com.br/images/51/515306396352820.jpg",
-      alt: "image car",
-      name: "Tesla model X",
-      description: "Tesla model that rides alone if you want to",
-      profilePic:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKPbmsnR5M4YrRifgCOMvnsQb6sZtDpspVrZjdtCtVkMuYM0QGrF_3nt8co8zdfbY4NYs&usqp=CAU",
-      profileName: "Morlock",
-      km: 21,
-      year: 2014,
-      price: 148750,
-    },
-    {
-      imgSource: "https://img.olx.com.br/images/51/515306396352820.jpg",
-      alt: "image car",
-      name: "Tesla model X",
-      description: "Tesla model that rides alone if you want to",
-      profilePic:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKPbmsnR5M4YrRifgCOMvnsQb6sZtDpspVrZjdtCtVkMuYM0QGrF_3nt8co8zdfbY4NYs&usqp=CAU",
-      profileName: "Morlock",
-      km: 21,
-      year: 2014,
-      price: 148750,
-    },
-    {
-      imgSource: "https://img.olx.com.br/images/51/515306396352820.jpg",
-      alt: "image car",
-      name: "Tesla model X",
-      description: "Tesla model that rides alone if you want to",
-      profilePic:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKPbmsnR5M4YrRifgCOMvnsQb6sZtDpspVrZjdtCtVkMuYM0QGrF_3nt8co8zdfbY4NYs&usqp=CAU",
-      profileName: "Morlock",
-      km: 21,
-      year: 2014,
-      price: 148750,
-    },
-    {
-      imgSource: "https://img.olx.com.br/images/51/515306396352820.jpg",
-      alt: "image car",
-      name: "Tesla model X",
-      description: "Tesla model that rides alone if you want to",
-      profilePic:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKPbmsnR5M4YrRifgCOMvnsQb6sZtDpspVrZjdtCtVkMuYM0QGrF_3nt8co8zdfbY4NYs&usqp=CAU",
-      profileName: "Morlock",
-      km: 21,
-      year: 2014,
-      price: 148750,
-    },
-    {
-      imgSource: "https://img.olx.com.br/images/51/515306396352820.jpg",
-      alt: "image car",
-      name: "Tesla model X",
-      description: "Tesla model that rides alone if you want to",
-      profilePic:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKPbmsnR5M4YrRifgCOMvnsQb6sZtDpspVrZjdtCtVkMuYM0QGrF_3nt8co8zdfbY4NYs&usqp=CAU",
-      profileName: "Morlock",
-      km: 21,
-      year: 2014,
-      price: 148750,
-    },
-    {
-      imgSource: "https://img.olx.com.br/images/51/515306396352820.jpg",
-      alt: "image car",
-      name: "Tesla model X",
-      description: "Tesla model that rides alone if you want to",
-      profilePic:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKPbmsnR5M4YrRifgCOMvnsQb6sZtDpspVrZjdtCtVkMuYM0QGrF_3nt8co8zdfbY4NYs&usqp=CAU",
-      profileName: "Morlock",
-      km: 21,
-      year: 2014,
-      price: 148750,
-    },
-    {
-      imgSource: "https://img.olx.com.br/images/51/515306396352820.jpg",
-      alt: "image car",
-      name: "Tesla model X",
-      description: "Tesla model that rides alone if you want to",
-      profilePic:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKPbmsnR5M4YrRifgCOMvnsQb6sZtDpspVrZjdtCtVkMuYM0QGrF_3nt8co8zdfbY4NYs&usqp=CAU",
-      profileName: "Morlock",
-      km: 21,
-      year: 2014,
-      price: 148750,
-    },
-  ];
-
   const { user, setLoading } = useContext(AuthContext);
+  
+  const { getAdvertisementById } = useContext(AdvertisementContext);
+  
+  const { userId } = useParams();
 
   return (
     <UlCards>
       {arr.map((announcement) => {
+        const isUserSeller = user?.seller && user.id === parseInt(userId!);      
+
+        const location = useLocation()
+      
+        const isHome = location.pathname === '/'
+         
         return (
           <li key={Math.random()}>
             {announcement.is_active ? (
@@ -129,9 +40,10 @@ const Cards = ({ arr }: CardsProps) => {
             <img
               src={announcement.cover_image}
               alt={announcement.model}
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
                 setLoading(true);
-                navigate("/product-page");
+                getAdvertisementById(announcement.id);
                 setTimeout(() => {
                   setLoading(false);
                 }, 500);
@@ -143,7 +55,7 @@ const Cards = ({ arr }: CardsProps) => {
             <p>{announcement.description}</p>
             <div className="announcerDetails">
               <img
-                src={announcements[0].profilePic}
+                src={avatar}
                 alt="ProfilePic"
                 className="profilePic"
               />
@@ -154,7 +66,7 @@ const Cards = ({ arr }: CardsProps) => {
               <span className="year">{announcement.year}</span>
               <span className="price">R$ {announcement.price}</span>
             </div>
-            {user?.name === announcement.user?.name && (
+            {!isHome && isUserSeller && (
               <div className="divButtonsAdmin">
                 <button className="btnEdit">Editar</button>
                 <button className="btnDetails">Ver detalhes</button>

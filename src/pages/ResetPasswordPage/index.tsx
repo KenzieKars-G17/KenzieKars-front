@@ -12,11 +12,12 @@ import { InputComponent } from "../../components/InputComponent";
 
 import { useContext, useEffect } from "react";
 import { ProductPageContext } from "../../contexts/productPage.context";
-import { ResetPasswordSchema } from "../../schemas/ResetPassword.schema";
+
 import { iResetPassword } from "../../interfaces/resetPassword.interfaces";
 import { useParams } from "react-router-dom";
 import api from "../../services/api";
 import { toast } from "react-toastify";
+import { ResetPasswordSchema } from "../../schemas/ResetPassword.schema";
 
 const ResetPasswordPage = () => {
   const { token } = useParams();
