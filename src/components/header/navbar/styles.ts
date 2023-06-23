@@ -35,7 +35,7 @@ export const NavbarContainer = styled.nav`
     min-width: 200px;
     height: auto;
     top: 65px;
-    left: 89%;
+    right: 17px;
     /* transform: translate(-50%); */
     z-index: 1;
     background: #f8f9fa;
