@@ -1,17 +1,58 @@
 import styled from "styled-components";
-import { FaBars } from "react-icons/fa";
 
 export const NavbarContainer = styled.nav`
-  /* position: relative; */
+  position: relative;
   width: 100%;
-  height: 80px;
+  min-height: 80px;
   border-bottom-width: 2px;
   border-bottom-style: solid;
   border-color: #dee2e6;
-  background-color: black;
   align-items: center;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  .toggle-menu-mobile {
+    opacity: 0;
+    height: 0;
+    width: 100%;
+    overflow: hidden;
+    transition: opacity 2s ease, height 2s ease;
+  }
+
+  .mobile-visible {
+    opacity: 1;
+    height: auto;
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .toggle-menu-profile {
+    display: none;
+  }
+  .profile-visible {
+    position: fixed;
+    min-width: 200px;
+    height: auto;
+    top: 65px;
+    right: 17px;
+    /* transform: translate(-50%); */
+    z-index: 1;
+    background: #f8f9fa;
+    box-shadow: 0px 4px 40px -10px #00000040;
+    padding: 1%;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .profile-visible > h3 {
+    color: #495057;
+    font-family: "inter", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+  }
 `;
 
 export const FazerLoginButton = styled.button`
@@ -27,11 +68,13 @@ export const FazerLoginButton = styled.button`
   text-decoration: none;
   cursor: pointer;
   outline: none;
+  cursor: pointer;
   &:focus {
     outline: none;
   }
   @media screen and (max-width: 768px) {
-    display: none;
+    width: fit-content;
+    padding: 0;
   }
 `;
 
@@ -61,7 +104,7 @@ export const CadastrarButton = styled.button`
     outline: none;
   }
   @media screen and (max-width: 768px) {
-    display: none;
+    width: 100%;
   }
 `;
 
@@ -83,10 +126,9 @@ export const RightContainer = styled.div`
   border-color: #dee2e6;
   padding-right: 3%;
   padding-left: 3%;
-  background-color: salmon;
   background-color: #fdfdfd;
   @media screen and (max-width: 768px) {
-    border-style: none;
+    border-left-style: none;
   }
 
   .profileInfo {
@@ -135,19 +177,5 @@ export const NavbarLogoContainer = styled.div`
 //     color: #000000;
 //   }
 // `;
-
-export const Hamburger = styled(FaBars)`
-  display: none;
-  color: black;
-  @media screen and (max-width: 768px) {
-    display: block;
-    font-size: 1.9rem;
-    top: 18px;
-    right: 0;
-    position: absolute;
-    cursor: pointer;
-    transform: translate(-100%, 30%);
-  }
-`;
 
 export const NavbarExtendedContainer = styled.div``;

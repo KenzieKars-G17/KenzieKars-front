@@ -6,13 +6,13 @@ import {
   RightContainer,
   NavbarInnerContainer,
   NavbarLogoContainer,
-  Hamburger,
   FazerLoginButton,
   CadastrarButton,
 } from "./styles";
 import LogoNav from "../../../assets/LogoNav.png";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/auth.context";
+import Hamburger from "hamburger-react";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
@@ -26,6 +26,8 @@ const Navbar = () => {
   useEffect(() => {
     updateWidth();
   }, []);
+
+  const [isOpen, setOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -45,20 +47,20 @@ const Navbar = () => {
             </NavbarLogoContainer>
           </LeftContainer>
           <RightContainer>
-            {user && currentWidth >= 768 ? (
+            {user && currentWidth >= 768 && (
               <>
                 <div
                   className="profileInfo"
                   onClick={() => {
-                    navigate("/user");
+                    isOpen ? setOpen(false) : setOpen(true);
                   }}
                 >
                   <div className="headerUserImg"></div>
                   <h2 className="headerUserName">{user.name}</h2>
                 </div>
-                <CadastrarButton onClick={logout}>Logout</CadastrarButton>
               </>
-            ) : (
+            )}
+            {!user && currentWidth >= 768 && (
               <FazerLoginButton
                 onClick={() => {
                   navigate("/login");
@@ -67,7 +69,7 @@ const Navbar = () => {
                 Fazer Login
               </FazerLoginButton>
             )}
-            {!user && (
+            {!user && currentWidth >= 768 && (
               <CadastrarButton
                 onClick={() => {
                   navigate("/register");
@@ -76,9 +78,55 @@ const Navbar = () => {
                 Cadastrar
               </CadastrarButton>
             )}
-            <Hamburger />
+            {currentWidth <= 768 && (
+              <Hamburger toggled={isOpen} toggle={setOpen} />
+            )}
           </RightContainer>
         </NavbarInnerContainer>
+        {user && currentWidth >= 768 && (
+          <div className={`toggle-menu-profile ${isOpen && "profile-visible"}`}>
+            <h3>Editar Perfil</h3>
+            <h3>Editar Endereço</h3>
+            <h3 onClick={() => navigate("/user")}>Meus Anúncios</h3>
+            <h3 onClick={logout}>Sair</h3>
+          </div>
+        )}
+        {!user && isOpen && currentWidth <= 768 && (
+          <div className={`toggle-menu-mobile ${isOpen && "mobile-visible"}`}>
+            <FazerLoginButton
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+              Fazer Login
+            </FazerLoginButton>
+            <CadastrarButton
+              onClick={() => {
+                navigate("/register");
+              }}
+            >
+              Cadastrar
+            </CadastrarButton>
+          </div>
+        )}
+        {user && isOpen && currentWidth <= 768 && (
+          <div className={`toggle-menu-mobile ${isOpen && "mobile-visible"}`}>
+            <FazerLoginButton
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+              Fazer Login
+            </FazerLoginButton>
+            <CadastrarButton
+              onClick={() => {
+                navigate("/register");
+              }}
+            >
+              Cadastrar
+            </CadastrarButton>
+          </div>
+        )}
       </NavbarContainer>
     </React.Fragment>
   );
