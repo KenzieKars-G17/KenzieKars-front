@@ -129,9 +129,6 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
   const editUser = async (data: any) => {
     data.seller = advertiser;
 
-    console.log("aqui irmao");
-    console.log(data);
-
     const jwtToken = localStorage.getItem("@TOKEN");
 
     try {
@@ -144,7 +141,6 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
       if (resp.status === 200) {
         toast.success("Cadastro editado com sucesso!");
         setTimeout(() => {
-          navigate("/user");
           SetShowFormEditUserInfo();
         }, 2000);
       } else {
