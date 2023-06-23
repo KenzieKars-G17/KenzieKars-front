@@ -87,7 +87,7 @@ const Navbar = () => {
           <div className={`toggle-menu-profile ${isOpen && "profile-visible"}`}>
             <h3>Editar Perfil</h3>
             <h3>Editar Endereço</h3>
-            <h3 onClick={() => navigate("/user")}>Meus Anúncios</h3>
+            <h3 onClick={() => navigate(`user/${user.id}`)}>Meus Anúncios</h3>
             <h3 onClick={logout}>Sair</h3>
           </div>
         )}

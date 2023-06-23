@@ -26,4 +26,8 @@ const returnUserAdSchema = z
   })
   .partial();
 
-export { userSchema, returnUserSchema, returnUserAdSchema };
+  const userIdSchema = userSchema.extend({
+    id: z.number()
+  })
+
+export { userSchema, returnUserSchema, returnUserAdSchema, userIdSchema};
