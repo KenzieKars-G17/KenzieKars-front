@@ -17,14 +17,15 @@ const Cards = ({ arr }: CardsProps) => {
   
   const { userId } = useParams();
 
+  const isUserSeller = user?.seller && user.id === parseInt(userId!);      
+
+  const location = useLocation()
+
+  const isHome = location.pathname === '/'
+
   return (
     <UlCards>
       {arr.map((announcement) => {
-        const isUserSeller = user?.seller && user.id === parseInt(userId!);      
-
-        const location = useLocation()
-      
-        const isHome = location.pathname === '/'
          
         return (
           <li key={Math.random()}>

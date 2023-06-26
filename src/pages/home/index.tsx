@@ -14,44 +14,17 @@ import FormAddAnnouncement from "../../components/forms/formAddAnnouncement";
 // import { useContext } from "react";
 import Loader from "../../components/loader";
 import { ModalWrapper } from "../../components/modal/filterModal/styles";
+import FormEditUserInfo from "../../components/forms/formEditUserInfo";
+import { AuthContext } from "../../contexts/auth.context";
 
 const HomePage = () => {
   const { loading } = useAuth();
-  const { allAdvertisements, filteredAd } = useContext(AdvertisementContext);
+  const { filteredAd } = useContext(AdvertisementContext);
   const { ShowBanner } = useContext(ProductPageContext);
-
-  // const {
-  //   showAllBrands,
-  //   showAllModels,
-  //   showAllColors,
-  //   showAllYears,
-  //   showAllFuels,
-
-  //   selectBrand,
-  //   selectModel,
-  //   selectColor,
-  //   selectYear,
-  //   selectFuel,
-  //   SetMinKm,
-  //   SetMaxKm,
-  //   SetMinPrice,
-  //   SetMaxPrice,
-
-  //   brandSelected,
-  //   modelSelected,
-  //   colorSelected,
-  //   yearSelected,
-  //   fuelSelected,
-  //   minKm,
-  //   maxKm,
-  //   minPrice,
-  //   maxPrice,
-  // } = useContext(FilterContext);
 
   useEffect(() => {
     const condition = true;
     ShowBanner(condition);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const {
@@ -63,6 +36,8 @@ const HomePage = () => {
   } = useContext(HomePageContext);
   const { ShowBannerPicture } = useContext(ProductPageContext);
 
+  const { showFormEditUserInfo } = useContext(AuthContext)
+
   useEffect(() => {
     const condition = true;
     ShowBannerPicture(condition);
@@ -70,7 +45,6 @@ const HomePage = () => {
     setTimeout(() => {
       updateWidth();
     }, 1000);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) {
@@ -107,6 +81,8 @@ const HomePage = () => {
         </button>
       ) : null}
       {/*COMPONENTIZAR E PADRONIZAR ESTE BOTÃO DE FILTROS*/}
+
+      {showFormEditUserInfo && <FormEditUserInfo/>}
 
       <Footer />
     </HomePageBase>

@@ -15,7 +15,7 @@ import { AuthContext } from "../../../contexts/auth.context";
 import Hamburger from "hamburger-react";
 
 const Navbar = () => {
-  const { user, logout } = useContext(AuthContext);
+  const { user, logout, SetShowFormEditUserInfo } = useContext(AuthContext);
   const [currentWidth, setCurrentWidth] = useState<number>(0);
 
   const updateWidth = (): void => {
@@ -87,7 +87,7 @@ const Navbar = () => {
           <div className={`toggle-menu-profile ${isOpen && "profile-visible"}`}>
             <h3>Editar Perfil</h3>
             <h3>Editar Endereço</h3>
-            <h3 onClick={() => navigate(`user/${user.id}`)}>Meus Anúncios</h3>
+            <h3 onClick={() => navigate("/user")}>Meus Anúncios</h3>
             <h3 onClick={logout}>Sair</h3>
           </div>
         )}

@@ -37,13 +37,12 @@ interface iContextValues {
 export const AuthContext = createContext({} as iContextValues);
 
 export const AuthProvider = ({ children }: iAuthProviderProps) => {
-
   const [advertiser, setAdvertiser] = useState(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [user, setUser] = useState<IUserReturn | null>(null);
-  const [ showFormEditUserInfo, setShowFormEditUserInfo ] = useState(false)
+  const [showFormEditUserInfo, setShowFormEditUserInfo] = useState(false);
 
-  const thisUser: any = user
+  const thisUser: any = user;
 
   const navigate = useNavigate();
 
@@ -128,11 +127,7 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
   };
 
   const editUser = async (data: any) => {
-
     data.seller = advertiser;
-
-    console.log("aqui irmao")
-    console.log(data)
 
     const jwtToken = localStorage.getItem("@TOKEN");
 
@@ -142,15 +137,12 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
           Authorization: `Bearer ${jwtToken}`,
         },
       });
-      
 
       if (resp.status === 200) {
         toast.success("Cadastro editado com sucesso!");
         setTimeout(() => {
-          navigate("/user")
-          SetShowFormEditUserInfo()
+          SetShowFormEditUserInfo();
         }, 2000);
-
       } else {
         toast.error("Ops, alguma coisa deu errado!");
       }
@@ -158,23 +150,41 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
       console.log(error);
       toast.error("Ops, alguma coisa deu errado!");
     }
+
+    try {
+      setLoading(true);
+      const jwtToken = localStorage.getItem("@TOKEN");
+
+      if (!jwtToken) return;
+
+      const findUser = await api.get("users", {
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+        },
+      });
+
+      setUser(findUser.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+    }
   };
 
-  const sendEmailResetPassword = async (email:string) =>{
+  const sendEmailResetPassword = async (email: string) => {
     try {
-       await api.post("users/resetPassword", email);
-       toast.success("Email enviado com sucesso!")
+      await api.post("users/resetPassword", email);
+      toast.success("Email enviado com sucesso!");
     } catch (error) {
-      toast.error("Ops, alguma coisa deu errado!")
+      toast.error("Ops, alguma coisa deu errado!");
     }
-
-  }
+  };
 
   const SetShowFormEditUserInfo = () => {
     setShowFormEditUserInfo((prevState) => !prevState);
-  }
-
-
+  };
 
   return (
     <AuthContext.Provider
@@ -191,7 +201,7 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
         sendEmailResetPassword,
         SetShowFormEditUserInfo,
         showFormEditUserInfo,
-        editUser
+        editUser,
       }}
     >
       {children}
