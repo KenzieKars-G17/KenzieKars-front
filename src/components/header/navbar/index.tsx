@@ -1,4 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useState,
+  MouseEventHandler,
+} from "react";
 
 import {
   NavbarContainer,
@@ -29,6 +34,14 @@ const Navbar = () => {
 
   const [isOpen, setOpen] = useState(false);
 
+  const handleMouseEnter = () => {
+    setOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    setOpen(false);
+  };
+
   const navigate = useNavigate();
 
   return (
@@ -46,15 +59,13 @@ const Navbar = () => {
               />
             </NavbarLogoContainer>
           </LeftContainer>
-          <RightContainer>
+          <RightContainer
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
             {user && currentWidth >= 768 && (
               <>
-                <div
-                  className="profileInfo"
-                  onClick={() => {
-                    isOpen ? setOpen(false) : setOpen(true);
-                  }}
-                >
+                <div className="profileInfo">
                   <div className="headerUserImg"></div>
                   <h2 className="headerUserName">{user.name}</h2>
                 </div>
@@ -84,8 +95,12 @@ const Navbar = () => {
           </RightContainer>
         </NavbarInnerContainer>
         {user && currentWidth >= 768 && (
-          <div className={`toggle-menu-profile ${isOpen && "profile-visible"}`}>
-            <h3>Editar Perfil</h3>
+          <div
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            className={`toggle-menu-profile ${isOpen && "profile-visible"}`}
+          >
+            <h3 onClick={SetShowFormEditUserInfo}>Editar Perfil</h3>
             <h3>Editar Endereço</h3>
             <h3 onClick={() => navigate("/user")}>Meus Anúncios</h3>
             <h3 onClick={logout}>Sair</h3>
@@ -111,20 +126,20 @@ const Navbar = () => {
         )}
         {user && isOpen && currentWidth <= 768 && (
           <div className={`toggle-menu-mobile ${isOpen && "mobile-visible"}`}>
+            <FazerLoginButton onClick={SetShowFormEditUserInfo}>
+              Editar Perfil
+            </FazerLoginButton>
+            <FazerLoginButton onClick={() => console.log("abrir modal")}>
+              Editar Endereço
+            </FazerLoginButton>
             <FazerLoginButton
               onClick={() => {
-                navigate("/login");
+                navigate("/user");
               }}
             >
-              Fazer Login
+              Meus Anúncios
             </FazerLoginButton>
-            <CadastrarButton
-              onClick={() => {
-                navigate("/register");
-              }}
-            >
-              Cadastrar
-            </CadastrarButton>
+            <FazerLoginButton onClick={logout}>Sair</FazerLoginButton>
           </div>
         )}
       </NavbarContainer>
