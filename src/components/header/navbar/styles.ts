@@ -27,6 +27,8 @@ export const NavbarContainer = styled.nav`
     align-items: center;
     flex-direction: column;
     gap: 10px;
+    z-index: 1;
+    background: #ffffff;
   }
   .toggle-menu-profile {
     display: none;
