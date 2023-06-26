@@ -24,8 +24,8 @@ const AppRoutes = () => {
                   <Route path="/" element={<HomePage />}></Route>
                   <Route path="/login" element={<LoginPage />}></Route>
                   <Route path="/register" element={<RegisterPage />}></Route>
-                  <Route path="/product-page" element={<ProductPage />}></Route>
-                  <Route path="/user" element={<DashboardUser />}></Route>
+                  <Route path="/product-page/:id" element={<ProductPage />}></Route>
+                  <Route path="/user/:userId" element={<DashboardUser />}></Route>
                   <Route path="/reset-password" element={<SendEmailResetPasswordPage/>}></Route>
                   <Route path="/reset-password/:token" element={<ResetPasswordPage/>}></Route>
                 </Routes>

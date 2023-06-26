@@ -7,10 +7,12 @@ import {
 } from "react";
 import {
   Iadvertisement,
+  IadvertisementId,
   IadvertisementStatus,
 } from "../interfaces/advertisements.interfaces";
 import api from "../services/api";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 interface advertisementProviderProps {
   children: React.ReactNode;
@@ -45,7 +47,7 @@ export const AdvertisementProvider = ({
     []
   );
 
-  const [advertisementById, setAdvertisementById] = useState<Iadvertisement>();
+  const [advertisementById, setAdvertisementById] = useState<IadvertisementId>();
 
   const [sellerAdvertisements, setSellerAdvertisements] = useState<
     Iadvertisement[]
@@ -58,10 +60,14 @@ export const AdvertisementProvider = ({
     setShowAddAdvertisementForm((prevState) => !prevState);
   };
 
+
   useEffect(() => {
     getAllAdvertisements();
     getSellerAdvertisements();
   }, []);
+
+  
+  const navigate = useNavigate();
 
   const getAllAdvertisements = async () => {
     try {
@@ -75,15 +81,11 @@ export const AdvertisementProvider = ({
 
   const getAdvertisementById = async (id: number) => {
     try {
-      const jwtToken = localStorage.getItem("@TOKEN");
-      if (!jwtToken) return;
-
-      const response = await api.get<Iadvertisement>(`advertisement/${id}`, {
-        headers: {
-          Authorization: `Bearer ${jwtToken}`,
-        },
-      });
+      const response = await api.get<IadvertisementId>(`advertisement/${id}`);
+      
       setAdvertisementById(response.data);
+      navigate(`/product-page/${response.data.id}`)
+      
     } catch (error) {
       console.error("Erro ao obter o anuncio", error);
     }
