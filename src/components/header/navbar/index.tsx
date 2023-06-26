@@ -85,7 +85,7 @@ const Navbar = () => {
         </NavbarInnerContainer>
         {user && currentWidth >= 768 && (
           <div className={`toggle-menu-profile ${isOpen && "profile-visible"}`}>
-            <h3>Editar Perfil</h3>
+            <h3 onClick={SetShowFormEditUserInfo}>Editar Perfil</h3>
             <h3>Editar Endereço</h3>
             <h3 onClick={() => navigate("/user")}>Meus Anúncios</h3>
             <h3 onClick={logout}>Sair</h3>
@@ -111,20 +111,20 @@ const Navbar = () => {
         )}
         {user && isOpen && currentWidth <= 768 && (
           <div className={`toggle-menu-mobile ${isOpen && "mobile-visible"}`}>
+            <FazerLoginButton onClick={SetShowFormEditUserInfo}>
+              Editar Perfil
+            </FazerLoginButton>
+            <FazerLoginButton onClick={() => console.log("abrir modal")}>
+              Editar Endereço
+            </FazerLoginButton>
             <FazerLoginButton
               onClick={() => {
-                navigate("/login");
+                navigate("/user");
               }}
             >
-              Fazer Login
+              Meus Anúncios
             </FazerLoginButton>
-            <CadastrarButton
-              onClick={() => {
-                navigate("/register");
-              }}
-            >
-              Cadastrar
-            </CadastrarButton>
+            <FazerLoginButton onClick={logout}>Sair</FazerLoginButton>
           </div>
         )}
       </NavbarContainer>
