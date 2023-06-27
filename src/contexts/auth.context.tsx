@@ -32,6 +32,8 @@ interface iContextValues {
   sendEmailResetPassword: any;
   showFormEditUserInfo: boolean;
   SetShowFormEditUserInfo: () => void;
+  showFormEditUserAddress: boolean;
+  SetShowFormEditUserAddress: () => void;
 }
 
 export const AuthContext = createContext({} as iContextValues);
@@ -41,6 +43,7 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [user, setUser] = useState<IUserReturn | null>(null);
   const [showFormEditUserInfo, setShowFormEditUserInfo] = useState(false);
+  const [showFormEditUserAddress, setShowFormEditUserAddress] = useState(false);
 
   const thisUser: any = user;
 
@@ -186,6 +189,10 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
     setShowFormEditUserInfo((prevState) => !prevState);
   };
 
+  const SetShowFormEditUserAddress = () => {
+    setShowFormEditUserAddress((prevState) => !prevState);
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -202,6 +209,8 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
         SetShowFormEditUserInfo,
         showFormEditUserInfo,
         editUser,
+        SetShowFormEditUserAddress,
+        showFormEditUserAddress
       }}
     >
       {children}

@@ -5,7 +5,7 @@ import { AuthContext } from "../../contexts/auth.context";
 
 const UserCard = () => {
   const { SetShowAddAdvertisementForm } = useContext(AdvertisementContext);
-  const { user, SetShowFormEditUserInfo } = useContext(AuthContext);
+  const { user, SetShowFormEditUserInfo, SetShowFormEditUserAddress } = useContext(AuthContext);
 
   return (
     <UserCardDiv>
@@ -22,6 +22,7 @@ const UserCard = () => {
       <div className="divButtons">
         <button onClick={SetShowAddAdvertisementForm}>Criar Anuncio</button>
         <button onClick={SetShowFormEditUserInfo}>Editar perfil</button>
+        <button onClick={SetShowFormEditUserAddress}>Editar endereço</button>
       </div>
     </UserCardDiv>
   );
