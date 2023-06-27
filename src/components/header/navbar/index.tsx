@@ -20,7 +20,7 @@ import { AuthContext } from "../../../contexts/auth.context";
 import Hamburger from "hamburger-react";
 
 const Navbar = () => {
-  const { user, logout, SetShowFormEditUserInfo } = useContext(AuthContext);
+  const { user, logout, SetShowFormEditUserInfo, SetShowFormEditUserAddress  } = useContext(AuthContext);
   const [currentWidth, setCurrentWidth] = useState<number>(0);
 
   const updateWidth = (): void => {
@@ -101,8 +101,8 @@ const Navbar = () => {
             className={`toggle-menu-profile ${isOpen && "profile-visible"}`}
           >
             <h3 onClick={SetShowFormEditUserInfo}>Editar Perfil</h3>
-            <h3>Editar Endereço</h3>
-            <h3 onClick={() => navigate("/user")}>Meus Anúncios</h3>
+            <h3 onClick={SetShowFormEditUserAddress}>Editar Endereço</h3>
+            <h3 onClick={() => navigate(`/user/${user.id}`)}>Meus Anúncios</h3>
             <h3 onClick={logout}>Sair</h3>
           </div>
         )}
@@ -129,12 +129,12 @@ const Navbar = () => {
             <FazerLoginButton onClick={SetShowFormEditUserInfo}>
               Editar Perfil
             </FazerLoginButton>
-            <FazerLoginButton onClick={() => console.log("abrir modal")}>
+            <FazerLoginButton onClick={SetShowFormEditUserAddress}>
               Editar Endereço
             </FazerLoginButton>
             <FazerLoginButton
               onClick={() => {
-                navigate("/user");
+                navigate(`/user/${user.id}`);
               }}
             >
               Meus Anúncios

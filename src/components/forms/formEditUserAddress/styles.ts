@@ -33,7 +33,6 @@ export const DivBackgroundFormEditUser = styled.div`
   form {
     height: 100%;
     margin: 10px;
-    overflow-y: scroll;
 
     label {
       margin: 10px 0 0 0;
