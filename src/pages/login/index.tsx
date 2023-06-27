@@ -1,21 +1,21 @@
+import { ProductPageContext } from "../../contexts/productPage.context";
+import { InputComponent } from "../../components/InputComponent";
+import { iLogin } from "../../interfaces/login.interfaces";
+
+import { LoginSchema } from "../../schemas/login.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import GlobalStyles from "../../styles/GlobalStyles";
 
+import { useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
 import Header from "../../components/header";
-import Footer from "../../components/footer";
 
+import Footer from "../../components/footer";
 import { useForm } from "react-hook-form";
-import { LoginSchema } from "./validator";
 
 import { StyledLogin } from "./styles";
 import { useAuth } from "../../hooks";
 
-import { tLogin } from "./types";
-import { InputComponent } from "../../components/InputComponent";
-
-import { useContext, useEffect } from "react";
-import { ProductPageContext } from "../../contexts/productPage.context";
-import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { login } = useAuth();
@@ -32,7 +32,7 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<tLogin>({
+  } = useForm<iLogin>({
     resolver: zodResolver(LoginSchema),
   });
 
