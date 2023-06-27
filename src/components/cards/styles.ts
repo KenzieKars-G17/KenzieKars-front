@@ -6,21 +6,25 @@ export const UlCards = styled.ul`
   gap: 20px;
   overflow-x: auto;
   max-width: 100%;
+
   height: 375px;
   justify-content: flex-start;
 
   li {
     display: flex;
-    justify-content: space-between;
+    gap: 20px;
     flex-direction: column;
-    height: 100%;
+    height: 410px;
+    padding: 0 10px;
     flex-shrink: 0;
-    width: 200px;
+    width: 312px;
     position: relative;
     transition: 0.3s;
 
     img {
       cursor: pointer;
+      height: 152px;
+      object-fit: contain;
     }
 
     :hover {
@@ -28,7 +32,11 @@ export const UlCards = styled.ul`
       transition: 0.3s;
     }
   }
-
+  .textContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
   img {
     width: 100%;
   }
@@ -51,6 +59,7 @@ export const UlCards = styled.ul`
     justify-content: space-between;
     align-items: flex-end;
     align-items: center;
+    justify-self: end;
   }
 
   .profilePic {
@@ -60,12 +69,16 @@ export const UlCards = styled.ul`
   }
 
   h2 {
-    text-align: center;
+    text-align: start;
   }
 
   p {
     max-width: 100%;
-    text-align: center;
+    text-align: start;
+    word-break: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .announcerDetails {
@@ -157,9 +170,5 @@ export const UlCards = styled.ul`
     flex-wrap: wrap;
     height: 100%;
     gap: 50px;
-
-    li {
-      height: 10%;
-    }
   }
 `;

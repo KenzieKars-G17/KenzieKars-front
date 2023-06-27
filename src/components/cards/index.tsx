@@ -4,7 +4,7 @@ import { AuthContext } from "../../contexts/auth.context";
 import { TAdvertisementArray } from "../../interfaces/advertisements.interfaces";
 import { useLocation, useParams } from "react-router-dom";
 import { AdvertisementContext } from "../../contexts/advertisements.context";
-import avatar from '../../assets/avatar.png';
+import avatar from "../../assets/avatar.png";
 
 interface CardsProps {
   arr: TAdvertisementArray;
@@ -12,21 +12,20 @@ interface CardsProps {
 
 const Cards = ({ arr }: CardsProps) => {
   const { user, setLoading } = useContext(AuthContext);
-  
+
   const { getAdvertisementById } = useContext(AdvertisementContext);
-  
+
   const { userId } = useParams();
 
-  const isUserSeller = user?.seller && user.id === parseInt(userId!);      
+  const isUserSeller = user?.seller && user.id === parseInt(userId!);
 
-  const location = useLocation()
+  const location = useLocation();
 
-  const isHome = location.pathname === '/'
+  const isHome = location.pathname === "/";
 
   return (
     <UlCards>
       {arr.map((announcement) => {
-         
         return (
           <li key={Math.random()}>
             {announcement.is_active ? (
@@ -50,17 +49,15 @@ const Cards = ({ arr }: CardsProps) => {
                 }, 500);
               }}
             />
-            <h2>
-              {announcement.brand}-{announcement.model}
-            </h2>
-            <p>{announcement.description}</p>
-            <div className="announcerDetails">
-              <img
-                src={avatar}
-                alt="ProfilePic"
-                className="profilePic"
-              />
-              <h3 className="userName">{announcement.user?.name}</h3>
+            <div className="textContainer">
+              <h2>
+                {announcement.brand}-{announcement.model}
+              </h2>
+              <p>{announcement.description}</p>
+              <div className="announcerDetails">
+                <img src={avatar} alt="ProfilePic" className="profilePic" />
+                <h3 className="userName">{announcement.user?.name}</h3>
+              </div>
             </div>
             <div className="productDetailsPreview">
               <span className="km">{announcement.mileage} KM</span>
