@@ -4,6 +4,7 @@ import { iEditRegister, iRegister } from "../interfaces/register.interfaces";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
+import jwt_decode from "jwt-decode";
 
 import {
   ReactNode,
@@ -56,12 +57,8 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
         const jwtToken = localStorage.getItem("@TOKEN");
 
         if (!jwtToken) return;
-
-        const findUser = await api.get("users", {
-          headers: {
-            Authorization: `Bearer ${jwtToken}`,
-          },
-        });
+        const decode: any = jwt_decode(jwtToken);
+        const findUser = await api.get(`users/${decode.sub}`);
 
         setUser(findUser.data);
       } catch (error) {
@@ -84,13 +81,10 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
     try {
       const resp = await api.post("login", data);
       const { token } = resp.data;
+      const decode: any = jwt_decode(token);
       setLoading(true);
       localStorage.setItem("@TOKEN", token);
-      const findUser = await api.get("users", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const findUser = await api.get(`users/${decode.sub}`);
 
       setUser(findUser.data);
       navigate("/");
@@ -210,7 +204,7 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
         showFormEditUserInfo,
         editUser,
         SetShowFormEditUserAddress,
-        showFormEditUserAddress
+        showFormEditUserAddress,
       }}
     >
       {children}

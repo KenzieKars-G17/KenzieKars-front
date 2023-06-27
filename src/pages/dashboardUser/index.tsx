@@ -2,6 +2,7 @@ import Cards from "../../components/cards";
 import Footer from "../../components/footer";
 import Header from "../../components/header";
 import UserCard from "../../components/userCard";
+import { useParams } from "react-router-dom";
 import { DashboardUserPageBase } from "./styles";
 import { useContext, useEffect } from "react";
 import { useAuth } from "../../hooks";
@@ -14,15 +15,21 @@ import FormEditUserInfo from "../../components/forms/formEditUserInfo";
 import FormEditUserAddress from "../../components/forms/formEditUserAddress";
 
 const DashboardUser = () => {
-
+  const { userId } = useParams();
   const { loading } = useAuth();
-  const { sellerAdvertisements, showAddAdvertisementForm } = useContext(AdvertisementContext);
-  const { showFormEditUserInfo, showFormEditUserAddress } = useContext(AuthContext)
+  const {
+    sellerAdvertisements,
+    showAddAdvertisementForm,
+    getSellerAdvertisements,
+  } = useContext(AdvertisementContext);
+  const { showFormEditUserInfo, showFormEditUserAddress } =
+    useContext(AuthContext);
 
   const { ShowBanner } = useContext(ProductPageContext);
 
   useEffect(() => {
     ShowBanner(true);
+    getSellerAdvertisements(+userId!);
   }, []);
   if (loading) {
     return <Loader />;
