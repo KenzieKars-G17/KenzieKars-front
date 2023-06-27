@@ -60,12 +60,15 @@ export const AdvertisementProvider = ({
   const SetShowAddAdvertisementForm = () => {
     setShowAddAdvertisementForm((prevState) => !prevState);
   };
-  const { userId } = useParams();
+  const { userId, id } = useParams();
 
   useEffect(() => {
     getAllAdvertisements();
     if (userId) {
       getSellerAdvertisements(+userId);
+    }
+    if (id) {
+      getAdvertisementById(+id);
     }
   }, []);
 

@@ -9,18 +9,20 @@ import { useAuth } from "../../hooks";
 import { ProductPageContext } from "../../contexts/productPage.context";
 import Loader from "../../components/loader";
 import { AdvertisementContext } from "../../contexts/advertisements.context";
+import { useParams } from "react-router-dom";
 
 const ProductPage = () => {
   const { loading } = useAuth();
-  const { ShowBannerPicture, ShowBanner} = useContext(ProductPageContext);
-  const { advertisementById } = useContext(AdvertisementContext)
-
-  const user = advertisementById.user
+  const { ShowBannerPicture, ShowBanner } = useContext(ProductPageContext);
+  const { advertisementById, getAdvertisementById } =
+    useContext(AdvertisementContext);
+  const { id } = useParams();
 
   useEffect(() => {
-    const condition = false; 
+    const condition = false;
     ShowBannerPicture(condition);
     ShowBanner(!condition);
+    getAdvertisementById(id);
   }, []);
 
   if (loading) {
@@ -55,7 +57,7 @@ const ProductPage = () => {
             </li>
           </ul>
         </section>
-        <UserDetails user={user}/>
+        <UserDetails user={advertisementById.user} />
         <Comments />
       </main>
 
