@@ -12,7 +12,7 @@ import {
 } from "../interfaces/advertisements.interfaces";
 import api from "../services/api";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface advertisementProviderProps {
   children: React.ReactNode;
@@ -25,7 +25,7 @@ interface iAdvertisementValues {
   advertisementById: any;
   getAdvertisementById: any;
   sellerAdvertisements: Iadvertisement[];
-  getSellerAdvertisements: () => void;
+  getSellerAdvertisements: (id: number) => void;
   createAdvertisement: (body: Iadvertisement) => Promise<Iadvertisement>;
   updateAdvertisement: any;
   deleteAdvertisement: any;
@@ -47,7 +47,8 @@ export const AdvertisementProvider = ({
     []
   );
 
-  const [advertisementById, setAdvertisementById] = useState<IadvertisementId>();
+  const [advertisementById, setAdvertisementById] =
+    useState<IadvertisementId>();
 
   const [sellerAdvertisements, setSellerAdvertisements] = useState<
     Iadvertisement[]
@@ -59,14 +60,15 @@ export const AdvertisementProvider = ({
   const SetShowAddAdvertisementForm = () => {
     setShowAddAdvertisementForm((prevState) => !prevState);
   };
-
+  const { userId } = useParams();
 
   useEffect(() => {
     getAllAdvertisements();
-    getSellerAdvertisements();
+    if (userId) {
+      getSellerAdvertisements(+userId);
+    }
   }, []);
 
-  
   const navigate = useNavigate();
 
   const getAllAdvertisements = async () => {
@@ -82,25 +84,19 @@ export const AdvertisementProvider = ({
   const getAdvertisementById = async (id: number) => {
     try {
       const response = await api.get<IadvertisementId>(`advertisement/${id}`);
-      
+
       setAdvertisementById(response.data);
-      navigate(`/product-page/${response.data.id}`)
-      
+      navigate(`/product-page/${response.data.id}`);
     } catch (error) {
       console.error("Erro ao obter o anuncio", error);
     }
   };
 
-  const getSellerAdvertisements = async () => {
+  const getSellerAdvertisements = async (id: number) => {
     try {
-      const jwtToken = localStorage.getItem("@TOKEN");
-      if (!jwtToken) return;
-
-      const response = await api.get<Iadvertisement[]>(`advertisement/seller`, {
-        headers: {
-          Authorization: `Bearer ${jwtToken}`,
-        },
-      });
+      const response = await api.get<Iadvertisement[]>(
+        `advertisement/seller/${id}`
+      );
       setSellerAdvertisements(response.data);
     } catch (error) {
       console.error("Erro ao obter os anuncios", error);
