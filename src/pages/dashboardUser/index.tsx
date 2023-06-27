@@ -13,6 +13,8 @@ import Loader from "../../components/loader";
 import { AuthContext } from "../../contexts/auth.context";
 import FormEditUserInfo from "../../components/forms/formEditUserInfo";
 import FormEditUserAddress from "../../components/forms/formEditUserAddress";
+import FormUpdateAnnouncement from "../../components/forms/formEditAnnouncement";
+import DeleteAnnouncementModal from "../../components/modal/modalDeleteAnnouncement";
 
 const DashboardUser = () => {
   const { userId } = useParams();
@@ -21,6 +23,9 @@ const DashboardUser = () => {
     sellerAdvertisements,
     showAddAdvertisementForm,
     getSellerAdvertisements,
+    showUpdateAdvertisementForm,
+    showDeleteAdvertisementModal
+
   } = useContext(AdvertisementContext);
   const { showFormEditUserInfo, showFormEditUserAddress } =
     useContext(AuthContext);
@@ -51,6 +56,8 @@ const DashboardUser = () => {
       {showAddAdvertisementForm && <FormAddAnnouncement />}
       {showFormEditUserInfo && <FormEditUserInfo />}
       {showFormEditUserAddress && <FormEditUserAddress />}
+      {showUpdateAdvertisementForm && <FormUpdateAnnouncement />}
+      {showDeleteAdvertisementModal && <DeleteAnnouncementModal />}
     </DashboardUserPageBase>
   );
 };

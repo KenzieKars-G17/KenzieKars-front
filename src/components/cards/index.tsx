@@ -13,7 +13,7 @@ interface CardsProps {
 const Cards = ({ arr }: CardsProps) => {
   const { user, setLoading } = useContext(AuthContext);
 
-  const { getAdvertisementById } = useContext(AdvertisementContext);
+  const { getAdvertisementById, SetShowUpdateAdvertisementForm, setSelectedAd } = useContext(AdvertisementContext);
 
   const { userId } = useParams();
 
@@ -66,7 +66,9 @@ const Cards = ({ arr }: CardsProps) => {
             </div>
             {!isHome && isUserSeller && (
               <div className="divButtonsAdmin">
-                <button className="btnEdit">Editar</button>
+                <button className="btnEdit" onClick={()=>{
+                  setSelectedAd(announcement)
+                  SetShowUpdateAdvertisementForm()}}>Editar</button>
                 <button className="btnDetails">Ver detalhes</button>
               </div>
             )}
