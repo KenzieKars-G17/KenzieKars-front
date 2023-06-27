@@ -33,6 +33,12 @@ interface iAdvertisementValues {
   SetShowAddAdvertisementForm: () => void;
   filteredAd: Iadvertisement[];
   setFilteredAd: Dispatch<SetStateAction<Iadvertisement[]>>;
+  showDeleteAdvertisementModal: boolean;
+  SetShowDeleteAdvertisementModal: () => void;
+  SetShowUpdateAdvertisementForm: () => void;
+  showUpdateAdvertisementForm: boolean;
+  selectedAd: Iadvertisement | null;
+  setSelectedAd: Dispatch<SetStateAction<any | null>>;
 }
 
 export const AdvertisementContext = createContext({} as iAdvertisementValues);
@@ -54,8 +60,25 @@ export const AdvertisementProvider = ({
     Iadvertisement[]
   >([]);
 
+  const [selectedAd, setSelectedAd] = useState<Iadvertisement | null>(null);
+
   const [filteredAd, setFilteredAd] =
     useState<Iadvertisement[]>(allAdvertisements);
+
+    const [showDeleteAdvertisementModal, setShowDeleteAdvertisementModal] =
+    useState<boolean>(false);
+
+  const [showUpdateAdvertisementForm, setShowUpdateAdvertisementForm] =
+    useState<boolean>(false);
+
+
+    const SetShowDeleteAdvertisementModal = () => {
+      setShowDeleteAdvertisementModal((prevState) => !prevState);
+    };
+  
+    const SetShowUpdateAdvertisementForm = () => {
+      setShowUpdateAdvertisementForm((prevState) => !prevState);
+    };
 
   const SetShowAddAdvertisementForm = () => {
     setShowAddAdvertisementForm((prevState) => !prevState);
@@ -207,6 +230,12 @@ export const AdvertisementProvider = ({
         SetShowAddAdvertisementForm,
         filteredAd,
         setFilteredAd,
+        SetShowDeleteAdvertisementModal,
+        showDeleteAdvertisementModal,
+        SetShowUpdateAdvertisementForm,
+        showUpdateAdvertisementForm,
+        selectedAd, 
+        setSelectedAd
       }}
     >
       {children}

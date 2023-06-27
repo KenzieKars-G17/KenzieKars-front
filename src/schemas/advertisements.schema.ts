@@ -21,6 +21,8 @@ export const advertisementSchemaId = advertisementSchema.extend({
   id: z.number()
 })
 
+export const updateAdvertisementSchema = advertisementSchema.partial()
+
 export const advertisementAllSchema = advertisementSchema
   .extend({ user: returnUserAdSchema, images: imageSchemaArray || [] })
   .partial()
