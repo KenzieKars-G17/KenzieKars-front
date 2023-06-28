@@ -48,13 +48,14 @@ export const AdvertisementContext = createContext({} as iAdvertisementValues);
 export const AdvertisementProvider = ({
   children,
 }: advertisementProviderProps) => {
-  const [showAddAdvertisementForm, setShowAddAdvertisementForm] = useState<boolean>(false);
+  const [showAddAdvertisementForm, setShowAddAdvertisementForm] =
+    useState<boolean>(false);
 
-  const [ isAdActive, setIsAdActive] = useState<boolean>(false);
+  const [isAdActive, setIsAdActive] = useState<boolean>(false);
 
   const SetIsAdActive = (condition: boolean) => {
-    setIsAdActive(condition)
-  }
+    setIsAdActive(condition);
+  };
 
   const [allAdvertisements, setAllAdvertisements] = useState<Iadvertisement[]>(
     []
@@ -100,7 +101,6 @@ export const AdvertisementProvider = ({
       getAdvertisementById(+id);
     }
   }, []);
-
 
   const navigate = useNavigate();
 
@@ -175,7 +175,6 @@ export const AdvertisementProvider = ({
           },
         }
       );
-
       return response.data;
     } catch (error) {
       console.error("Erro ao atualizar o anuncio", error);
@@ -244,7 +243,7 @@ export const AdvertisementProvider = ({
         selectedAd,
         setSelectedAd,
         isAdActive,
-        SetIsAdActive
+        SetIsAdActive,
       }}
     >
       {children}

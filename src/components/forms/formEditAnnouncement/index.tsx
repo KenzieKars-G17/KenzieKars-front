@@ -33,7 +33,7 @@ const FormUpdateAnnouncement = () => {
   });
 
   const onSubmit = async (data: any) => {
-    console.log(data)
+    data.is_active = isAdActive
     data.price = parseInt(data.price);
     data.table_price = parseInt(data.table_price);
     await updateAdvertisement(selectedAd!.id, data);
