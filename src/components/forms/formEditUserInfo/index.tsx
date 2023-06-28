@@ -1,17 +1,17 @@
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../../contexts/auth.context";
-import { SubmitHandler, useForm, useFormState } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import { InputComponent } from "../../InputComponent";
 import Modal from "../../modal";
-import { iEditRegister, iRegister } from "../../../interfaces/register.interfaces";
+import { iEditRegister } from "../../../interfaces/register.interfaces";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { EditRegisterSchema, RegisterSchema } from "../../../schemas/register.schema";
+import { EditRegisterSchema } from "../../../schemas/register.schema";
 import { DivBackgroundFormEditUser } from "./styles";
 
 const FormEditUserInfo = () => {
 
-  const { user, editUser, SetAdvertiser, advertiser, SetShowFormEditUserInfo } = useContext(AuthContext);
+  const { user, editUser, SetAdvertiser, SetShowFormEditUserInfo, deleteUser } = useContext(AuthContext);
 
   const thisUser: any = user
 
@@ -30,9 +30,12 @@ const FormEditUserInfo = () => {
   return (
     <Modal>
       <DivBackgroundFormEditUser>
-        <div className="title-box">
-          <h1 className="register-title">Editar Informações pessoais</h1>
+        <div className="header-modal">
+          <h1>Editar Perfil</h1>
           <button onClick={SetShowFormEditUserInfo}>X</button>
+        </div>
+        <div className="title-box">
+          <h2 className="register-title">Informações pessoais</h2>
         </div>
         <form
           className="register-form"
@@ -122,11 +125,12 @@ const FormEditUserInfo = () => {
           </div>
 
           <div className="buttons-cont">
-            <button className="bttn bttn-brand" type="submit">
-              Salvar
-            </button>
-            <button className="bttn bttn-brand">
+            <button className="bttn bttn-cancel">
               Cancelar
+            </button>
+            <button className="bttn bttn-delete" type="button" onClick={() => { deleteUser(thisUser.id); SetShowFormEditUserInfo(); }}>Excluir Perfil</button>
+            <button className="bttn bttn-brand" type="submit">
+              Salvar Alterações
             </button>
           </div>
         </form>
