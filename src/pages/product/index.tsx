@@ -57,7 +57,7 @@ const ProductPage = () => {
             </li>
           </ul>
         </section>
-        <UserDetails user={advertisementById.user} />
+        {advertisementById && <UserDetails user={advertisementById.user} />}
         <Comments />
       </main>
 
