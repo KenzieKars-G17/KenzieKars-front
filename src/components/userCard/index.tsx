@@ -4,12 +4,14 @@ import { Category, NameAndCategoryDiv, UserCardDiv } from "./styles";
 import { AdvertisementContext } from "../../contexts/advertisements.context";
 import { AuthContext } from "../../contexts/auth.context";
 import { ProductPageContext } from "../../contexts/productPage.context";
+import { useParams } from "react-router-dom";
 
 const UserCard = () => {
   const { SetShowAddAdvertisementForm } = useContext(AdvertisementContext);
   const { user, SetShowFormEditUserInfo, SetShowFormEditUserAddress } =
     useContext(AuthContext);
   const { setBrands } = useContext(ProductPageContext);
+  const { userId } = useParams();
 
   const getBrands = async () => {
     try {
@@ -34,18 +36,22 @@ const UserCard = () => {
         )}
       </NameAndCategoryDiv>
       <p>{user?.description}</p>
-      <div className="divButtons">
-        <button
-          onClick={() => {
-            SetShowAddAdvertisementForm();
-            getBrands();
-          }}
-        >
-          Criar Anuncio
-        </button>
-        <button onClick={SetShowFormEditUserInfo}>Editar perfil</button>
-        <button onClick={SetShowFormEditUserAddress}>Editar endereço</button>
-      </div>
+      {user?.id == userId && (
+        <div className="divButtons">
+          {user?.seller && (
+            <button
+              onClick={() => {
+                SetShowAddAdvertisementForm();
+                getBrands();
+              }}
+            >
+              Criar Anuncio
+            </button>
+          )}
+          <button onClick={SetShowFormEditUserInfo}>Editar perfil</button>
+          <button onClick={SetShowFormEditUserAddress}>Editar endereço</button>
+        </div>
+      )}
     </UserCardDiv>
   );
 };
