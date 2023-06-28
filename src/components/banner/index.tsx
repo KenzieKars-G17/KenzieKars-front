@@ -18,10 +18,9 @@ const Banner = () => {
         alignItems: "center",
         justifyContent: "center",
         flexDirection: "column",
-        backgroundImage:
-          showBannerPicture === true
-            ? `url("https://fotos.jornaldocarro.estadao.com.br/wp-content/uploads/2021/06/12104139/0x0-ModelSPLAID-1.jpg")`
-            : "none",
+        backgroundImage: showBannerPicture === true
+          ? `linear-gradient(to top, rgba(0, 0, 0, 2.5), rgba(0, 0, 0, 0)), url("https://fotos.jornaldocarro.estadao.com.br/wp-content/uploads/2021/06/12104139/0x0-ModelSPLAID-1.jpg")`
+          : "none",
         backgroundColor: showBannerPicture === false ? "#4529E6" : undefined,
         backgroundSize: "cover",
         backgroundPosition: "center",
