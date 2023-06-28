@@ -20,6 +20,16 @@ export const DivBackgroundFormEditUser = styled.div`
     text-align: left;
   }
 
+  .header-modal{
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h1{
+      padding-left: 10px;
+    }
+  }
+
   .title-box {
     display: flex;
     justify-content: space-between;
@@ -57,11 +67,29 @@ export const DivBackgroundFormEditUser = styled.div`
     display: flex;
     justify-content: center;
     gap: 10px;
+    margin-top: 10px;
     button {
       margin: 10px 0 10px 0;
       cursor: pointer;
       background-color: #5126ea;
       color: white;
+    }
+
+    .bttn-cancel{
+      border: 1.5px solid var(--color-grey-6);
+      background: var(--color-grey-6);
+      color: var(--color-grey-2);
+    }
+
+    .bttn-delete {
+      padding: 0.75rem 1.75rem;
+      border: 1.5px solid var(--color-alert-2);
+      background: var(--color-alert-2);
+      font-size: 1rem;
+      font-family: Inter;
+      font-weight: 600;
+      line-height: 0rem;
+      color: var(--color-alert-1);
     }
   }
 

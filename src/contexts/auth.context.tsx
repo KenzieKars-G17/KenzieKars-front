@@ -1,6 +1,10 @@
 import { IUserReturn } from "../interfaces/user.interface";
 import { iLogin } from "../interfaces/login.interfaces";
-import { iEditAddress, iEditRegister, iRegister } from "../interfaces/register.interfaces";
+import {
+  iEditAddress,
+  iEditRegister,
+  iRegister,
+} from "../interfaces/register.interfaces";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
@@ -36,6 +40,7 @@ interface iContextValues {
   SetShowFormEditUserInfo: () => void;
   showFormEditUserAddress: boolean;
   SetShowFormEditUserAddress: () => void;
+  deleteUser: (id:number)=> void;
 }
 
 export const AuthContext = createContext({} as iContextValues);
@@ -65,7 +70,9 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
       const findUser = await api.get(`users/${decode.sub}`);
       
       setUser(findUser.data);
-      setAdvertiser(user!.seller)
+      if(user){
+        setAdvertiser(user?.seller);
+      }
     } catch (error) {
       console.log(error);
     } finally {
@@ -128,9 +135,8 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
   };
 
   const editUser = async (data: any) => {
-
     if (data.email === user?.email) {
-      delete data.email
+      delete data.email;
     }
 
     data.seller = advertiser;
@@ -149,7 +155,7 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
         setTimeout(() => {
           SetShowFormEditUserInfo();
         }, 2000);
-        loadUser()
+        loadUser();
       } else {
         toast.error("Ops, alguma coisa deu errado!");
       }
@@ -181,9 +187,6 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
   };
 
   const editUserAddress = async (data: iEditAddress) => {
-
-    console.log(data)
-
     const jwtToken = localStorage.getItem("@TOKEN");
 
     try {
@@ -198,7 +201,7 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
         setTimeout(() => {
           SetShowFormEditUserAddress();
         }, 2000);
-        loadUser()
+        loadUser();
       } else {
         toast.error("Ops, alguma coisa deu errado!");
       }
@@ -213,13 +216,29 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
 
       if (!jwtToken) return;
 
-      loadUser()
+      loadUser();
     } catch (error) {
       console.log(error);
     } finally {
       setTimeout(() => {
         setLoading(false);
       }, 1000);
+    }
+  };
+
+  const deleteUser = async (id: number) => {
+    const jwtToken = localStorage.getItem("@TOKEN");
+    if (!jwtToken) return;
+
+    try {
+      await api.delete(`/users/${id}`, {
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+        }
+      })
+      logout()
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -259,6 +278,7 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
         editUserAddress,
         SetShowFormEditUserAddress,
         showFormEditUserAddress,
+        deleteUser
       }}
     >
       {children}
