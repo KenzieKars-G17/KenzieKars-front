@@ -5,7 +5,8 @@ const AddressSchema = z.object({
   city: z.string(),
   state: z.string(),
   street: z.string(),
-  number: z.string()
+  number: z.string(),
+  complement: z.string()
 });
 
 const RegisterSchema = z.object({
@@ -27,7 +28,7 @@ const EditRegisterSchema = z.object({
   phone: z.string().max(9),
   birthdate: z.string(),
   description: z.string(),
-  address: AddressSchema,
+  // address: AddressSchema,
   password: z.string().min(8, "A senha deve ter no mínimo 8 caracteres")
 });
 
