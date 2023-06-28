@@ -65,6 +65,7 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
       const findUser = await api.get(`users/${decode.sub}`);
 
       setUser(findUser.data);
+      setAdvertiser(user!.seller)
     } catch (error) {
       console.log(error);
     } finally {

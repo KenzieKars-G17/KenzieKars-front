@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AdvertisementContext } from "../../../contexts/advertisements.context";
 import { InputComponent } from "../../InputComponent";
 import Modal from "../../modal";
@@ -12,17 +12,18 @@ const FormUpdateAnnouncement = () => {
   const {
     SetShowUpdateAdvertisementForm,
     updateAdvertisement,
-    // getSellerAdvertisements,
     SetShowDeleteAdvertisementModal,
     selectedAd,
-    // SetIsAdActive,
-    // isAdActive,
-    // updateAdvertisementStatus
+    SetIsAdActive,
+    isAdActive
   } = useContext(AdvertisementContext);
 
-  const [teste, setTeste] = useState()
+  useEffect(() => {
+    SetIsAdActive(selectedAd!.is_active)
+  }, [])
 
-
+  console.log(isAdActive)
+  
   const {
     register,
     handleSubmit,
@@ -32,6 +33,7 @@ const FormUpdateAnnouncement = () => {
   });
 
   const onSubmit = async (data: any) => {
+    console.log(data)
     data.price = parseInt(data.price);
     data.table_price = parseInt(data.table_price);
     await updateAdvertisement(selectedAd!.id, data);
@@ -161,29 +163,52 @@ const FormUpdateAnnouncement = () => {
           )}
 
           <div className="divButtonsType">
-               {/* {teste? <input value={teste} {...register("is_active")} /> : <input value={selectedAd?.is_active} {...register("is_active")} />} */}
-        
-              {/* <button
-                style={isAdActive? { backgroundColor: "#4529E6", color: "white" }: {backgroundColor: "transparent"}}
-                type="button"
-                onClick={() => {
-            
-                  SetIsAdActive(true);
-                  // ()=> updateAdvertisementStatus(selectedAd.id,condition)
+            {isAdActive === true ? (
+              <button
+                style={{ backgroundColor: "#4529E6", color: "white" }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  const condition = true;
+                  SetIsAdActive(condition);
                 }}
               >
                 Sim
               </button>
-            
+            ) : (
               <button
-                style={!isAdActive? { backgroundColor: "#4529E6", color: "white" }: {backgroundColor: "transparent"}}
-                type="button"
-                onClick={() => {
-                  SetIsAdActive(false);
+                onClick={(e) => {
+                  e.preventDefault();
+                  const condition = true;
+                  SetIsAdActive(condition);
+                }}
+              >
+                {" "}
+                Sim
+              </button>
+            )}
+
+            {isAdActive === true ? (
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  const condition = false;
+                  SetIsAdActive(condition);
                 }}
               >
                 Não
-              </button>          */}
+              </button>
+            ) : (
+              <button
+              style={{ backgroundColor: "#4529E6", color: "white" }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  const condition = false;
+                  SetIsAdActive(condition);
+                }}
+              >
+                Não
+              </button>
+            )}
           </div>
 
           {/* <InputComponent type="text" placeholder="https://image.com" label="1º Imagem da galeria" />
