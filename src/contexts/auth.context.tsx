@@ -63,7 +63,7 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
       if (!jwtToken) return;
       const decode: any = jwt_decode(jwtToken);
       const findUser = await api.get(`users/${decode.sub}`);
-
+      
       setUser(findUser.data);
       setAdvertiser(user!.seller)
     } catch (error) {
@@ -87,11 +87,13 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
       setLoading(true);
       localStorage.setItem("@TOKEN", token);
       const findUser = await api.get(`users/${decode.sub}`);
-
+      
       setUser(findUser.data);
+      toast.success("Login efetuado com sucesso!");
       navigate("/");
     } catch (error) {
       console.log(error);
+      toast.error("Verifique seus dados!");
     } finally {
       setTimeout(() => {
         setLoading(false);
