@@ -1,5 +1,8 @@
-import { useContext } from "react";
+import api2 from "../../../services/api2";
+import { useContext, useEffect, useState } from "react";
 import { AdvertisementContext } from "../../../contexts/advertisements.context";
+import { ProductPageContext } from "../../../contexts/productPage.context";
+import { AuthContext } from "../../../contexts/auth.context";
 import { InputComponent } from "../../InputComponent";
 import Modal from "../../modal";
 import { FormNewAd } from "./styles";
@@ -14,19 +17,53 @@ const FormAddAnnouncement = () => {
     createAdvertisement,
     getSellerAdvertisements,
   } = useContext(AdvertisementContext);
+  const { user } = useContext(AuthContext);
+  const { brands } = useContext(ProductPageContext);
+
+  const [models, setModels] = useState([]);
+  const [carSpecs, setCarSpecs] = useState<any>(null);
+
+  const getModels = async (e: any) => {
+    const value = e.target.value;
+    console.log(value);
+    try {
+      setModels([]);
+      setCarSpecs(null);
+
+      const response = await api2.get(
+        `https://kenzie-kars.herokuapp.com/cars?brand=${value}`
+      );
+      setModels(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getCarSpecs = async (e: any) => {
+    const value = e.target.value;
+    const findCar = models.find((car: any) => car.name === value);
+    setCarSpecs(findCar);
+  };
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Iadvertisement>({ resolver: zodResolver(advertisementSchema) });
+  } = useForm<Iadvertisement>();
 
   const onSubmit = async (data: any) => {
     data.price = parseInt(data.price);
-    data.table_price = parseInt(data.table_price);
+    data.table_price = parseInt(carSpecs.value);
+    if (carSpecs.fuel === 1) {
+      data.fuel = "Flex";
+    }
+    if (carSpecs.fuel === 3) {
+      data.fuel = "electric";
+    }
+    data.year = carSpecs.year;
     await createAdvertisement(data);
     SetShowAddAdvertisementForm();
-    getSellerAdvertisements();
+    getSellerAdvertisements(user!.id);
   };
 
   return (
@@ -39,21 +76,44 @@ const FormAddAnnouncement = () => {
 
         <div className="divInputs">
           <h3>Informações do veículo:</h3>
-          <InputComponent
+          {/* <InputComponent
             type="text"
             placeholder="Mercedez-Benz"
             label="Marca"
             {...register("brand")}
-          />
+          /> */}
+          <fieldset>
+            <label htmlFor="">Marca</label>
+            <select {...register("brand")} onChange={(e) => getModels(e)}>
+              <option value="">Selecione uma marca</option>
+              {brands &&
+                brands.map((item: any, index: number) => (
+                  <option key={index} value={item}>
+                    {item}
+                  </option>
+                ))}
+            </select>
+          </fieldset>
           {errors.brand && (
             <span className="alert-span">{errors.brand.message}</span>
           )}
-          <InputComponent
+          {/* <InputComponent
             type="text"
             placeholder="A 200 CGI ADVANCE SEDAN"
             label="Modelo"
             {...register("model")}
-          />
+          /> */}
+          <fieldset>
+            <label htmlFor="">Modelo</label>
+            <select {...register("model")} onChange={(e) => getCarSpecs(e)}>
+              <option value="">Selecione uma marca</option>
+              {models.map((item: any, index) => (
+                <option key={index} value={item.name}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+          </fieldset>
           {errors.model && (
             <span className="alert-span">{errors.model.message}</span>
           )}
@@ -62,17 +122,36 @@ const FormAddAnnouncement = () => {
               type="text"
               placeholder="2018"
               label="Ano"
+              value={carSpecs?.year}
               {...register("year")}
             />
             {errors.year && (
               <span className="alert-span">{errors.year.message}</span>
             )}
-            <InputComponent
-              type="text"
-              placeholder="Gasolina / Etanol"
-              label="Combustível"
-              {...register("fuel")}
-            />
+            {carSpecs?.fuel === 1 ? (
+              <InputComponent
+                type="text"
+                placeholder="Gasolina / Etanol"
+                label="Combustível"
+                value="Flex"
+                {...register("fuel")}
+              />
+            ) : carSpecs?.fuel === 3 ? (
+              <InputComponent
+                type="text"
+                placeholder="Gasolina / Etanol"
+                label="Combustível"
+                value="Elétrico"
+                {...register("fuel")}
+              />
+            ) : (
+              <InputComponent
+                type="text"
+                placeholder="Gasolina / Etanol"
+                label="Combustível"
+                {...register("fuel")}
+              />
+            )}
             {errors.fuel && (
               <span className="alert-span">{errors.fuel.message}</span>
             )}
@@ -104,6 +183,7 @@ const FormAddAnnouncement = () => {
               type="number"
               placeholder="48000"
               label="Preço tabela FIPE"
+              value={carSpecs?.value}
               {...register("table_price")}
             />
             {errors.table_price && (
