@@ -107,63 +107,6 @@ const FormEditUserInfo = () => {
               <span className="alert-span">{errors.description.message}</span>
             )}
 
-
-            <div className="divTypeAccount">
-              <label>Tipo de conta:</label>
-
-              <div className="divButtonsType">
-
-                {advertiser === true ? (
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      const condition = false;
-                      SetAdvertiser(condition);
-                    }}
-                  >
-                    Comprador
-                  </button>
-                ) : (
-                  <button
-                    style={{ backgroundColor: "#4529E6", color: "white" }}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      const condition = false;
-                      SetAdvertiser(condition);
-                    }}
-                  >
-                    {" "}
-                    Comprador
-                  </button>
-                )}
-
-                {advertiser === true ? (
-                  <button
-                    style={{ backgroundColor: "#4529E6", color: "white" }}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      const condition = true;
-                      SetAdvertiser(condition);
-                    }}
-                  >
-                    Anunciante
-                  </button>
-                ) : (
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      const condition = true;
-                      SetAdvertiser(condition);
-                    }}
-                  >
-                    Anunciante
-                  </button>
-                )}
-
-              </div>
-
-            </div>
-
             <InputComponent
               label="Senha"
               placeholder="Digite a senha"

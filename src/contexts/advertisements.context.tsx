@@ -39,6 +39,8 @@ interface iAdvertisementValues {
   showUpdateAdvertisementForm: boolean;
   selectedAd: Iadvertisement | null;
   setSelectedAd: Dispatch<SetStateAction<any | null>>;
+  isAdActive: boolean;
+  SetIsAdActive: (condition: boolean) => void;
 }
 
 export const AdvertisementContext = createContext({} as iAdvertisementValues);
@@ -48,6 +50,12 @@ export const AdvertisementProvider = ({
 }: advertisementProviderProps) => {
   const [showAddAdvertisementForm, setShowAddAdvertisementForm] =
     useState<boolean>(false);
+
+  const [isAdActive, setIsAdActive] = useState<boolean>(false);
+
+  const SetIsAdActive = (condition: boolean) => {
+    setIsAdActive(condition);
+  };
 
   const [allAdvertisements, setAllAdvertisements] = useState<Iadvertisement[]>(
     []
@@ -65,20 +73,19 @@ export const AdvertisementProvider = ({
   const [filteredAd, setFilteredAd] =
     useState<Iadvertisement[]>(allAdvertisements);
 
-    const [showDeleteAdvertisementModal, setShowDeleteAdvertisementModal] =
+  const [showDeleteAdvertisementModal, setShowDeleteAdvertisementModal] =
     useState<boolean>(false);
 
   const [showUpdateAdvertisementForm, setShowUpdateAdvertisementForm] =
     useState<boolean>(false);
 
+  const SetShowDeleteAdvertisementModal = () => {
+    setShowDeleteAdvertisementModal((prevState) => !prevState);
+  };
 
-    const SetShowDeleteAdvertisementModal = () => {
-      setShowDeleteAdvertisementModal((prevState) => !prevState);
-    };
-  
-    const SetShowUpdateAdvertisementForm = () => {
-      setShowUpdateAdvertisementForm((prevState) => !prevState);
-    };
+  const SetShowUpdateAdvertisementForm = () => {
+    setShowUpdateAdvertisementForm((prevState) => !prevState);
+  };
 
   const SetShowAddAdvertisementForm = () => {
     setShowAddAdvertisementForm((prevState) => !prevState);
@@ -168,7 +175,6 @@ export const AdvertisementProvider = ({
           },
         }
       );
-
       return response.data;
     } catch (error) {
       console.error("Erro ao atualizar o anuncio", error);
@@ -234,8 +240,10 @@ export const AdvertisementProvider = ({
         showDeleteAdvertisementModal,
         SetShowUpdateAdvertisementForm,
         showUpdateAdvertisementForm,
-        selectedAd, 
-        setSelectedAd
+        selectedAd,
+        setSelectedAd,
+        isAdActive,
+        SetIsAdActive,
       }}
     >
       {children}
