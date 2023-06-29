@@ -16,7 +16,7 @@ const Banner = () => {
         opacity: 0.7,
         display: "flex",
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "flex-start",
         flexDirection: "column",
         backgroundImage: showBannerPicture === true
           ? `linear-gradient(to top, rgba(0, 0, 0, 2.5), rgba(0, 0, 0, 0)), url("https://fotos.jornaldocarro.estadao.com.br/wp-content/uploads/2021/06/12104139/0x0-ModelSPLAID-1.jpg")`
@@ -30,8 +30,8 @@ const Banner = () => {
     >
       {showBannerPicture === true && (
         <>
-          <h1 style={{ fontSize: "15.5pt" }}>Motors Shop</h1>
-          <p style={{ fontSize: "15.5pt" }}>
+          <h1 style={{ fontSize: "15.5pt", margin: "60px 0"}}>Motors Shop</h1>
+          <p style={{ fontSize: "15.5pt" , textShadow: "1pt 1pt 2pt black"}}>
             A melhor plataforma de anúncios de carros do país
           </p>
         </>
