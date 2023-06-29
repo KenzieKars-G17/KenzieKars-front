@@ -144,6 +144,7 @@ export const AdvertisementProvider = ({
       const response = await api.post("advertisement", body, {
         headers: {
           Authorization: `Bearer ${jwtToken}`,
+          "Content-Type": "multipart/form-data",
         },
       });
 

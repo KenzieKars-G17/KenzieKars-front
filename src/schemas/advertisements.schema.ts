@@ -11,17 +11,17 @@ export const advertisementSchema = z.object({
   color: z.string().max(45),
   description: z.string(),
   year: z.string().max(4),
-  table_price:  z.union([z.string(), z.number()]),
-  price:  z.union([z.string(), z.number()]),
+  table_price: z.union([z.string(), z.number()]),
+  price: z.union([z.string(), z.number()]),
   is_active: z.boolean().optional().default(true),
-  cover_image: z.string(),
+  cover_image: z.unknown(),
 });
 
 export const advertisementSchemaId = advertisementSchema.extend({
-  id: z.number()
-})
+  id: z.number(),
+});
 
-export const updateAdvertisementSchema = advertisementSchema.partial()
+export const updateAdvertisementSchema = advertisementSchema.partial();
 
 export const advertisementAllSchema = advertisementSchema
   .extend({ user: returnUserAdSchema, images: imageSchemaArray || [] })

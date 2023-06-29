@@ -19,13 +19,14 @@ const FormAddAnnouncement = () => {
   } = useContext(AdvertisementContext);
   const { user } = useContext(AuthContext);
   const { brands } = useContext(ProductPageContext);
-
-  const [models, setModels] = useState([]);
+  const [image, setImage] = useState();
+  const [moreImage, setMoreImage] = useState([]);
+  const [models, setModels] = useState<string[]>([]);
   const [carSpecs, setCarSpecs] = useState<any>(null);
 
   const getModels = async (e: any) => {
     const value = e.target.value;
-    console.log(value);
+
     try {
       setModels([]);
       setCarSpecs(null);
@@ -44,7 +45,10 @@ const FormAddAnnouncement = () => {
     const findCar = models.find((car: any) => car.name === value);
     setCarSpecs(findCar);
   };
-
+  const addMoreImages = () => {
+    console.log(moreImage);
+    setMoreImage((prevData) => [...prevData, `${prevData.length + 1} imagem`]);
+  };
   const {
     register,
     handleSubmit,
@@ -61,6 +65,8 @@ const FormAddAnnouncement = () => {
       data.fuel = "electric";
     }
     data.year = carSpecs.year;
+    data.cover_image = image;
+    console.log(data);
     await createAdvertisement(data);
     SetShowAddAdvertisementForm();
     getSellerAdvertisements(user!.id);
@@ -68,7 +74,11 @@ const FormAddAnnouncement = () => {
 
   return (
     <Modal>
-      <FormNewAd noValidate onSubmit={handleSubmit(onSubmit)}>
+      <FormNewAd
+        noValidate
+        onSubmit={handleSubmit(onSubmit)}
+        encType="multipart/form-data"
+      >
         <div className="divTitleAndCloseButton">
           <h2>Criar anúncio</h2>
           <button onClick={SetShowAddAdvertisementForm}>X</button>
@@ -76,12 +86,6 @@ const FormAddAnnouncement = () => {
 
         <div className="divInputs">
           <h3>Informações do veículo:</h3>
-          {/* <InputComponent
-            type="text"
-            placeholder="Mercedez-Benz"
-            label="Marca"
-            {...register("brand")}
-          /> */}
           <fieldset>
             <label htmlFor="">Marca</label>
             <select {...register("brand")} onChange={(e) => getModels(e)}>
@@ -97,12 +101,7 @@ const FormAddAnnouncement = () => {
           {errors.brand && (
             <span className="alert-span">{errors.brand.message}</span>
           )}
-          {/* <InputComponent
-            type="text"
-            placeholder="A 200 CGI ADVANCE SEDAN"
-            label="Modelo"
-            {...register("model")}
-          /> */}
+
           <fieldset>
             <label htmlFor="">Modelo</label>
             <select {...register("model")} onChange={(e) => getCarSpecs(e)}>
@@ -212,20 +211,34 @@ const FormAddAnnouncement = () => {
           )}
 
           <InputComponent
-            type="text"
+            type="file"
             placeholder="https://image.com"
             label="Imagem da capa"
             {...register("cover_image")}
+            onChange={(event) => {
+              setImage(event.target.files[0]);
+            }}
           />
           {errors.cover_image && (
             <span className="alert-span">{errors.cover_image.message}</span>
           )}
-
-          {/* <InputComponent type="text" placeholder="https://image.com" label="1º Imagem da galeria" />
-
-          <InputComponent type="text" placeholder="https://image.com" label="2º Imagem da galeria" /> */}
-
-          {/* <button className="buttonAddField">Adicionar campo para imagem da galeria</button> */}
+          <div>
+            {moreImage.length > 0 &&
+              moreImage.map((text) => (
+                <InputComponent
+                  type="file"
+                  placeholder="https://image.com"
+                  label={text}
+                  {...register("cover_image")}
+                  onChange={(event) => {
+                    setImage(event.target.files[0]);
+                  }}
+                />
+              ))}
+          </div>
+          <button type="button" onClick={addMoreImages}>
+            +
+          </button>
 
           <div className="divButtonCancelAndSubmit">
             <button
