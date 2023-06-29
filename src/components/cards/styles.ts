@@ -14,7 +14,7 @@ export const UlCards = styled.ul`
     display: flex;
     gap: 20px;
     flex-direction: column;
-    height: 410px;
+    height: 340px;
     padding: 0 10px;
     flex-shrink: 0;
     width: 312px;
