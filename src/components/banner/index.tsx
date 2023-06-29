@@ -31,7 +31,7 @@ const Banner = () => {
       {showBannerPicture === true && (
         <>
           <h1 style={{ fontSize: "15.5pt" }}>Motors Shop</h1>
-          <p style={{ fontSize: "15.5pt" }}>
+          <p style={{ fontSize: "15.5pt" , textShadow: "1pt 1pt 2pt black"}}>
             A melhor plataforma de anúncios de carros do país
           </p>
         </>
