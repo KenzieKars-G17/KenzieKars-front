@@ -173,6 +173,7 @@ export const AdvertisementProvider = ({
         {
           headers: {
             Authorization: `Bearer ${jwtToken}`,
+            "Content-Type": "multipart/form-data"
           },
         }
       );

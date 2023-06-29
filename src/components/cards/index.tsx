@@ -5,6 +5,8 @@ import { TAdvertisementArray } from "../../interfaces/advertisements.interfaces"
 import { useLocation, useParams } from "react-router-dom";
 import { AdvertisementContext } from "../../contexts/advertisements.context";
 import avatar from "../../assets/avatar.png";
+import api2 from "../../services/api2";
+import { ProductPageContext } from "../../contexts/productPage.context";
 
 interface CardsProps {
   arr: TAdvertisementArray;
@@ -15,6 +17,8 @@ const Cards = ({ arr }: CardsProps) => {
 
   const { getAdvertisementById, SetShowUpdateAdvertisementForm, setSelectedAd } = useContext(AdvertisementContext);
 
+  const {setBrands} = useContext(ProductPageContext)
+
   const { userId } = useParams();
 
   const isUserSeller = user?.seller && user.id === parseInt(userId!);
@@ -22,6 +26,17 @@ const Cards = ({ arr }: CardsProps) => {
   const location = useLocation();
 
   const isHome = location.pathname === "/";
+
+  const getBrands = async () => {
+    try {
+      const response = await api2.get("cars");
+      const data = response.data;
+      const keys = Object.keys(data);
+      setBrands(keys);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <UlCards>
@@ -68,6 +83,7 @@ const Cards = ({ arr }: CardsProps) => {
               <div className="divButtonsAdmin">
                 <button className="btnEdit" onClick={()=>{
                   setSelectedAd(announcement)
+                  getBrands()
                   SetShowUpdateAdvertisementForm()}}>Editar</button>
                 <button className="btnDetails">Ver detalhes</button>
               </div>

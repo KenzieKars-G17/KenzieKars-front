@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AdvertisementContext } from "../../../contexts/advertisements.context";
 import { InputComponent } from "../../InputComponent";
 import Modal from "../../modal";
@@ -7,6 +7,8 @@ import { useForm } from "react-hook-form";
 import { updateAdvertisementSchema } from "../../../schemas/advertisements.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TupdateAdvertisement } from "../../../interfaces/advertisements.interfaces";
+import api2 from "../../../services/api2";
+import { ProductPageContext } from "../../../contexts/productPage.context";
 
 const FormUpdateAnnouncement = () => {
   const {
@@ -15,13 +17,13 @@ const FormUpdateAnnouncement = () => {
     SetShowDeleteAdvertisementModal,
     selectedAd,
     SetIsAdActive,
-    isAdActive
+    isAdActive,
   } = useContext(AdvertisementContext);
 
   useEffect(() => {
-    SetIsAdActive(selectedAd!.is_active)
-  }, [])
-  
+    SetIsAdActive(selectedAd!.is_active);
+  }, []);
+
   const {
     register,
     handleSubmit,
@@ -31,11 +33,44 @@ const FormUpdateAnnouncement = () => {
   });
 
   const onSubmit = async (data: any) => {
-    data.is_active = isAdActive
+    if (carSpecs.fuel === 1) {
+      data.fuel = "Flex";
+    }
+    if (carSpecs.fuel === 3) {
+      data.fuel = "electric";
+    }
+
+    data.is_active = isAdActive;
     data.price = parseInt(data.price);
     data.table_price = parseInt(data.table_price);
+    data.cover_image = image;
     await updateAdvertisement(selectedAd!.id, data);
     SetShowUpdateAdvertisementForm();
+  };
+
+  const { brands } = useContext(ProductPageContext);
+
+  const [image, setImage] = useState();
+  const [models, setModels] = useState([]);
+  const [carSpecs, setCarSpecs] = useState<any>(null);
+
+  const getModel = async (e: any) => {
+    const value = e.target.value;
+
+    try {
+      setModels([]);
+      setCarSpecs(null);
+      const resp = await api2.get(`cars?brand=${value}`);
+      setModels(resp.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getCarSpec = async (e: any) => {
+    const value = e.target.value;
+    const findCar = models.find((car: any) => car.name === value);
+    setCarSpecs(findCar);
   };
 
   return (
@@ -48,23 +83,41 @@ const FormUpdateAnnouncement = () => {
 
         <div className="divInputs">
           <h3>Informações do veículo:</h3>
-          <InputComponent
-            type="text"
-            placeholder={selectedAd!.brand}
-            defaultValue={selectedAd!.brand}
-            label="Marca"
-            {...register("brand")}
-          />
+          <fieldset>
+            <label htmlFor="">Marca</label>
+            <select
+              {...register("brand")}
+              onChange={(e) => {
+                getModel(e);
+              }}
+            >
+              <option value="">Selecionar uma marca</option>
+              {brands &&
+                brands.map((brand: any, index: any) => (
+                  <option key={index} value={brand}>
+                    {brand}
+                  </option>
+                ))}
+            </select>
+          </fieldset>
+
           {errors.brand && (
             <span className="alert-span">{errors.brand.message}</span>
           )}
-          <InputComponent
-            type="text"
-            placeholder={selectedAd!.model}
-            defaultValue={selectedAd!.model}
-            label="Modelo"
-            {...register("model")}
-          />
+
+          <fieldset>
+            <label htmlFor="">Modelo</label>
+            <select {...register("model")} onChange={(e) => getCarSpec(e)}>
+              <option value="">Selecionar um modelo</option>
+              {models &&
+                models.map((model: any, index) => (
+                  <option key={index} value={model.name}>
+                    {model.name}
+                  </option>
+                ))}
+            </select>
+          </fieldset>
+
           {errors.model && (
             <span className="alert-span">{errors.model.message}</span>
           )}
@@ -74,6 +127,7 @@ const FormUpdateAnnouncement = () => {
               placeholder={selectedAd!.year}
               defaultValue={selectedAd!.year}
               label="Ano"
+              value={carSpecs?.year}
               {...register("year")}
             />
             {errors.year && (
@@ -82,7 +136,7 @@ const FormUpdateAnnouncement = () => {
             <InputComponent
               type="text"
               placeholder={selectedAd!.fuel}
-              defaultValue={selectedAd!.fuel}
+              value={carSpecs?.fuel === 3 ? "Eletrico" : "Flex"}
               label="Combustível"
               {...register("fuel")}
             />
@@ -117,8 +171,8 @@ const FormUpdateAnnouncement = () => {
           <div className="divTwoInputs">
             <InputComponent
               type="number"
-              placeholder={selectedAd!.table_price + ""}
-              defaultValue={selectedAd!.table_price}
+              placeholder={carSpecs?.value}
+              value={carSpecs?.value}
               label="Preço tabela FIPE"
               {...register("table_price")}
             />
@@ -150,11 +204,11 @@ const FormUpdateAnnouncement = () => {
           )}
 
           <InputComponent
-            type="text"
-            placeholder={selectedAd!.cover_image}
-            defaultValue={selectedAd!.cover_image}
+            type="file"
+            placeholder="Imagem da capa"
             label="Imagem da capa"
             {...register("cover_image")}
+            onChange={(e: any | null) => setImage(e.target.files[0])}
           />
           {errors.cover_image && (
             <span className="alert-span">{errors.cover_image.message}</span>
@@ -197,7 +251,7 @@ const FormUpdateAnnouncement = () => {
               </button>
             ) : (
               <button
-              style={{ backgroundColor: "#4529E6", color: "white" }}
+                style={{ backgroundColor: "#4529E6", color: "white" }}
                 onClick={(e) => {
                   e.preventDefault();
                   const condition = false;
@@ -208,12 +262,6 @@ const FormUpdateAnnouncement = () => {
               </button>
             )}
           </div>
-
-          {/* <InputComponent type="text" placeholder="https://image.com" label="1º Imagem da galeria" />
-
-          <InputComponent type="text" placeholder="https://image.com" label="2º Imagem da galeria" /> */}
-
-          {/* <button className="buttonAddField">Adicionar campo para imagem da galeria</button> */}
 
           <div className="divButtonDeleteAndSubmit">
             <button
