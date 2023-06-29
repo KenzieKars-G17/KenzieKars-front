@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AdvertisementContext } from "../../../contexts/advertisements.context";
 import { InputComponent } from "../../InputComponent";
 import Modal from "../../modal";
@@ -7,6 +7,8 @@ import { useForm } from "react-hook-form";
 import { updateAdvertisementSchema } from "../../../schemas/advertisements.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TupdateAdvertisement } from "../../../interfaces/advertisements.interfaces";
+import api2 from "../../../services/api2";
+import { ProductPageContext } from "../../../contexts/productPage.context";
 
 const FormUpdateAnnouncement = () => {
   const {
@@ -15,13 +17,13 @@ const FormUpdateAnnouncement = () => {
     SetShowDeleteAdvertisementModal,
     selectedAd,
     SetIsAdActive,
-    isAdActive
+    isAdActive,
   } = useContext(AdvertisementContext);
 
   useEffect(() => {
-    SetIsAdActive(selectedAd!.is_active)
-  }, [])
-  
+    SetIsAdActive(selectedAd!.is_active);
+  }, []);
+
   const {
     register,
     handleSubmit,
@@ -31,11 +33,29 @@ const FormUpdateAnnouncement = () => {
   });
 
   const onSubmit = async (data: any) => {
-    data.is_active = isAdActive
+    data.is_active = isAdActive;
     data.price = parseInt(data.price);
     data.table_price = parseInt(data.table_price);
     await updateAdvertisement(selectedAd!.id, data);
     SetShowUpdateAdvertisementForm();
+  };
+
+  const { brands } = useContext(ProductPageContext);
+
+  const [image, setImage] = useState();
+  const [model, setModel] = useState([]);
+  const [carSpecs, setCarSpecs] = useState(null);
+
+  const getModel = async (e: any) => {
+    const value = e.target.value;
+    try {
+      setModel([]);
+      setCarSpecs(null);
+      const resp = await api2.get(`cars?brand=${value}`);
+      setModel(resp.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -48,16 +68,26 @@ const FormUpdateAnnouncement = () => {
 
         <div className="divInputs">
           <h3>Informações do veículo:</h3>
-          <InputComponent
-            type="text"
-            placeholder={selectedAd!.brand}
-            defaultValue={selectedAd!.brand}
-            label="Marca"
-            {...register("brand")}
-          />
+          {/* <div>
+            <label htmlFor="">Marca</label>
+            <select
+              {...register("brand")}
+              onChange={(e) => getModel(e)}
+            >
+              <option value="">Selecionar uma marca</option>
+              {brands &&
+                brands.map((brand, index) => (
+                  <option key={index} value={brand}>
+                    {brand}
+                  </option>
+                ))}
+            </select>
+          </div> */}
+
           {errors.brand && (
             <span className="alert-span">{errors.brand.message}</span>
           )}
+
           <InputComponent
             type="text"
             placeholder={selectedAd!.model}
@@ -150,11 +180,12 @@ const FormUpdateAnnouncement = () => {
           )}
 
           <InputComponent
-            type="text"
+            type="file"
             placeholder={selectedAd!.cover_image}
             defaultValue={selectedAd!.cover_image}
             label="Imagem da capa"
             {...register("cover_image")}
+            onChange={(e) => setImage(e.target.files[0])}
           />
           {errors.cover_image && (
             <span className="alert-span">{errors.cover_image.message}</span>
@@ -197,7 +228,7 @@ const FormUpdateAnnouncement = () => {
               </button>
             ) : (
               <button
-              style={{ backgroundColor: "#4529E6", color: "white" }}
+                style={{ backgroundColor: "#4529E6", color: "white" }}
                 onClick={(e) => {
                   e.preventDefault();
                   const condition = false;
