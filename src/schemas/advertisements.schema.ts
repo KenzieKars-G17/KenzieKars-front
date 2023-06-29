@@ -14,7 +14,7 @@ export const advertisementSchema = z.object({
   table_price: z.union([z.string(), z.number()]),
   price: z.union([z.string(), z.number()]),
   is_active: z.boolean().optional().default(true),
-  cover_image: z.unknown(),
+  cover_image: z.string(),
 });
 
 export const advertisementSchemaId = advertisementSchema.extend({

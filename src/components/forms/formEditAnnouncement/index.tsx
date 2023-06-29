@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { AdvertisementContext } from "../../../contexts/advertisements.context";
 import { InputComponent } from "../../InputComponent";
 import Modal from "../../modal";
@@ -21,8 +21,6 @@ const FormUpdateAnnouncement = () => {
   useEffect(() => {
     SetIsAdActive(selectedAd!.is_active)
   }, [])
-
-  console.log(isAdActive)
   
   const {
     register,
