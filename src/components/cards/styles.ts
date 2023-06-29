@@ -7,7 +7,7 @@ export const UlCards = styled.ul`
   overflow-x: auto;
   max-width: 100%;
 
-  height: 375px;
+  /* height: 375px; */
   justify-content: flex-start;
 
   li {
@@ -50,16 +50,18 @@ export const UlCards = styled.ul`
     font-weight: bold;
   }
 
+  .year{
+    margin: 0 100px 0 0;
+  }
+
   .price {
     font-weight: bold;
   }
 
   .productDetailsPreview {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    align-items: center;
-    justify-self: end;
+    justify-content: flex-start;
+    gap: 10px;
   }
 
   .profilePic {
