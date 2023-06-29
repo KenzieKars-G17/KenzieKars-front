@@ -33,9 +33,17 @@ const FormUpdateAnnouncement = () => {
   });
 
   const onSubmit = async (data: any) => {
+    if (carSpecs.fuel === 1) {
+      data.fuel = "Flex";
+    }
+    if (carSpecs.fuel === 3) {
+      data.fuel = "electric";
+    }
+
     data.is_active = isAdActive;
     data.price = parseInt(data.price);
     data.table_price = parseInt(data.table_price);
+    data.cover_image = image;
     await updateAdvertisement(selectedAd!.id, data);
     SetShowUpdateAdvertisementForm();
   };
@@ -43,19 +51,26 @@ const FormUpdateAnnouncement = () => {
   const { brands } = useContext(ProductPageContext);
 
   const [image, setImage] = useState();
-  const [model, setModel] = useState([]);
-  const [carSpecs, setCarSpecs] = useState(null);
+  const [models, setModels] = useState([]);
+  const [carSpecs, setCarSpecs] = useState<any>(null);
 
   const getModel = async (e: any) => {
     const value = e.target.value;
+
     try {
-      setModel([]);
+      setModels([]);
       setCarSpecs(null);
       const resp = await api2.get(`cars?brand=${value}`);
-      setModel(resp.data);
+      setModels(resp.data);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const getCarSpec = async (e: any) => {
+    const value = e.target.value;
+    const findCar = models.find((car: any) => car.name === value);
+    setCarSpecs(findCar);
   };
 
   return (
@@ -68,33 +83,41 @@ const FormUpdateAnnouncement = () => {
 
         <div className="divInputs">
           <h3>Informações do veículo:</h3>
-          {/* <div>
+          <fieldset>
             <label htmlFor="">Marca</label>
             <select
               {...register("brand")}
-              onChange={(e) => getModel(e)}
+              onChange={(e) => {
+                getModel(e);
+              }}
             >
               <option value="">Selecionar uma marca</option>
               {brands &&
-                brands.map((brand, index) => (
+                brands.map((brand: any, index: any) => (
                   <option key={index} value={brand}>
                     {brand}
                   </option>
                 ))}
             </select>
-          </div> */}
+          </fieldset>
 
           {errors.brand && (
             <span className="alert-span">{errors.brand.message}</span>
           )}
 
-          <InputComponent
-            type="text"
-            placeholder={selectedAd!.model}
-            defaultValue={selectedAd!.model}
-            label="Modelo"
-            {...register("model")}
-          />
+          <fieldset>
+            <label htmlFor="">Modelo</label>
+            <select {...register("model")} onChange={(e) => getCarSpec(e)}>
+              <option value="">Selecionar um modelo</option>
+              {models &&
+                models.map((model: any, index) => (
+                  <option key={index} value={model.name}>
+                    {model.name}
+                  </option>
+                ))}
+            </select>
+          </fieldset>
+
           {errors.model && (
             <span className="alert-span">{errors.model.message}</span>
           )}
@@ -104,6 +127,7 @@ const FormUpdateAnnouncement = () => {
               placeholder={selectedAd!.year}
               defaultValue={selectedAd!.year}
               label="Ano"
+              value={carSpecs?.year}
               {...register("year")}
             />
             {errors.year && (
@@ -112,7 +136,7 @@ const FormUpdateAnnouncement = () => {
             <InputComponent
               type="text"
               placeholder={selectedAd!.fuel}
-              defaultValue={selectedAd!.fuel}
+              value={carSpecs?.fuel === 3 ? "Eletrico" : "Flex"}
               label="Combustível"
               {...register("fuel")}
             />
@@ -147,8 +171,8 @@ const FormUpdateAnnouncement = () => {
           <div className="divTwoInputs">
             <InputComponent
               type="number"
-              placeholder={selectedAd!.table_price + ""}
-              defaultValue={selectedAd!.table_price}
+              placeholder={carSpecs?.value}
+              value={carSpecs?.value}
               label="Preço tabela FIPE"
               {...register("table_price")}
             />
@@ -181,11 +205,10 @@ const FormUpdateAnnouncement = () => {
 
           <InputComponent
             type="file"
-            placeholder={selectedAd!.cover_image}
-            defaultValue={selectedAd!.cover_image}
+            placeholder="Imagem da capa"
             label="Imagem da capa"
             {...register("cover_image")}
-            onChange={(e) => setImage(e.target.files[0])}
+            onChange={(e: any | null) => setImage(e.target.files[0])}
           />
           {errors.cover_image && (
             <span className="alert-span">{errors.cover_image.message}</span>
@@ -239,12 +262,6 @@ const FormUpdateAnnouncement = () => {
               </button>
             )}
           </div>
-
-          {/* <InputComponent type="text" placeholder="https://image.com" label="1º Imagem da galeria" />
-
-          <InputComponent type="text" placeholder="https://image.com" label="2º Imagem da galeria" /> */}
-
-          {/* <button className="buttonAddField">Adicionar campo para imagem da galeria</button> */}
 
           <div className="divButtonDeleteAndSubmit">
             <button

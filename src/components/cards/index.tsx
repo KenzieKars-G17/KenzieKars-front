@@ -83,7 +83,7 @@ const Cards = ({ arr }: CardsProps) => {
               <div className="divButtonsAdmin">
                 <button className="btnEdit" onClick={()=>{
                   setSelectedAd(announcement)
-                  // getBrands()
+                  getBrands()
                   SetShowUpdateAdvertisementForm()}}>Editar</button>
                 <button className="btnDetails">Ver detalhes</button>
               </div>
