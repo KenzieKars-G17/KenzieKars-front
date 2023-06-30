@@ -19,7 +19,8 @@ import { AuthContext } from "../../contexts/auth.context";
 
 const HomePage = () => {
   const { loading } = useAuth();
-  const { filteredAd } = useContext(AdvertisementContext);
+  const { filteredAd, getAllAdvertisements, page, setPage } =
+    useContext(AdvertisementContext);
   const { ShowBanner } = useContext(ProductPageContext);
 
   useEffect(() => {
@@ -36,7 +37,7 @@ const HomePage = () => {
   } = useContext(HomePageContext);
   const { ShowBannerPicture } = useContext(ProductPageContext);
 
-  const { showFormEditUserInfo } = useContext(AuthContext)
+  const { showFormEditUserInfo } = useContext(AuthContext);
 
   useEffect(() => {
     const condition = true;
@@ -50,6 +51,21 @@ const HomePage = () => {
   if (loading) {
     return <Loader />;
   }
+  const handleNextPage = () => {
+    if (filteredAd.length >= 12) {
+      setPage(page + 1);
+      getAllAdvertisements();
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+      getAllAdvertisements();
+    }
+    console.log(page);
+  };
+
   return (
     <HomePageBase>
       <Header />
@@ -82,7 +98,7 @@ const HomePage = () => {
       ) : null}
       {/*COMPONENTIZAR E PADRONIZAR ESTE BOTÃO DE FILTROS*/}
 
-      {showFormEditUserInfo && <FormEditUserInfo/>}
+      {showFormEditUserInfo && <FormEditUserInfo />}
 
       <Footer />
     </HomePageBase>

@@ -41,6 +41,8 @@ interface iAdvertisementValues {
   setSelectedAd: Dispatch<SetStateAction<any | null>>;
   isAdActive: boolean;
   SetIsAdActive: (condition: boolean) => void;
+  page: number;
+  setPage: Dispatch<SetStateAction<number>>;
 }
 
 export const AdvertisementContext = createContext({} as iAdvertisementValues);
@@ -90,6 +92,8 @@ export const AdvertisementProvider = ({
   const SetShowAddAdvertisementForm = () => {
     setShowAddAdvertisementForm((prevState) => !prevState);
   };
+  const [page, setPage] = useState(1);
+
   const { userId, id } = useParams();
 
   useEffect(() => {
@@ -106,9 +110,10 @@ export const AdvertisementProvider = ({
 
   const getAllAdvertisements = async () => {
     try {
-      const response = await api.get<Iadvertisement[]>("advertisement");
-      setAllAdvertisements(response.data);
-      setFilteredAd(response.data);
+      const response = await api.get(`advertisement?page=${page}&perPage=12`);
+      console.log(response.data.data);
+      setAllAdvertisements(response.data.data);
+      setFilteredAd(response.data.data);
     } catch (error) {
       console.error("Erro ao obter os anuncios", error);
     }
@@ -125,12 +130,12 @@ export const AdvertisementProvider = ({
     }
   };
 
-  const getSellerAdvertisements = async (id: number) => {
+  const getSellerAdvertisements = async (payload: any) => {
     try {
-      const response = await api.get<Iadvertisement[]>(
-        `advertisement/seller/${id}`
+      const response = await api.get(
+        `advertisement/seller/${payload.id}?page=${payload.page}&perPage=12`
       );
-      setSellerAdvertisements(response.data);
+      setSellerAdvertisements(response.data.data);
     } catch (error) {
       console.error("Erro ao obter os anuncios", error);
     }
@@ -173,7 +178,7 @@ export const AdvertisementProvider = ({
         {
           headers: {
             Authorization: `Bearer ${jwtToken}`,
-            "Content-Type": "multipart/form-data"
+            "Content-Type": "multipart/form-data",
           },
         }
       );
@@ -246,6 +251,8 @@ export const AdvertisementProvider = ({
         setSelectedAd,
         isAdActive,
         SetIsAdActive,
+        page,
+        setPage,
       }}
     >
       {children}
