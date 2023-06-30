@@ -28,9 +28,7 @@ const FormUpdateAnnouncement = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<TupdateAdvertisement>({
-    resolver: zodResolver(updateAdvertisementSchema),
-  });
+  } = useForm<TupdateAdvertisement>();
 
   const onSubmit = async (data: any) => {
     if (carSpecs.fuel === 1) {
