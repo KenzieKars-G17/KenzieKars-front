@@ -66,7 +66,7 @@ export default createGlobalStyle`
     color: var(--color-gray-2);
     -webkit-font-smoothing: antialiased;
   }
-	
+
 
 	body, input, button, textarea {
     font-family: 'Inter';

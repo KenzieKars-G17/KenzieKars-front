@@ -15,9 +15,19 @@ interface CardsProps {
 const Cards = ({ arr }: CardsProps) => {
   const { user, setLoading } = useContext(AuthContext);
 
-  const { getAdvertisementById, SetShowUpdateAdvertisementForm, setSelectedAd } = useContext(AdvertisementContext);
+  const {
+    filteredAd,
+    getAdvertisementById,
+    SetShowUpdateAdvertisementForm,
+    setSelectedAd,
+    getAllAdvertisements,
+    getSellerAdvertisements,
+    page,
+    setPage,
+    maxPage,
+  } = useContext(AdvertisementContext);
 
-  const {setBrands} = useContext(ProductPageContext)
+  const { setBrands } = useContext(ProductPageContext);
 
   const { userId } = useParams();
 
@@ -37,60 +47,97 @@ const Cards = ({ arr }: CardsProps) => {
       console.log(error);
     }
   };
+  const handleNextPage = () => {
+    if (filteredAd.length >= 12) {
+      setPage(page + 1);
+      if (userId) {
+        getSellerAdvertisements(+userId);
+      }
 
+      getAllAdvertisements();
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+      if (userId) {
+        getSellerAdvertisements(+userId);
+      }
+      getAllAdvertisements();
+    }
+  };
   return (
     <UlCards>
-      {arr.map((announcement) => {
-        return (
-          <li key={Math.random()}>
-            {announcement.is_active ? (
-              <div className="divActive">
-                <p>Ativo</p>
+      <ul>
+        {arr.map((announcement) => {
+          return (
+            <li key={Math.random()}>
+              {announcement.is_active ? (
+                <div className="divActive">
+                  <p>Ativo</p>
+                </div>
+              ) : (
+                <div className="divInactive">
+                  <p>Inativo</p>
+                </div>
+              )}
+              <img
+                src={announcement.cover_image}
+                alt={announcement.model}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setLoading(true);
+                  getAdvertisementById(announcement.id);
+                  setTimeout(() => {
+                    setLoading(false);
+                  }, 500);
+                }}
+              />
+              <div className="textContainer">
+                <h2>
+                  {announcement.brand}-{announcement.model}
+                </h2>
+                <p>{announcement.description}</p>
+                <div className="announcerDetails">
+                  <img src={avatar} alt="ProfilePic" className="profilePic" />
+                  <h3 className="userName">{announcement.user?.name}</h3>
+                </div>
               </div>
-            ) : (
-              <div className="divInactive">
-                <p>Inativo</p>
+              <div className="productDetailsPreview">
+                <span className="km">{announcement.mileage} KM</span>
+                <span className="year">{announcement.year}</span>
+                <span className="price">R$ {announcement.price}</span>
               </div>
-            )}
-            <img
-              src={announcement.cover_image}
-              alt={announcement.model}
-              onClick={(e) => {
-                e.preventDefault();
-                setLoading(true);
-                getAdvertisementById(announcement.id);
-                setTimeout(() => {
-                  setLoading(false);
-                }, 500);
-              }}
-            />
-            <div className="textContainer">
-              <h2>
-                {announcement.brand}-{announcement.model}
-              </h2>
-              <p>{announcement.description}</p>
-              <div className="announcerDetails">
-                <img src={avatar} alt="ProfilePic" className="profilePic" />
-                <h3 className="userName">{announcement.user?.name}</h3>
-              </div>
-            </div>
-            <div className="productDetailsPreview">
-              <span className="km">{announcement.mileage} KM</span>
-              <span className="year">{announcement.year}</span>
-              <span className="price">R$ {announcement.price}</span>
-            </div>
-            {!isHome && isUserSeller && (
-              <div className="divButtonsAdmin">
-                <button className="btnEdit" onClick={()=>{
-                  setSelectedAd(announcement)
-                  getBrands()
-                  SetShowUpdateAdvertisementForm()}}>Editar</button>
-                <button className="btnDetails">Ver detalhes</button>
-              </div>
-            )}
-          </li>
-        );
-      })}
+              {!isHome && isUserSeller && (
+                <div className="divButtonsAdmin">
+                  <button
+                    className="btnEdit"
+                    onClick={() => {
+                      setSelectedAd(announcement);
+                      getBrands();
+                      SetShowUpdateAdvertisementForm();
+                    }}
+                  >
+                    Editar
+                  </button>
+                  <button className="btnDetails">Ver detalhes</button>
+                </div>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+      <div className="pagination">
+        {page > 1 && <button onClick={handlePrevPage}>&lt; Anterior</button>}
+        <span>
+          <b>{page}</b> de {maxPage}
+        </span>
+
+        {filteredAd.length >= 12 && (
+          <button onClick={handleNextPage}>Seguinte &gt;</button>
+        )}
+      </div>
     </UlCards>
   );
 };

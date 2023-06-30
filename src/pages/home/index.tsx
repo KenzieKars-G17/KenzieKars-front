@@ -51,20 +51,6 @@ const HomePage = () => {
   if (loading) {
     return <Loader />;
   }
-  const handleNextPage = () => {
-    if (filteredAd.length >= 12) {
-      setPage(page + 1);
-      getAllAdvertisements();
-    }
-  };
-
-  const handlePrevPage = () => {
-    if (page > 1) {
-      setPage(page - 1);
-      getAllAdvertisements();
-    }
-    console.log(page);
-  };
 
   return (
     <HomePageBase>

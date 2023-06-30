@@ -43,6 +43,7 @@ interface iAdvertisementValues {
   SetIsAdActive: (condition: boolean) => void;
   page: number;
   setPage: Dispatch<SetStateAction<number>>;
+  maxPage: number;
 }
 
 export const AdvertisementContext = createContext({} as iAdvertisementValues);
@@ -93,6 +94,7 @@ export const AdvertisementProvider = ({
     setShowAddAdvertisementForm((prevState) => !prevState);
   };
   const [page, setPage] = useState(1);
+  const [maxPage, setMaxPage] = useState(1);
 
   const { userId, id } = useParams();
 
@@ -104,16 +106,22 @@ export const AdvertisementProvider = ({
     if (id) {
       getAdvertisementById(+id);
     }
-  }, []);
+  }, [page, maxPage]);
 
   const navigate = useNavigate();
 
   const getAllAdvertisements = async () => {
     try {
       const response = await api.get(`advertisement?page=${page}&perPage=12`);
-      console.log(response.data.data);
+
       setAllAdvertisements(response.data.data);
       setFilteredAd(response.data.data);
+
+      if (response.data.count <= 12) {
+        setMaxPage(1);
+      } else {
+        setMaxPage(Math.ceil(response.data.count / 12));
+      }
     } catch (error) {
       console.error("Erro ao obter os anuncios", error);
     }
@@ -130,12 +138,17 @@ export const AdvertisementProvider = ({
     }
   };
 
-  const getSellerAdvertisements = async (payload: any) => {
+  const getSellerAdvertisements = async (userId: number) => {
     try {
       const response = await api.get(
-        `advertisement/seller/${payload.id}?page=${payload.page}&perPage=12`
+        `advertisement/seller/${userId}?page=${page}&perPage=12`
       );
       setSellerAdvertisements(response.data.data);
+      if (response.data.count <= 12) {
+        setMaxPage(1);
+      } else {
+        setMaxPage(Math.ceil(response.data.count / 12));
+      }
     } catch (error) {
       console.error("Erro ao obter os anuncios", error);
     }
@@ -253,6 +266,7 @@ export const AdvertisementProvider = ({
         SetIsAdActive,
         page,
         setPage,
+        maxPage,
       }}
     >
       {children}
