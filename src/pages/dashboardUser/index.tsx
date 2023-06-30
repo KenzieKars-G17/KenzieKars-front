@@ -24,8 +24,8 @@ const DashboardUser = () => {
     showAddAdvertisementForm,
     getSellerAdvertisements,
     showUpdateAdvertisementForm,
-    showDeleteAdvertisementModal,   
-
+    showDeleteAdvertisementModal,
+    page,
   } = useContext(AdvertisementContext);
 
   const { showFormEditUserInfo, showFormEditUserAddress } =
@@ -36,7 +36,7 @@ const DashboardUser = () => {
   useEffect(() => {
     ShowBanner(true);
     getSellerAdvertisements(+userId!);
-  }, [showUpdateAdvertisementForm]);
+  }, [showUpdateAdvertisementForm, page]);
 
   if (loading) {
     return <Loader />;
