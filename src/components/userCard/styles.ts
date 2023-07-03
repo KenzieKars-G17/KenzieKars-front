@@ -37,7 +37,6 @@ export const UserCardDiv = styled.div`
     height: 104px;
     width: 104px;
     border-radius: 75%;
-    background-color: black; //só para vizualisar
   }
 
   h3 {
