@@ -16,15 +16,21 @@ export const DashboardUserPageBase = styled.div`
     gap: 15px;
 
     .divAdvertisement {
+      /* height: auto; */
       margin-top: 275px;
       margin-bottom: 75px;
       max-width: 100%;
-
-      .no-advertisement {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-      }
+      width: 100%;
+      padding-left: 5%;
+      padding-right: 5%;
+      display: flex;
+      align-items: flex-start;
+    }
+    .no-advertisement {
+      margin-top: 120px;
+      display: flex;
+      justify-content: center;
+      width: 100%;
     }
     .divPurpleBackground {
       height: 357px;
