@@ -14,7 +14,7 @@ export const UlCards = styled.ul`
     display: flex;
     gap: 20px;
     flex-direction: column;
-    height: 340px;
+    height: 356px;
     padding: 0 10px;
     flex-shrink: 0;
     width: 312px;
@@ -36,6 +36,12 @@ export const UlCards = styled.ul`
     display: flex;
     flex-direction: column;
     gap: 10px;
+
+    h2 {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
   img {
     width: 100%;
@@ -50,7 +56,7 @@ export const UlCards = styled.ul`
     font-weight: bold;
   }
 
-  .year{
+  .year {
     margin: 0 100px 0 0;
   }
 
