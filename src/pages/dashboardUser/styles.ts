@@ -19,6 +19,9 @@ export const DashboardUserPageBase = styled.div`
       margin-top: 275px;
       margin-bottom: 75px;
       max-width: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
     }
     .divPurpleBackground {
       height: 357px;
