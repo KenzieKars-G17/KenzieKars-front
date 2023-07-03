@@ -18,6 +18,7 @@ export const UlCards = styled.section`
     li {
       display: flex;
       gap: 20px;
+      margin-bottom: 105px;
       flex-direction: column;
       height: 340px;
       padding: 0 10px;

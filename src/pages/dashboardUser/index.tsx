@@ -47,16 +47,15 @@ const DashboardUser = () => {
       <Header />
       <main>
         <UserCard />
-        <div className="divAdvertisement">
-          {sellerAdvertisements.length === 0 ? (
-            <>
+        {sellerAdvertisements.length === 0 ? (
+          <div className="no-advertisement">
             <p>Não há anúncios</p>
-            <div/>
-            </>
-          ) : (
+          </div>
+        ) : (
+          <div className="divAdvertisement">
             <Cards arr={sellerAdvertisements} />
-          )}
-        </div>
+          </div>
+        )}
       </main>
       <Footer />
       {showAddAdvertisementForm && <FormAddAnnouncement />}
