@@ -1,8 +1,4 @@
-import React, {
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import {
   NavbarContainer,
@@ -19,7 +15,8 @@ import { AuthContext } from "../../../contexts/auth.context";
 import Hamburger from "hamburger-react";
 
 const Navbar = () => {
-  const { user, logout, SetShowFormEditUserInfo, SetShowFormEditUserAddress  } = useContext(AuthContext);
+  const { user, logout, SetShowFormEditUserInfo, SetShowFormEditUserAddress } =
+    useContext(AuthContext);
   const [currentWidth, setCurrentWidth] = useState<number>(0);
 
   const updateWidth = (): void => {
@@ -65,7 +62,9 @@ const Navbar = () => {
             {user && currentWidth >= 768 && (
               <>
                 <div className="profileInfo">
-                  <div className="headerUserImg"></div>
+                  <div className="headerUserImg">
+                    <img src="../../src/assets/avatar.png" alt="Profile Img" />
+                  </div>
                   <h2 className="headerUserName">{user.name}</h2>
                 </div>
               </>

@@ -26,7 +26,7 @@ const UserCard = () => {
   };
   return (
     <UserCardDiv>
-      <img></img>
+      <img src="../../src/assets/avatar.png" alt="Profile Image" />
       <NameAndCategoryDiv>
         <h3>{user?.name}</h3>
         {user?.seller && (

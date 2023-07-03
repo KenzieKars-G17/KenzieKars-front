@@ -152,8 +152,12 @@ export const RightContainer = styled.div`
   .headerUserImg {
     width: 32px;
     height: 32px;
-    background: #5126ea;
     border-radius: 150px;
+
+    img {
+      height: inherit;
+      width: inherit;
+    }
   }
 `;
 
