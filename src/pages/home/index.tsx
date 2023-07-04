@@ -16,14 +16,27 @@ import Loader from "../../components/loader";
 import { ModalWrapper } from "../../components/modal/filterModal/styles";
 import FormEditUserInfo from "../../components/forms/formEditUserInfo";
 import { AuthContext } from "../../contexts/auth.context";
+import jwt_decode from "jwt-decode";
+import { toast } from "react-toastify";
 
 const HomePage = () => {
-  const { loading } = useAuth();
+  const { loading, logout } = useAuth();
   const { filteredAd, getAllAdvertisements, page, setPage } =
     useContext(AdvertisementContext);
   const { ShowBanner } = useContext(ProductPageContext);
 
+  const isTokenExpired = (token: string) => {
+    const decodedToken: any = jwt_decode(token);
+    const currentTime = Date.now() / 1000; // Obter o tempo atual em segundos
+
+    return decodedToken.exp < currentTime;
+  };
   useEffect(() => {
+    const jwtToken = localStorage.getItem("@TOKEN");
+    if (jwtToken && isTokenExpired(jwtToken)) {
+      toast.error("Seu token expirou, logue novamente!");
+      logout();
+    }
     const condition = true;
     ShowBanner(condition);
   }, []);
