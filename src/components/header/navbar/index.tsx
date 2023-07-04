@@ -100,7 +100,11 @@ const Navbar = () => {
           >
             <h3 onClick={SetShowFormEditUserInfo}>Editar Perfil</h3>
             <h3 onClick={SetShowFormEditUserAddress}>Editar Endereço</h3>
-            <h3 onClick={() => navigate(`/user/${user.id}`)}>Meus Anúncios</h3>
+            {user.seller && (
+              <h3 onClick={() => navigate(`/user/${user.id}`)}>
+                Meus Anúncios
+              </h3>
+            )}
             <h3 onClick={logout}>Sair</h3>
           </div>
         )}
@@ -130,13 +134,15 @@ const Navbar = () => {
             <FazerLoginButton onClick={SetShowFormEditUserAddress}>
               Editar Endereço
             </FazerLoginButton>
-            <FazerLoginButton
-              onClick={() => {
-                navigate(`/user/${user.id}`);
-              }}
-            >
-              Meus Anúncios
-            </FazerLoginButton>
+            {user.seller && (
+              <FazerLoginButton
+                onClick={() => {
+                  navigate(`/user/${user.id}`);
+                }}
+              >
+                Meus Anúncios
+              </FazerLoginButton>
+            )}
             <FazerLoginButton onClick={logout}>Sair</FazerLoginButton>
           </div>
         )}
