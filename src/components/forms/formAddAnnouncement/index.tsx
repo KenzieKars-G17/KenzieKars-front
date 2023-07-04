@@ -47,7 +47,10 @@ const FormAddAnnouncement = () => {
   };
   const addMoreImages = () => {
     console.log(moreImage);
-    setMoreImage((prevData) => [...prevData, `${prevData.length + 1} imagem`]);
+    setMoreImage((prevData): any => [
+      ...prevData,
+      `${prevData.length + 1} imagem`,
+    ]);
   };
   const {
     register,
