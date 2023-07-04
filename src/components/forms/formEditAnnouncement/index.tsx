@@ -4,8 +4,6 @@ import { InputComponent } from "../../InputComponent";
 import Modal from "../../modal";
 import { FormUpdateAd } from "./styles";
 import { useForm } from "react-hook-form";
-import { updateAdvertisementSchema } from "../../../schemas/advertisements.schema";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { TupdateAdvertisement } from "../../../interfaces/advertisements.interfaces";
 import api2 from "../../../services/api2";
 import { ProductPageContext } from "../../../contexts/productPage.context";
@@ -264,7 +262,10 @@ const FormUpdateAnnouncement = () => {
           <div className="divButtonDeleteAndSubmit">
             <button
               className="buttonDeleteAd"
-              onClick={SetShowDeleteAdvertisementModal}
+              onClick={()=>{
+                SetShowDeleteAdvertisementModal()
+                SetShowUpdateAdvertisementForm()
+              }}
             >
               Excluir anúncio
             </button>
