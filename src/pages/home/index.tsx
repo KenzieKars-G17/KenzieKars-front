@@ -27,7 +27,7 @@ const HomePage = () => {
 
   const isTokenExpired = (token: string) => {
     const decodedToken: any = jwt_decode(token);
-    const currentTime = Date.now() / 1000; // Obter o tempo atual em segundos
+    const currentTime = Date.now() / 1000;
 
     return decodedToken.exp < currentTime;
   };
