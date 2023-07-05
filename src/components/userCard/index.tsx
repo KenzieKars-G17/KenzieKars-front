@@ -41,7 +41,7 @@ const UserCard = () => {
 
   useEffect(() => {
     getApiUser();
-  }, []);
+  }, [pageUser]);
 
   return (
     <UserCardDiv>

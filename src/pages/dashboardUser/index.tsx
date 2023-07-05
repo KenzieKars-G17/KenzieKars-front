@@ -36,7 +36,8 @@ const DashboardUser = () => {
   useEffect(() => {
     ShowBanner(true);
     getSellerAdvertisements(+userId!);
-  }, [showUpdateAdvertisementForm, page]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showUpdateAdvertisementForm, page, userId]);
 
   if (loading) {
     return <Loader />;
