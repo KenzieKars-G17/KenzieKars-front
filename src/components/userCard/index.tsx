@@ -1,10 +1,12 @@
 import api2 from "../../services/api2";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Category, NameAndCategoryDiv, UserCardDiv } from "./styles";
 import { AdvertisementContext } from "../../contexts/advertisements.context";
 import { AuthContext } from "../../contexts/auth.context";
 import { ProductPageContext } from "../../contexts/productPage.context";
 import { useParams } from "react-router-dom";
+import api from "../../services/api";
+import { IUserReturn } from "../../interfaces/user.interface";
 
 const UserCard = () => {
   const { SetShowAddAdvertisementForm } = useContext(AdvertisementContext);
@@ -12,6 +14,8 @@ const UserCard = () => {
     useContext(AuthContext);
   const { setBrands } = useContext(ProductPageContext);
   const { userId } = useParams();
+
+  const [pageUser, setPageUser] = useState<IUserReturn>();
 
   const getBrands = async () => {
     try {
@@ -24,21 +28,36 @@ const UserCard = () => {
       console.log(error);
     }
   };
+
+  const getApiUser = async () => {
+    try {
+      const response = await api.get(`users/${userId}`);
+
+      setPageUser(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getApiUser();
+  }, []);
+
   return (
     <UserCardDiv>
       <img src="../../src/assets/avatar.png" alt="Profile Image" />
       <NameAndCategoryDiv>
-        <h3>{user?.name}</h3>
-        {user?.seller && (
+        <h3>{pageUser?.name}</h3>
+        {pageUser?.seller && (
           <Category>
             <span>Anunciante</span>
           </Category>
         )}
       </NameAndCategoryDiv>
-      <p>{user?.description}</p>
+      <p>{pageUser?.description}</p>
       {user?.id == userId && (
         <div className="divButtons">
-          {user?.seller && (
+          {pageUser?.seller && (
             <button
               onClick={() => {
                 SetShowAddAdvertisementForm();
