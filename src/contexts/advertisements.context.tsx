@@ -13,6 +13,7 @@ import {
 import api from "../services/api";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
 interface advertisementProviderProps {
   children: React.ReactNode;
@@ -228,12 +229,15 @@ export const AdvertisementProvider = ({
     try {
       const jwtToken = localStorage.getItem("@TOKEN");
       if (!jwtToken) return;
+      const idUser : any = jwt_decode(jwtToken)
 
       await api.delete(`advertisement/${id}`, {
         headers: {
           Authorization: `Bearer ${jwtToken}`,
         },
       });
+
+      getSellerAdvertisements(idUser.sub)
     } catch (error) {
       console.error("Erro ao deletar o anuncio", error);
     }

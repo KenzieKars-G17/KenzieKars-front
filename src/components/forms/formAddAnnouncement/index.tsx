@@ -47,12 +47,16 @@ const FormAddAnnouncement = () => {
     const findCar = models.find((car: any) => car.name === value);
     setCarSpecs(findCar);
   };
+  
   const addMoreImages = () => {
-    if (moreImage >= 4) {
-      return toast.error("Atingiu o limite de imagens");
-    }
-    setMoreImage((prevData) => prevData + 1);
+
+if (moreImage >= 4) {
+  return toast.error("Atingiu o limite de imagens");
+}
+setMoreImage((prevData) => prevData + 1);
+
   };
+
   const {
     register,
     handleSubmit,
