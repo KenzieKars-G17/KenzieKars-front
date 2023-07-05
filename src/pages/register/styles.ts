@@ -6,13 +6,14 @@ export const StyledRegister = styled.main`
   align-items: center;
   padding: 5.2rem 1.6rem;
   width: 100vw;
+  max-width: 100vw;
   background-color: var(--color-grey-8);
 
-  button{
+  button {
     cursor: pointer;
   }
 
-  .divTypeAccount{
+  .divTypeAccount {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -20,31 +21,31 @@ export const StyledRegister = styled.main`
     align-items: space-between;
     gap: 5px;
 
-    label{
+    label {
       font-weight: bold;
     }
 
-    .divButtonsType{
+    .divButtonsType {
       width: 100%;
       display: flex;
       justify-content: space-around;
     }
 
-    button{
+    button {
       width: 45%;
       border: 1pt solid lightgray;
       text-align: center;
     }
   }
 
-  .divTwoInputs{
+  .divTwoInputs {
     width: 100%;
     display: flex;
     align-items: flex-start;
     gap: 15px;
   }
 
-  .tittle-box{
+  .tittle-box {
     width: 100%;
   }
 
@@ -95,7 +96,7 @@ export const StyledRegister = styled.main`
     margin-bottom: 2.4rem;
     gap: 15px;
 
-    h2{
+    h2 {
       font-weight: bold;
       font-size: 10pt;
     }

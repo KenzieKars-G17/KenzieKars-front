@@ -50,7 +50,7 @@ export default createGlobalStyle`
     padding: 0;
     outline:0;
     box-sizing: border-box;
-    list-style: none;
+    list-style: none;		
 		
   }
 
@@ -66,7 +66,16 @@ export default createGlobalStyle`
     color: var(--color-gray-2);
     -webkit-font-smoothing: antialiased;
   }
-
+	header{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	main{
+		max-width: 1400px;
+		
+	}
 
 	body, input, button, textarea {
     font-family: 'Inter';
