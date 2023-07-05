@@ -50,23 +50,34 @@ export default createGlobalStyle`
     padding: 0;
     outline:0;
     box-sizing: border-box;
-    list-style: none;
+    list-style: none;		
+		
   }
 
   body,html{
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
   }
 
   body {
+		margin: 0;
+  	display: flex;
     background: var(--color-gray-10);
     color: var(--color-gray-2);
     -webkit-font-smoothing: antialiased;
-
-    overflow-x: hidden;
   }
+	header{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	main{
+		max-width: 1400px;
+		
+	}
 
-  body, input, button, textarea {
+	body, input, button, textarea {
     font-family: 'Inter';
     font-size: 1.6rem;
   }
@@ -75,9 +86,29 @@ export default createGlobalStyle`
     font-weight: 500;
   }
 
-  button {
-    cursor: pointer;
-  }
+	h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  transition: border-color 0.25s;
+}
+
+button:hover {
+  border-color: #646cff;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
 
 .text-style-heading-heading-1-700 {
 	font-size: 2.75rem;
