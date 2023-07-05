@@ -25,7 +25,7 @@ const IndividualProduct = () => {
   return (
     <IndividualProductBase>
       <section className="mainPicture">
-        <img src={advertisementById.cover_image} />
+        <img src={advertisementById && advertisementById.cover_image} />
       </section>
 
       {advertisementById && (
