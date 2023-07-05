@@ -10,6 +10,7 @@ import {
   CadastrarButton,
 } from "./styles";
 import LogoNav from "../../../assets/LogoNav.png";
+import avatar from "../../../assets/avatar.png";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/auth.context";
 import Hamburger from "hamburger-react";
@@ -63,7 +64,7 @@ const Navbar = () => {
               <>
                 <div className="profileInfo">
                   <div className="headerUserImg">
-                    <img src="../../src/assets/avatar.png" alt="Profile Img" />
+                    <img src={avatar} alt="Profile Img" />
                   </div>
                   <h2 className="headerUserName">{user.name}</h2>
                 </div>

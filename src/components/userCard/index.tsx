@@ -7,6 +7,7 @@ import { ProductPageContext } from "../../contexts/productPage.context";
 import { useParams } from "react-router-dom";
 import api from "../../services/api";
 import { IUserReturn } from "../../interfaces/user.interface";
+import avatar from "../../assets/avatar.png";
 
 const UserCard = () => {
   const { SetShowAddAdvertisementForm } = useContext(AdvertisementContext);
@@ -45,7 +46,7 @@ const UserCard = () => {
 
   return (
     <UserCardDiv>
-      <img src="../../src/assets/avatar.png" alt="Profile Image" />
+      <img src={avatar} alt="Profile Image" />
       <NameAndCategoryDiv>
         <h3>{pageUser?.name}</h3>
         {pageUser?.seller && (
