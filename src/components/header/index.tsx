@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import { useContext } from "react";
 import Banner from "../banner";
 import Navbar from "./navbar";
 import { ProductPageContext } from "../../contexts/productPage.context";
