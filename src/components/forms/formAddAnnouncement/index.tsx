@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import api2 from "../../../services/api2";
 import { useContext, useEffect, useState } from "react";
 import { AdvertisementContext } from "../../../contexts/advertisements.context";
@@ -10,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { advertisementSchema } from "../../../schemas/advertisements.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Iadvertisement } from "../../../interfaces/advertisements.interfaces";
+import { toast } from "react-toastify";
 
 const FormAddAnnouncement = () => {
   const {
@@ -19,8 +21,8 @@ const FormAddAnnouncement = () => {
   } = useContext(AdvertisementContext);
   const { user } = useContext(AuthContext);
   const { brands } = useContext(ProductPageContext);
-  const [image, setImage] = useState();
-  const [moreImage, setMoreImage] = useState([]);
+  const [images, setImages] = useState<any>([]);
+  const [moreImage, setMoreImage] = useState<number>(0);
   const [models, setModels] = useState<string[]>([]);
   const [carSpecs, setCarSpecs] = useState<any>(null);
 
@@ -46,8 +48,10 @@ const FormAddAnnouncement = () => {
     setCarSpecs(findCar);
   };
   const addMoreImages = () => {
-    console.log(moreImage);
-    setMoreImage((prevData) => [...prevData, `${prevData.length + 1} imagem`]);
+    if (moreImage >= 4) {
+      return toast.error("Atingiu o limite de imagens");
+    }
+    setMoreImage((prevData) => prevData + 1);
   };
   const {
     register,
@@ -65,7 +69,11 @@ const FormAddAnnouncement = () => {
       data.fuel = "electric";
     }
     data.year = carSpecs.year;
-    data.cover_image = image;
+    data.cover_image = images[0];
+    data.gallery_image_1 = images.length > 1 && images[1]
+    data.gallery_image_2 = images.length > 2 && images[2]
+    data.gallery_image_3 = images.length > 3 && images[3]
+    data.gallery_image_4 = images.length > 4 && images[4]
     console.log(data);
     await createAdvertisement(data);
     SetShowAddAdvertisementForm();
@@ -215,29 +223,130 @@ const FormAddAnnouncement = () => {
             placeholder="https://image.com"
             label="Imagem da capa"
             {...register("cover_image")}
-            onChange={(event) => {
-              setImage(event.target.files[0]);
+            onChange={(event: any) => {
+              const newImages = Array.from(event.target.files);
+              setImages((prevState: any) => [...prevState, ...newImages]);
             }}
           />
           {errors.cover_image && (
             <span className="alert-span">{errors.cover_image.message}</span>
           )}
-          <div>
-            {moreImage.length > 0 &&
-              moreImage.map((text) => (
-                <InputComponent
-                  type="file"
-                  placeholder="https://image.com"
-                  label={text}
-                  {...register("cover_image")}
-                  onChange={(event) => {
-                    setImage(event.target.files[0]);
-                  }}
-                />
-              ))}
-          </div>
+
+          {moreImage === 0 && null}
+
+          {moreImage === 1 && (
+            <div>
+              <InputComponent
+                type="file"
+                placeholder="https://image.com"
+                label=""
+                onChange={(event: any) => {
+                  const newImages = Array.from(event.target.files);
+                  setImages((prevState: any) => [...prevState, ...newImages]);
+                }}
+              />
+            </div>
+          )}
+
+          {moreImage === 2 && (
+            <div>
+              <InputComponent
+                type="file"
+                placeholder="https://image.com"
+                label=""
+                onChange={(event: any) => {
+                  const newImages = Array.from(event.target.files);
+                  setImages((prevState: any) => [...prevState, ...newImages]);
+                }}
+              />
+
+              <InputComponent
+                type="file"
+                placeholder="https://image.com"
+                label=""
+                onChange={(event: any) => {
+                  const newImages = Array.from(event.target.files);
+                  setImages((prevState: any) => [...prevState, ...newImages]);
+                }}
+              />
+            </div>
+          )}
+
+          {moreImage === 3 && (
+            <div>
+              <InputComponent
+                type="file"
+                placeholder="https://image.com"
+                label=""
+                onChange={(event: any) => {
+                  const newImages = Array.from(event.target.files);
+                  setImages((prevState: any) => [...prevState, ...newImages]);
+                }}
+              />
+              <InputComponent
+                type="file"
+                placeholder="https://image.com"
+                label=""
+                onChange={(event: any) => {
+                  const newImages = Array.from(event.target.files);
+                  setImages((prevState: any) => [...prevState, ...newImages]);
+                }}
+              />
+              <InputComponent
+                type="file"
+                placeholder="https://image.com"
+                label=""
+                onChange={(event: any) => {
+                  const newImages = Array.from(event.target.files);
+                  setImages((prevState: any) => [...prevState, ...newImages]);
+                }}
+              />
+            </div>
+          )}
+
+          {moreImage === 4 && (
+            <div>
+              <InputComponent
+                type="file"
+                placeholder="https://image.com"
+                label=""
+                onChange={(event: any) => {
+                  const newImages = Array.from(event.target.files);
+                  setImages((prevState: any) => [...prevState, ...newImages]);
+                }}
+              />
+              <InputComponent
+                type="file"
+                placeholder="https://image.com"
+                label=""
+                onChange={(event: any) => {
+                  const newImages = Array.from(event.target.files);
+                  setImages((prevState: any) => [...prevState, ...newImages]);
+                }}
+              />
+              <InputComponent
+                type="file"
+                placeholder="https://image.com"
+                label=""
+                onChange={(event: any) => {
+                  const newImages = Array.from(event.target.files);
+                  setImages((prevState: any) => [...prevState, ...newImages]);
+                }}
+              />
+              <InputComponent
+                type="file"
+                placeholder="https://image.com"
+                label=""
+                onChange={(event: any) => {
+                  const newImages = Array.from(event.target.files);
+                  setImages((prevState: any) => [...prevState, ...newImages]);
+                }}
+              />
+            </div>
+          )}
+
           <button type="button" onClick={addMoreImages}>
-            +
+            Adicionar Campo de Imagem
           </button>
 
           <div className="divButtonCancelAndSubmit">
