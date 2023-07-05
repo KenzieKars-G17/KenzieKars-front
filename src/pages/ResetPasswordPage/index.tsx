@@ -17,7 +17,7 @@ import { iResetPassword } from "../../interfaces/resetPassword.interfaces";
 import { useParams } from "react-router-dom";
 import api from "../../services/api";
 import { toast } from "react-toastify";
-import ResetPasswordSchema from "../../schemas/ResetPassword.schema";
+import ResetPasswordSchema from "../../schemas/resetPassword.schema";
 
 const ResetPasswordPage = () => {
   const { token } = useParams();
