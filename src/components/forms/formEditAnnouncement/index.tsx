@@ -82,6 +82,7 @@ const FormUpdateAnnouncement = () => {
           <fieldset>
             <label htmlFor="">Marca</label>
             <select
+              className="customSelect"
               {...register("brand")}
               onChange={(e) => {
                 getModel(e);
@@ -103,7 +104,11 @@ const FormUpdateAnnouncement = () => {
 
           <fieldset>
             <label htmlFor="">Modelo</label>
-            <select {...register("model")} onChange={(e) => getCarSpec(e)}>
+            <select
+              className="customSelect"
+              {...register("model")}
+              onChange={(e) => getCarSpec(e)}
+            >
               <option value="">Selecionar um modelo</option>
               {models &&
                 models.map((model: any, index) => (
@@ -262,9 +267,9 @@ const FormUpdateAnnouncement = () => {
           <div className="divButtonDeleteAndSubmit">
             <button
               className="buttonDeleteAd"
-              onClick={()=>{
-                SetShowDeleteAdvertisementModal()
-                SetShowUpdateAdvertisementForm()
+              onClick={() => {
+                SetShowDeleteAdvertisementModal();
+                SetShowUpdateAdvertisementForm();
               }}
             >
               Excluir anúncio
