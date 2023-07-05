@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef } from "react";
 import Cards from "../../components/cards";
 import FilterAside from "../../components/filterAside";
 import Footer from "../../components/footer";
@@ -52,6 +52,13 @@ const HomePage = () => {
 
   const { showFormEditUserInfo } = useContext(AuthContext);
 
+  const handleScrollToTop = () => {
+    const headerElement = document.getElementById("header");
+    if (headerElement) {
+      headerElement.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   useEffect(() => {
     const condition = true;
     ShowBannerPicture(condition);
@@ -83,7 +90,10 @@ const HomePage = () => {
       {/*COMPONENTIZAR E PADRONIZAR ESTE BOTÃO DE FILTROS*/}
       {showButtonFilter === true && currentWidth < 768 ? (
         <button
-          onClick={ShowFilterAside}
+          onClick={() => {
+            ShowFilterAside();
+            handleScrollToTop();
+          }}
           style={{
             margin: "5px 25vw",
             width: "50vw",
