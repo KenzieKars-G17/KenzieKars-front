@@ -165,7 +165,7 @@ const Filter = (): JSX.Element => {
   const [isAllYears, setIsAllYears] = useState<boolean>(false);
   const [isAllColors, setIsAllColors] = useState<boolean>(false);
 
-  const handleBrands = () => setIsAllBrands(!isAllBrands);  
+  const handleBrands = () => setIsAllBrands(!isAllBrands);
   const handleModels = () => setIsAllModels(!isAllModels);
   const handleYears = () => setIsAllYears(!isAllYears);
   const handleColors = () => setIsAllColors(!isAllColors);
@@ -183,7 +183,7 @@ const Filter = (): JSX.Element => {
         <div>
           <h3 className="title3">Marca</h3>
           <button type="button" onClick={handleBrands}>
-          {isAllBrands ? "Esconder" : "Ver todas"}
+            {isAllBrands ? "Esconder" : "Ver todas"}
           </button>
           <ul className="filter-options">
             {brand.map((x, i) => (
@@ -203,7 +203,9 @@ const Filter = (): JSX.Element => {
               </li>
             ))}
           </ul>
-          <ul className={isAllBrands ? "filter-slide sliderIn" : "filter-slide"}>
+          <ul
+            className={isAllBrands ? "filter-slide sliderIn" : "filter-slide"}
+          >
             {brand.map((x, i) => (
               <li key={i * Math.random()}>
                 <p
@@ -225,7 +227,7 @@ const Filter = (): JSX.Element => {
         <div>
           <h3 className="title3">Modelo</h3>
           <button type="button" onClick={handleModels}>
-          {isAllModels ? "Esconder" : "Ver todos"}
+            {isAllModels ? "Esconder" : "Ver todos"}
           </button>
           <ul className="filter-options">
             {model.map((x, i) => (
@@ -245,7 +247,9 @@ const Filter = (): JSX.Element => {
               </li>
             ))}
           </ul>
-          <ul className={isAllModels ? "filter-slide sliderIn" : "filter-slide"}>
+          <ul
+            className={isAllModels ? "filter-slide sliderIn" : "filter-slide"}
+          >
             {model.map((x, i) => (
               <li key={i * Math.random()}>
                 <p
@@ -267,7 +271,7 @@ const Filter = (): JSX.Element => {
         <div>
           <h3 className="title3">Cor</h3>
           <button type="button" onClick={handleColors}>
-          {isAllColors ? "Esconder" : "Ver todos"}
+            {isAllColors ? "Esconder" : "Ver todos"}
           </button>
           <ul className="filter-options">
             {colors.map((x, i) => (
@@ -287,7 +291,9 @@ const Filter = (): JSX.Element => {
               </li>
             ))}
           </ul>
-          <ul className={isAllColors ? "filter-slide sliderIn" : "filter-slide"}>
+          <ul
+            className={isAllColors ? "filter-slide sliderIn" : "filter-slide"}
+          >
             {colors.map((x, i) => (
               <li key={i * Math.random()}>
                 <p
@@ -309,7 +315,7 @@ const Filter = (): JSX.Element => {
         <div>
           <h3 className="title3">Ano</h3>
           <button type="button" onClick={handleYears}>
-          {isAllYears ? "Esconder" : "Ver todos"}
+            {isAllYears ? "Esconder" : "Ver todos"}
           </button>
           <ul className="filter-options">
             {years.map((x, i) => (
