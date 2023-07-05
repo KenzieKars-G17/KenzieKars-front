@@ -1,5 +1,5 @@
 import api2 from "../../services/api2";
-import { useContext , useState, useEffect} from "react";
+import { useContext, useState, useEffect } from "react";
 import { Category, NameAndCategoryDiv, UserCardDiv } from "./styles";
 import { AdvertisementContext } from "../../contexts/advertisements.context";
 import { AuthContext } from "../../contexts/auth.context";
@@ -15,7 +15,7 @@ const UserCard = () => {
   const { setBrands } = useContext(ProductPageContext);
   const { userId } = useParams();
 
-  const [pageUser, setPageUser] = useState<IUserReturn>()
+  const [pageUser, setPageUser] = useState<IUserReturn>();
 
   const getBrands = async () => {
     try {
@@ -28,25 +28,20 @@ const UserCard = () => {
       console.log(error);
     }
   };
-   
 
-  const getApiUser = async () =>{
+  const getApiUser = async () => {
     try {
-      const response = await api.get(`users/${userId}`)
+      const response = await api.get(`users/${userId}`);
 
-      setPageUser(response.data)
-
+      setPageUser(response.data);
     } catch (error) {
       console.log(error);
-      
     }
-  }
-  
+  };
 
   useEffect(() => {
-   getApiUser()
-  }, [])
-  
+    getApiUser();
+  }, []);
 
   return (
     <UserCardDiv>
