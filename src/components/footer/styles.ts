@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import GlobalStyles from "../../styles/GlobalStyles";
 
 export const FooterContainer = styled.footer`
   /* position: fixed; */

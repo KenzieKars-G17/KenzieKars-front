@@ -7,11 +7,7 @@ import { InputComponent } from "../../InputComponent";
 const FormLogin = () => {
   const { login } = useContext(AuthContext);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const onSubmit: SubmitHandler<any> = (data) => {
     localStorage.removeItem("@TOKEN");

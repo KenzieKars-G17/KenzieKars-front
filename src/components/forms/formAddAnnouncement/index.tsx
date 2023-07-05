@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import api2 from "../../../services/api2";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { AdvertisementContext } from "../../../contexts/advertisements.context";
 import { ProductPageContext } from "../../../contexts/productPage.context";
 import { AuthContext } from "../../../contexts/auth.context";
@@ -8,8 +8,6 @@ import { InputComponent } from "../../InputComponent";
 import Modal from "../../modal";
 import { FormNewAd } from "./styles";
 import { useForm } from "react-hook-form";
-import { advertisementSchema } from "../../../schemas/advertisements.schema";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Iadvertisement } from "../../../interfaces/advertisements.interfaces";
 import { toast } from "react-toastify";
 
@@ -47,14 +45,12 @@ const FormAddAnnouncement = () => {
     const findCar = models.find((car: any) => car.name === value);
     setCarSpecs(findCar);
   };
-  
+
   const addMoreImages = () => {
-
-if (moreImage >= 4) {
-  return toast.error("Atingiu o limite de imagens");
-}
-setMoreImage((prevData) => prevData + 1);
-
+    if (moreImage >= 4) {
+      return toast.error("Atingiu o limite de imagens");
+    }
+    setMoreImage((prevData) => prevData + 1);
   };
 
   const {
@@ -74,10 +70,10 @@ setMoreImage((prevData) => prevData + 1);
     }
     data.year = carSpecs.year;
     data.cover_image = images[0];
-    data.gallery_image_1 = images.length > 1 && images[1]
-    data.gallery_image_2 = images.length > 2 && images[2]
-    data.gallery_image_3 = images.length > 3 && images[3]
-    data.gallery_image_4 = images.length > 4 && images[4]
+    data.gallery_image_1 = images.length > 1 && images[1];
+    data.gallery_image_2 = images.length > 2 && images[2];
+    data.gallery_image_3 = images.length > 3 && images[3];
+    data.gallery_image_4 = images.length > 4 && images[4];
     console.log(data);
     await createAdvertisement(data);
     SetShowAddAdvertisementForm();

@@ -79,6 +79,7 @@ const Comments = () => {
         }
       );
       getComments();
+      return response;
     } catch (error) {
       console.error("Erro ao obter os anuncios", error);
     }
@@ -87,11 +88,7 @@ const Comments = () => {
     getComments();
   }, []);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const onSubmit: SubmitHandler<any> = (data) => {
     if (sugest) {

@@ -1,23 +1,23 @@
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../../contexts/auth.context";
-import { SubmitHandler, useForm, useFormState } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { InputComponent } from "../../InputComponent";
 import Modal from "../../modal";
-import { iEditAddress, iEditRegister, iRegister } from "../../../interfaces/register.interfaces";
+import { iEditAddress } from "../../../interfaces/register.interfaces";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AddressSchema, EditRegisterSchema, RegisterSchema } from "../../../schemas/register.schema";
+import { AddressSchema } from "../../../schemas/register.schema";
 import { DivBackgroundFormEditUser } from "./styles";
 
 const FormEditUserAddress = () => {
+  const { user, editUserAddress, SetAdvertiser, SetShowFormEditUserAddress } =
+    useContext(AuthContext);
 
-  const { user, editUser, editUserAddress, SetAdvertiser, advertiser, SetShowFormEditUserAddress } = useContext(AuthContext);
-
-  const thisUser: any = user
+  const thisUser: any = user;
 
   useEffect(() => {
-    SetAdvertiser(thisUser.seller)
-  }, [])
-  
+    SetAdvertiser(thisUser.seller);
+  }, []);
+
   const {
     register,
     handleSubmit,
@@ -39,7 +39,6 @@ const FormEditUserAddress = () => {
           onSubmit={handleSubmit(editUserAddress)}
         >
           <div className="inputs-cont">
-            
             <InputComponent
               label="CEP"
               placeholder="00.000-000"
@@ -60,9 +59,7 @@ const FormEditUserAddress = () => {
                 {...register("state")}
               />
               {errors.state && (
-                <span className="alert-span">
-                  {errors.state?.message}
-                </span>
+                <span className="alert-span">{errors.state?.message}</span>
               )}
 
               <InputComponent
@@ -73,9 +70,7 @@ const FormEditUserAddress = () => {
                 {...register("city")}
               />
               {errors.city && (
-                <span className="alert-span">
-                  {errors.city?.message}
-                </span>
+                <span className="alert-span">{errors.city?.message}</span>
               )}
             </div>
 
@@ -87,9 +82,7 @@ const FormEditUserAddress = () => {
               {...register("street")}
             />
             {errors.street && (
-              <span className="alert-span">
-                {errors.street?.message}
-              </span>
+              <span className="alert-span">{errors.street?.message}</span>
             )}
 
             <div className="divTwoInputs">
@@ -101,24 +94,26 @@ const FormEditUserAddress = () => {
                 {...register("number")}
               />
               {errors.number && (
-                <span className="alert-span">
-                  {errors.number?.message}
-                </span>
+                <span className="alert-span">{errors.number?.message}</span>
               )}
 
-              <InputComponent label="Complemento" placeholder="Digite o complemento" type="text" {...register("complement")} />
-                {errors.complement && (<span className="alert-span">{errors.complement?.message}</span>)}
+              <InputComponent
+                label="Complemento"
+                placeholder="Digite o complemento"
+                type="text"
+                {...register("complement")}
+              />
+              {errors.complement && (
+                <span className="alert-span">{errors.complement?.message}</span>
+              )}
             </div>
-
           </div>
 
           <div className="buttons-cont">
             <button className="bttn bttn-brand" type="submit">
               Salvar
             </button>
-            <button className="bttn bttn-brand">
-              Cancelar
-            </button>
+            <button className="bttn bttn-brand">Cancelar</button>
           </div>
         </form>
       </DivBackgroundFormEditUser>

@@ -1,17 +1,13 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect } from "react";
 import Cards from "../../components/cards";
 import FilterAside from "../../components/filterAside";
 import Footer from "../../components/footer";
 import Header from "../../components/header";
 import { useAuth } from "../../hooks";
 import { HomePageContext } from "../../contexts/homepage.context";
-// import { FilterContext } from "../../contexts/filter.context";
 import { HomePageBase } from "./styles";
 import { ProductPageContext } from "../../contexts/productPage.context";
-import Modal from "../../components/modal";
 import { AdvertisementContext } from "../../contexts/advertisements.context";
-import FormAddAnnouncement from "../../components/forms/formAddAnnouncement";
-// import { useContext } from "react";
 import Loader from "../../components/loader";
 import { ModalWrapper } from "../../components/modal/filterModal/styles";
 import FormEditUserInfo from "../../components/forms/formEditUserInfo";
@@ -21,8 +17,7 @@ import { toast } from "react-toastify";
 
 const HomePage = () => {
   const { loading, logout } = useAuth();
-  const { filteredAd, getAllAdvertisements, page, setPage } =
-    useContext(AdvertisementContext);
+  const { filteredAd } = useContext(AdvertisementContext);
   const { ShowBanner } = useContext(ProductPageContext);
 
   const isTokenExpired = (token: string) => {
@@ -87,7 +82,6 @@ const HomePage = () => {
         <Cards arr={filteredAd} />
       </main>
 
-      {/*COMPONENTIZAR E PADRONIZAR ESTE BOTÃO DE FILTROS*/}
       {showButtonFilter === true && currentWidth < 768 ? (
         <button
           onClick={() => {
@@ -105,7 +99,6 @@ const HomePage = () => {
           Filtros
         </button>
       ) : null}
-      {/*COMPONENTIZAR E PADRONIZAR ESTE BOTÃO DE FILTROS*/}
 
       {showFormEditUserInfo && <FormEditUserInfo />}
 

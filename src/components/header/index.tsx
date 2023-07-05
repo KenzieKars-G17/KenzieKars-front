@@ -5,7 +5,6 @@ import { ProductPageContext } from "../../contexts/productPage.context";
 
 const Header = () => {
   const { showBanner } = useContext(ProductPageContext);
-  const mainRef: any = useRef(null);
   return (
     <header id="header">
       <Navbar></Navbar>
