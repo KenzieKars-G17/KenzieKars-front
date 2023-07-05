@@ -4,7 +4,7 @@ const userSchema = z.object({
   name: z.string().min(3).max(45),
   email: z.string().email().max(45),
   cpf: z.string().max(11),
-  phone: z.string().max(9),
+  phone: z.string().max(45),
   birthdate: z.string().max(10),
   description: z.string().nullable().default(null),
   seller: z.boolean().optional().default(false),
@@ -26,8 +26,8 @@ const returnUserAdSchema = z
   })
   .partial();
 
-  const userIdSchema = userSchema.extend({
-    id: z.number()
-  })
+const userIdSchema = userSchema.extend({
+  id: z.number(),
+});
 
-export { userSchema, returnUserSchema, returnUserAdSchema, userIdSchema};
+export { userSchema, returnUserSchema, returnUserAdSchema, userIdSchema };

@@ -29,14 +29,19 @@ const FormUpdateAnnouncement = () => {
   } = useForm<TupdateAdvertisement>();
 
   const onSubmit = async (data: any) => {
-    if (carSpecs.fuel === 1) {
-      data.fuel = "Flex";
+    // if (carSpecs.fuel === 1) {
+    //   data.fuel = "Flex";
+    // }
+    // if (carSpecs.fuel === 3) {
+    //   data.fuel = "electric";
+    // } else {
+    data.fuel = selectedAd!.fuel;
+    // }
+    if (data.cover_image.length <= 0) {
+      data.cover_image = selectedAd!.cover_image;
     }
-    if (carSpecs.fuel === 3) {
-      data.fuel = "electric";
-    }
-
     data.is_active = isAdActive;
+    console.log(data.is_active);
     data.price = parseInt(data.price);
     data.table_price = parseInt(data.table_price);
     data.cover_image = image;
@@ -82,13 +87,14 @@ const FormUpdateAnnouncement = () => {
           <fieldset>
             <label htmlFor="">Marca</label>
             <select
+              defaultValue={selectedAd?.brand}
               className="customSelect"
               {...register("brand")}
               onChange={(e) => {
                 getModel(e);
               }}
             >
-              <option value="">Selecionar uma marca</option>
+              <option value={selectedAd!.brand}>{selectedAd!.brand}</option>
               {brands &&
                 brands.map((brand: any, index: any) => (
                   <option key={index} value={brand}>
@@ -105,11 +111,12 @@ const FormUpdateAnnouncement = () => {
           <fieldset>
             <label htmlFor="">Modelo</label>
             <select
+              defaultValue={selectedAd?.model}
               className="customSelect"
               {...register("model")}
               onChange={(e) => getCarSpec(e)}
             >
-              <option value="">Selecionar um modelo</option>
+              <option value={selectedAd!.model}>{selectedAd!.model}</option>
               {models &&
                 models.map((model: any, index) => (
                   <option key={index} value={model.name}>
@@ -136,6 +143,7 @@ const FormUpdateAnnouncement = () => {
             )}
             <InputComponent
               type="text"
+              defaultValue={selectedAd!.fuel}
               placeholder={selectedAd!.fuel}
               value={carSpecs?.fuel === 3 ? "Eletrico" : "Flex"}
               label="Combustível"

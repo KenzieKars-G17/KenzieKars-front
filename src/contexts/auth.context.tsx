@@ -40,7 +40,7 @@ interface iContextValues {
   SetShowFormEditUserInfo: () => void;
   showFormEditUserAddress: boolean;
   SetShowFormEditUserAddress: () => void;
-  deleteUser: (id:number)=> void;
+  deleteUser: (id: number) => void;
 }
 
 export const AuthContext = createContext({} as iContextValues);
@@ -68,9 +68,9 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
       if (!jwtToken) return;
       const decode: any = jwt_decode(jwtToken);
       const findUser = await api.get(`users/${decode.sub}`);
-      
+
       setUser(findUser.data);
-      if(user){
+      if (user) {
         setAdvertiser(user?.seller);
       }
     } catch (error) {
@@ -94,7 +94,7 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
       setLoading(true);
       localStorage.setItem("@TOKEN", token);
       const findUser = await api.get(`users/${decode.sub}`);
-      
+
       setUser(findUser.data);
       toast.success("Login efetuado com sucesso!");
       navigate("/");
@@ -163,27 +163,6 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
       console.log(error);
       toast.error("Ops, alguma coisa deu errado!");
     }
-
-    try {
-      setLoading(true);
-      const jwtToken = localStorage.getItem("@TOKEN");
-
-      if (!jwtToken) return;
-
-      const findUser = await api.get("users", {
-        headers: {
-          Authorization: `Bearer ${jwtToken}`,
-        },
-      });
-
-      setUser(findUser.data);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setTimeout(() => {
-        setLoading(false);
-      }, 1000);
-    }
   };
 
   const editUserAddress = async (data: iEditAddress) => {
@@ -234,9 +213,9 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
       await api.delete(`/users/${id}`, {
         headers: {
           Authorization: `Bearer ${jwtToken}`,
-        }
-      })
-      logout()
+        },
+      });
+      logout();
     } catch (error) {
       console.log(error);
     }
@@ -278,7 +257,7 @@ export const AuthProvider = ({ children }: iAuthProviderProps) => {
         editUserAddress,
         SetShowFormEditUserAddress,
         showFormEditUserAddress,
-        deleteUser
+        deleteUser,
       }}
     >
       {children}
