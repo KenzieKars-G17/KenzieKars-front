@@ -1,19 +1,15 @@
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import Banner from "../banner";
 import Navbar from "./navbar";
 import { ProductPageContext } from "../../contexts/productPage.context";
 
 const Header = () => {
-
-  
-  const { showBanner } = useContext(ProductPageContext)
-
-
+  const { showBanner } = useContext(ProductPageContext);
+  const mainRef: any = useRef(null);
   return (
-    <header>
+    <header id="header">
       <Navbar></Navbar>
-      {showBanner && <Banner/>}
-
+      {showBanner && <Banner />}
     </header>
   );
 };
