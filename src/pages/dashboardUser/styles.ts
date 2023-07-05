@@ -25,6 +25,10 @@ export const DashboardUserPageBase = styled.div`
       padding-right: 5%;
       display: flex;
       align-items: flex-start;
+
+      @media (max-width: 768px) {
+        margin-top: 120px;
+      }
     }
     .no-advertisement {
       margin-top: 120px;

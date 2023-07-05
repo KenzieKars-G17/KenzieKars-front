@@ -10,17 +10,29 @@ export const FormUpdateAd = styled.form`
   border-radius: 8px;
   overflow-y: scroll;
   padding: 2px;
+  overflow-x: hidden;
+  ::-webkit-scrollbar {
+    width: 0;
+  }
 
-  button{
+  ::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+
+  button {
     cursor: pointer;
   }
 
-  .divButtonsType{
-            padding: 10px 0;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
+  .divButtonsType {
+    padding: 10px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
   }
 
   .divTitleAndCloseButton {
@@ -52,17 +64,25 @@ export const FormUpdateAd = styled.form`
   }
 
   .divInputs {
-    display: flex;
+    margin-top: 30px;
+    /* display: flex; */
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
     fieldset {
-      max-width: 100%;
+      width: 100%;
       gap: 5px;
+      border: none;
+      padding: 0;
+      margin: 0;
+      margin-left: 5px;
+      display: flex;
+      flex-direction: column;
     }
 
     label {
+      display: inline-block;
       font-size: 12pt;
       margin: 20px 0 0 10px;
     }
@@ -75,9 +95,22 @@ export const FormUpdateAd = styled.form`
     input {
       margin: 0 0 0 10px;
       width: 88%;
-      border: 1pt solid var(--color-grey-3);
+      border-color: #e9ecef;
       height: 35px;
       font-size: 15px;
+    }
+    .customSelect {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      margin: 5px 0px 0px 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      width: 88%;
+      background-color: #e9ecef;
+      cursor: pointer;
     }
   }
 
@@ -85,7 +118,8 @@ export const FormUpdateAd = styled.form`
     display: flex;
 
     input {
-      width: 75%;
+      width: 77%;
+      border-color: #e9ecef;
     }
   }
 
@@ -117,11 +151,11 @@ export const FormUpdateAd = styled.form`
       border-radius: 4px;
       border: 1.5px solid var(--color-brand-3);
       background-color: var(--color-brand-3);
-      color: var(--color-brand-4); 
+      color: var(--color-brand-4);
       min-width: 16px;
     }
 
-    .buttonSubmit:hover{
+    .buttonSubmit:hover {
       background-color: var(--color-brand-1);
     }
   }
