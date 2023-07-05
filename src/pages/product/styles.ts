@@ -14,6 +14,7 @@ export const ProductPageBase = styled.div`
     gap: 15px;
     justify-content: center;
     align-items: center;
+    max-width: 100vw;
   }
 
   .pictures {
