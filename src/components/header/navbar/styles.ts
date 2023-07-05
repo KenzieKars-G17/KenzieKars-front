@@ -4,13 +4,15 @@ export const NavbarContainer = styled.nav`
   position: relative;
   width: 100%;
   min-height: 80px;
+  max-width: 1400px;
   border-bottom-width: 2px;
   border-bottom-style: solid;
   border-color: #dee2e6;
   align-items: center;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  /* overflow: hidden; */
+
   .toggle-menu-mobile {
     opacity: 0;
     height: 0;
@@ -34,11 +36,11 @@ export const NavbarContainer = styled.nav`
     display: none;
   }
   .profile-visible {
-    position: fixed;
+    position: absolute;
     min-width: 200px;
     height: auto;
     top: 65px;
-    right: 17px;
+    right: 0;
     /* transform: translate(-50%); */
     z-index: 1;
     background: #f8f9fa;
@@ -115,8 +117,8 @@ export const LeftContainer = styled.div`
   flex: 70%;
   display: flex;
   align-items: center;
-  padding-left: 5%;
   background-color: #fdfdfd;
+  padding-left: 3%;
 `;
 
 export const RightContainer = styled.div`

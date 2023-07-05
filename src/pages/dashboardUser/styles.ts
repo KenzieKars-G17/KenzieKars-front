@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const DashboardUserPageBase = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-direction: row;
   width: 100vw;
   height: 100vh;
@@ -13,6 +13,7 @@ export const DashboardUserPageBase = styled.div`
     margin: 10px 0;
     width: 100vw;
     display: flex;
+    justify-content: center;
     gap: 15px;
 
     .divAdvertisement {

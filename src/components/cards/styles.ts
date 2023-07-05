@@ -8,12 +8,12 @@ export const UlCards = styled.section`
   ul {
     list-style: none;
     display: flex;
+    justify-content: center;
     gap: 20px;
     overflow-x: auto;
     max-width: 100%;
     flex-wrap: wrap;
     /* height: 375px; */
-    justify-content: flex-start;
 
     li {
       display: flex;

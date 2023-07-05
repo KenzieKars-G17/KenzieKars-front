@@ -6,12 +6,13 @@ export const StyledLogin = styled.main`
   align-items: center;
   padding: 5.2rem 1.6rem;
   width: 100vw;
+  max-width: 100vw;
   background-color: var(--color-grey-8);
   @media (min-width: 700px) {
     padding: 12rem 1.6rem;
   }
 
-  button{
+  button {
     cursor: pointer;
   }
 
