@@ -49,6 +49,7 @@ const DashboardUser = () => {
     <DashboardUserPageBase>
       <Header />
       <main>
+        <h1 className="h1Title">Anúncios</h1>
         <UserCard />
         {sellerAdvertisements.length === 0 ? (
           <div className="no-advertisement">
@@ -56,7 +57,7 @@ const DashboardUser = () => {
           </div>
         ) : (
           <div className="divAdvertisement">
-            <Cards arr={sellerAdvertisements} />
+            <Cards arr={sellerAdvertisements}/>
           </div>
         )}
       </main>
