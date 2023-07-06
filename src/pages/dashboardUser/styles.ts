@@ -33,6 +33,10 @@ export const DashboardUserPageBase = styled.div`
       padding-right: 5%;
       display: flex;
 
+      li{
+       height: 400px;
+      }
+
 
       @media (min-width: 768px) {
         margin-top: 10px;

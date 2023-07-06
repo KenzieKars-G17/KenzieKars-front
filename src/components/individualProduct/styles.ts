@@ -42,7 +42,9 @@ export const IndividualProductBase = styled.section`
 
     .yearAndKm {
       display: flex;
-      justify-content: flex-start;
+      justify-content: space-between;
+      margin: 0px 10px 0px 0px;
+      align-items: center;
       gap: 10px;
       margin: 0 0 0 20px;
     }
@@ -59,8 +61,9 @@ export const IndividualProductBase = styled.section`
     .price {
       font-weight: bold;
       font-size: 10pt;
-      margin: 0 0 0 20px;
+      margin: 0 20px 0 0;
       color: black;
+      text-align: center;
     }
 
     .buyButton {

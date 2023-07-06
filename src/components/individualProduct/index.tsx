@@ -35,10 +35,13 @@ const IndividualProduct = () => {
               {advertisementById.brand} {advertisementById.model}
             </h1>
             <div className="yearAndKm">
+              <div style={{display: "flex", gap:"10px"}}>
               <span className="km">{advertisementById.mileage} KM</span>
               <span className="year">{advertisementById.year}</span>
+              </div>
+              <span className="price">R$ {formattedPrice()}</span>
             </div>
-            <span className="price">R$ {formattedPrice()}</span>
+
             <button className="buyButton" onClick={openWhatsApp}>
               Comprar
             </button>

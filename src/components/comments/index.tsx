@@ -41,7 +41,6 @@ const Comments = () => {
 
   const updateComment = async (commentId: number) => {
     try {
-      console.log(commentFormat);
       const response = await api.patch(
         `advertisement/comments/${commentId}`,
         commentFormat,
@@ -51,9 +50,10 @@ const Comments = () => {
           },
         }
       );
-
+  
       getComments();
       setEdit(false);
+      setEditValue(""); // <-
       return response.data;
     } catch (error) {
       console.error("Erro ao obter os anuncios", error);
@@ -89,13 +89,14 @@ const Comments = () => {
     getComments();
   }, []);
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const onSubmit: SubmitHandler<any> = (data) => {
     if (sugest) {
       data.comment = sugest;
     }
     createComment(data);
+    reset();
     setSugest(null);
   };
 
@@ -114,10 +115,10 @@ const Comments = () => {
             return (
               <li key={comment.id} className="individualComment">
                 <div className="UserDetails">
-                  <div>
+                  <div style={{display:"flex", alignItems:"cemter"}}>
                     <img src={avatar} />
                     <h3>{comment.user.name}</h3>
-                    <span>Há {translateDate}</span>
+                    <span style={{fontSize:"8pt", fontWeight:"bold", color:"gray"}}>Há {translateDate}</span>
                   </div>
                   {jwtToken && user?.id === comment.user.id && (
                     <div className="buttonsContainer">
@@ -134,7 +135,7 @@ const Comments = () => {
                   <>
                     <textarea
                       className="editInput"
-                      defaultValue={comment.comment}
+                      value={comment.comment}
                       onChange={(e) => setEditValue(e.target.value)}
                     />
                     <button
@@ -159,7 +160,7 @@ const Comments = () => {
           <img src={avatar} />
           <h3>{user?.name}</h3>
         </div>
-        {sugest ? (
+        {sugest !== null ? (
           <textarea
             value={sugest}
             placeholder="Carro ultra confortável, foi uma ótima experiência de compra..."
@@ -167,6 +168,7 @@ const Comments = () => {
           />
         ) : (
           <textarea
+          defaultValue=""
             placeholder="Carro ultra confortável, foi uma ótima experiência de compra..."
             {...register("comment")}
           />

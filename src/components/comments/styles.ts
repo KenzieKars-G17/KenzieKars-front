@@ -83,6 +83,7 @@ export const CommentsForm = styled.form`
     justify-content: flex-start;
     align-items: center;
     gap: 10px;
+    margin: 20px 0 0 0;
 
     img {
       margin: 0 0 0 20px;
