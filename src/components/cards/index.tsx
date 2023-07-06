@@ -49,7 +49,7 @@ const Cards = ({ arr }: CardsProps) => {
   };
 
   const handleNextPage = () => {
-    if (filteredAd.length >= 12 && page !== (page + 1)) {
+    if (filteredAd.length >= 12 && page !== page + 1) {
       setPage(page + 1);
       if (userId) {
         getSellerAdvertisements(+userId);
@@ -58,7 +58,7 @@ const Cards = ({ arr }: CardsProps) => {
   };
 
   const handlePrevPage = () => {
-    if (page > 1 && page !== (page - 1)) {
+    if (page > 1 && page !== page - 1) {
       setPage(page - 1);
       if (userId) {
         getSellerAdvertisements(+userId);
@@ -127,16 +127,18 @@ const Cards = ({ arr }: CardsProps) => {
           );
         })}
       </ul>
-      <div className="pagination">
-        {page > 1 && <button onClick={handlePrevPage}>&lt; Anterior</button>}
-        <span>
-          <b>{page}</b> de {maxPage}
-        </span>
+      {!userId && (
+        <div className="pagination">
+          {page > 1 && <button onClick={handlePrevPage}>&lt; Anterior</button>}
+          <span>
+            <b>{page}</b> de {maxPage}
+          </span>
 
-        {filteredAd.length >= 12 && (
-          <button onClick={handleNextPage}>Seguinte &gt;</button>
-        )}
-      </div>
+          {filteredAd.length >= 12 && (
+            <button onClick={handleNextPage}>Seguinte &gt;</button>
+          )}
+        </div>
+      )}
     </UlCards>
   );
 };
