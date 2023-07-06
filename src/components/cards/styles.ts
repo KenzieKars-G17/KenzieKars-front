@@ -98,6 +98,13 @@ export const UlCards = styled.section`
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+
+    }
+
+    .pDescription{
+      font-size: 10pt;
+      color: gray;
+      font-weight: bold;
     }
 
     .announcerDetails {
