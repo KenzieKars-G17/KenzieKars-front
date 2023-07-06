@@ -2,9 +2,10 @@ import styled from "styled-components";
 
 export const UlCards = styled.section`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
+  
   ul {
     list-style: none;
     display: flex;
@@ -34,7 +35,6 @@ export const UlCards = styled.section`
       }
 
       :hover {
-        scale: 1.01;
         transition: 0.3s;
       }
     }
