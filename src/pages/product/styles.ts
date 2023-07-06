@@ -22,7 +22,7 @@ export const ProductPageBase = styled.div`
     height: 330px;
     background-color: white;
     border-radius: 8px;
-    display: none;
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
