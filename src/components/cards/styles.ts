@@ -19,7 +19,6 @@ export const UlCards = styled.section`
     li {
       display: flex;
       gap: 20px;
-      margin-bottom: 105px;
       flex-direction: column;
       height: 340px;
       padding: 0 10px;
@@ -27,11 +26,12 @@ export const UlCards = styled.section`
       width: 312px;
       position: relative;
       transition: 0.3s;
+      font-size: 8pt;
 
       img {
         cursor: pointer;
         height: 152px;
-        object-fit: contain;
+        object-fit: cover;
       }
 
       :hover {
@@ -47,6 +47,8 @@ export const UlCards = styled.section`
       width: 100%;
     }
 
+
+
     .km,
     .year {
       background-color: #edeafd;
@@ -54,6 +56,13 @@ export const UlCards = styled.section`
       padding: 5px;
       font-size: 10pt;
       font-weight: bold;
+      width: 100%;
+      text-align: center;
+    }
+
+    .km{
+      width: 500%;
+      text-align: center;
     }
 
     .year {
@@ -62,6 +71,8 @@ export const UlCards = styled.section`
 
     .price {
       font-weight: bold;
+      font-size: 10pt;
+      width: 500%;
     }
 
     .productDetailsPreview {
