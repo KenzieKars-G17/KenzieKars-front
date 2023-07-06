@@ -18,13 +18,14 @@ import Hamburger from "hamburger-react";
 const Navbar = () => {
   const { user, logout, SetShowFormEditUserInfo, SetShowFormEditUserAddress } =
     useContext(AuthContext);
+
   const [currentWidth, setCurrentWidth] = useState<number>(0);
 
   const updateWidth = (): void => {
     setCurrentWidth(window.innerWidth);
     window.addEventListener("resize", updateWidth);
   };
-
+  
   useEffect(() => {
     updateWidth();
   }, []);

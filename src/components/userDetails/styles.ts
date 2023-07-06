@@ -35,7 +35,7 @@ export const UserDetailsDiv = styled.div`
 
   @media (min-width: 768px) {
     position: absolute;
-    top: 448px;
+    top: 436px;
     width: 25vw;
     right: 143px;
   }

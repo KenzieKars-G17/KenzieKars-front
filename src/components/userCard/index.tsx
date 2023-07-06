@@ -65,7 +65,7 @@ const UserCard = () => {
                 getBrands();
               }}
             >
-              Criar Anuncio
+              Criar Anúncio
             </button>
           )}
           <button onClick={SetShowFormEditUserInfo}>Editar perfil</button>

@@ -14,8 +14,10 @@ import FormEditUserInfo from "../../components/forms/formEditUserInfo";
 import { AuthContext } from "../../contexts/auth.context";
 import jwt_decode from "jwt-decode";
 import { toast } from "react-toastify";
+import FormEditUserAddress from "../../components/forms/formEditUserAddress";
 
 const HomePage = () => {
+
   const { loading, logout } = useAuth();
   const { filteredAd } = useContext(AdvertisementContext);
   const { ShowBanner } = useContext(ProductPageContext);
@@ -45,7 +47,7 @@ const HomePage = () => {
   } = useContext(HomePageContext);
   const { ShowBannerPicture } = useContext(ProductPageContext);
 
-  const { showFormEditUserInfo } = useContext(AuthContext);
+  const { showFormEditUserInfo, showFormEditUserAddress } = useContext(AuthContext);
 
   const handleScrollToTop = () => {
     const headerElement = document.getElementById("header");
@@ -85,8 +87,13 @@ const HomePage = () => {
       {showButtonFilter === true && currentWidth < 768 ? (
         <button
           onClick={() => {
-            ShowFilterAside();
             handleScrollToTop();
+
+            setTimeout(() => {
+              ShowFilterAside();
+            }, 300);
+
+
           }}
           style={{
             margin: "5px 25vw",
@@ -101,6 +108,7 @@ const HomePage = () => {
       ) : null}
 
       {showFormEditUserInfo && <FormEditUserInfo />}
+      {showFormEditUserAddress && <FormEditUserAddress />}
 
       <Footer />
     </HomePageBase>

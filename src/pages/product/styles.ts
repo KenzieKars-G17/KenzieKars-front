@@ -7,7 +7,6 @@ export const ProductPageBase = styled.div`
   flex-wrap: wrap;
 
   main {
-    margin: 10px 0;
     width: 100vw;
     display: flex;
     flex-direction: column;
@@ -15,6 +14,7 @@ export const ProductPageBase = styled.div`
     justify-content: center;
     align-items: center;
     max-width: 100vw;
+    background-color: #EDEAFD;
   }
 
   .pictures {
@@ -22,7 +22,7 @@ export const ProductPageBase = styled.div`
     height: 330px;
     background-color: white;
     border-radius: 8px;
-    display: none;
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
@@ -39,6 +39,9 @@ export const ProductPageBase = styled.div`
       flex-direction: row;
       flex-wrap: wrap;
       height: 100%;
+      justify-content: flex-start;
+      align-items: space-around;
+      padding: 20px;
     }
 
     li {
@@ -54,7 +57,7 @@ export const ProductPageBase = styled.div`
     .pictures {
       display: flex;
       position: absolute;
-      top: 106px;
+      top: 97px;
       width: 25vw;
       right: 143px;
     }

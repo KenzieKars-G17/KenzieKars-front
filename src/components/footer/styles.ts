@@ -36,6 +36,7 @@ export const FooterLogoContainer = styled.div`
 
 export const TradeMark = styled.span`
   color: white;
+  text-align: center;
 `;
 
 export const ToTopButton = styled.button`

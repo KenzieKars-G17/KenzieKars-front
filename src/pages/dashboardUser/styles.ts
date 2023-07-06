@@ -9,23 +9,52 @@ export const DashboardUserPageBase = styled.div`
   flex-wrap: wrap;
   position: relative;
 
+  .h1Title{
+    margin: 50px 0 0 50px;
+    font-size: 15pt;
+    font-weight: bolder;
+  }
+
   main {
     margin: 10px 0;
     width: 100vw;
     display: flex;
     justify-content: center;
     gap: 15px;
+    flex-direction: column;
 
     .divAdvertisement {
       /* height: auto; */
-      margin-top: 275px;
+      margin-top: 75px;
       margin-bottom: 75px;
-      max-width: 100%;
+      /* max-width: 100%; */
       width: 100%;
       padding-left: 5%;
       padding-right: 5%;
       display: flex;
-      align-items: flex-start;
+      justify-content: center;
+
+      li{
+       height: 400px;
+      }
+
+
+      @media (min-width: 768px) {
+        margin-top: 10px;
+        align-items: flex-start;
+        ul{
+        width: 100vw;
+        justify-content: flex-start;
+        gap: 12%;
+        margin: 50px 0 0 0;
+
+        li{
+          height: 390px
+        }
+      }
+      }
+
+
 
       @media (max-width: 768px) {
         margin-top: 120px;
