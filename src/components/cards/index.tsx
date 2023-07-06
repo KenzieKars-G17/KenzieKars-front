@@ -20,7 +20,6 @@ const Cards = ({ arr }: CardsProps) => {
     getAdvertisementById,
     SetShowUpdateAdvertisementForm,
     setSelectedAd,
-    getAllAdvertisements,
     getSellerAdvertisements,
     page,
     setPage,
