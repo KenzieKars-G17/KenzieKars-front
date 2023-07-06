@@ -4,7 +4,7 @@ import Header from "../../components/header";
 import UserCard from "../../components/userCard";
 import { useParams } from "react-router-dom";
 import { DashboardUserPageBase } from "./styles";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useAuth } from "../../hooks";
 import { AdvertisementContext } from "../../contexts/advertisements.context";
 import FormAddAnnouncement from "../../components/forms/formAddAnnouncement";
@@ -15,6 +15,8 @@ import FormEditUserInfo from "../../components/forms/formEditUserInfo";
 import FormEditUserAddress from "../../components/forms/formEditUserAddress";
 import FormUpdateAnnouncement from "../../components/forms/formEditAnnouncement";
 import DeleteAnnouncementModal from "../../components/modal/modalDeleteAnnouncement";
+import { IUserReturn } from "../../interfaces/user.interface";
+import api from "../../services/api";
 
 const DashboardUser = () => {
   const { userId } = useParams();
@@ -31,13 +33,29 @@ const DashboardUser = () => {
   const { showFormEditUserInfo, showFormEditUserAddress } =
     useContext(AuthContext);
 
-  const { ShowBanner } = useContext(ProductPageContext);
+  const { ShowBanner, ShowBannerPicture } = useContext(ProductPageContext);
+
+  const [pageUser, setPageUser] = useState<IUserReturn>();
+
+  const getApiUser = async () => {
+    try {
+      const response = await api.get(`users/${userId}`);
+
+      setPageUser(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   useEffect(() => {
+    getApiUser();
     ShowBanner(true);
     getSellerAdvertisements(+userId!);
+    const condition = false
+    ShowBannerPicture(condition)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [showUpdateAdvertisementForm, page, userId]);
+  }, [showUpdateAdvertisementForm, page, userId, pageUser]);
 
   if (loading) {
     return <Loader />;
@@ -47,6 +65,7 @@ const DashboardUser = () => {
     <DashboardUserPageBase>
       <Header />
       <main>
+        <h1 className="h1Title">Anúncios</h1>
         <UserCard />
         {sellerAdvertisements.length === 0 ? (
           <div className="no-advertisement">
@@ -54,7 +73,7 @@ const DashboardUser = () => {
           </div>
         ) : (
           <div className="divAdvertisement">
-            <Cards arr={sellerAdvertisements} />
+            <Cards arr={sellerAdvertisements}/>
           </div>
         )}
       </main>

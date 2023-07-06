@@ -98,7 +98,7 @@ const Cards = ({ arr }: CardsProps) => {
                 <h2>
                   {announcement.brand}-{announcement.model}
                 </h2>
-                <p>{announcement.description}</p>
+                <p className="pDescription">{announcement.description}</p>
                 <div className="announcerDetails">
                   <img src={avatar} alt="ProfilePic" className="profilePic" />
                   <h3 className="userName">{announcement.user?.name}</h3>

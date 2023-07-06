@@ -2,23 +2,34 @@ import styled from "styled-components";
 
 export const UlCards = styled.section`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
+  overflow-x: scroll;
+  @media (min-width: 768px) {
+    flex-wrap: wrap;
+    height: 100%;
+    gap: 50px;
+    overflow-x: hidden;
+  }
+
   ul {
     list-style: none;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 20px;
     overflow-x: auto;
     max-width: 100%;
-    flex-wrap: wrap;
-    /* height: 375px; */
+    flex-wrap: nowrap;
+    @media (min-width: 768px) {
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      
+    }
 
     li {
       display: flex;
       gap: 20px;
-      margin-bottom: 105px;
       flex-direction: column;
       height: 340px;
       padding: 0 10px;
@@ -26,16 +37,19 @@ export const UlCards = styled.section`
       width: 312px;
       position: relative;
       transition: 0.3s;
+      font-size: 8pt;
+      overflow: hidden;
 
       img {
         cursor: pointer;
         height: 152px;
-        object-fit: contain;
-      }
-
-      :hover {
-        scale: 1.01;
+        object-fit: cover;
         transition: 0.3s;
+
+        :hover {
+          opacity: 0.8;
+          transition: 0.3s;
+        }
       }
     }
     .textContainer {
@@ -54,6 +68,13 @@ export const UlCards = styled.section`
       padding: 5px;
       font-size: 10pt;
       font-weight: bold;
+      width: 100%;
+      text-align: center;
+    }
+
+    .km {
+      width: 500%;
+      text-align: center;
     }
 
     .year {
@@ -62,6 +83,8 @@ export const UlCards = styled.section`
 
     .price {
       font-weight: bold;
+      font-size: 10pt;
+      width: 500%;
     }
 
     .productDetailsPreview {
@@ -87,6 +110,12 @@ export const UlCards = styled.section`
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+
+    .pDescription {
+      font-size: 10pt;
+      color: gray;
+      font-weight: bold;
     }
 
     .announcerDetails {
@@ -185,9 +214,5 @@ export const UlCards = styled.section`
       cursor: pointer;
     }
   }
-  @media (min-width: 768px) {
-    flex-wrap: wrap;
-    height: 100%;
-    gap: 50px;
-  }
+
 `;

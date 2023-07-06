@@ -59,12 +59,17 @@ export default createGlobalStyle`
     min-height: 100vh;
   }
 
+  button{
+	cursor: pointer;
+  }
+
   body {
 		margin: 0;
   	display: flex;
     background: var(--color-gray-10);
     color: var(--color-gray-2);
     -webkit-font-smoothing: antialiased;
+	overflow-x: hidden;
   }
 	header{
 		display: flex;

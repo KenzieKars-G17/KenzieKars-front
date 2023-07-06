@@ -180,8 +180,8 @@ const FormUpdateAnnouncement = () => {
           <div className="divTwoInputs">
             <InputComponent
               type="number"
-              placeholder={carSpecs?.value}
-              value={carSpecs?.value}
+              placeholder={carSpecs?.table_price}
+              value={selectedAd?.table_price}
               label="Preço tabela FIPE"
               {...register("table_price")}
             />

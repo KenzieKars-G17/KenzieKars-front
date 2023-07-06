@@ -21,6 +21,7 @@ export const CommentsDiv = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0 10px 0 10px;
     gap: 15px;
     justify-self: flex-end;
     svg {
@@ -32,7 +33,6 @@ export const CommentsDiv = styled.div`
   }
 
   p {
-    text-align: center;
     margin: 10px 20px 20px 20px;
   }
   .editInput {
@@ -83,6 +83,7 @@ export const CommentsForm = styled.form`
     justify-content: flex-start;
     align-items: center;
     gap: 10px;
+    margin: 20px 0 0 0;
 
     img {
       margin: 0 0 0 20px;
@@ -120,6 +121,7 @@ export const CommentsForm = styled.form`
     display: flex;
     gap: 5px;
     flex-wrap: wrap;
+    padding: 10px 0px 20px 20px;
 
     li {
       background-color: #e9ecef;

@@ -20,6 +20,13 @@ export const UserCardDiv = styled.div`
   .divButtons {
     display: flex;
     gap: 2px;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    @media (min-width: 768px) {
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+    }
 
     button {
       cursor: pointer;
