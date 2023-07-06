@@ -5,18 +5,26 @@ export const UlCards = styled.section`
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
+  overflow-x: scroll;
+  @media (min-width: 768px) {
+    flex-wrap: wrap;
+    height: 100%;
+    gap: 50px;
+    overflow-x: hidden;
+  }
 
   ul {
     list-style: none;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 20px;
     overflow-x: auto;
     max-width: 100%;
-    flex-wrap: wrap;
-    /* height: 375px; */
+    flex-wrap: nowrap;
     @media (min-width: 768px) {
       justify-content: flex-start;
+      flex-wrap: wrap;
+      
     }
 
     li {
@@ -205,9 +213,5 @@ export const UlCards = styled.section`
       cursor: pointer;
     }
   }
-  @media (min-width: 768px) {
-    flex-wrap: wrap;
-    height: 100%;
-    gap: 50px;
-  }
+
 `;
