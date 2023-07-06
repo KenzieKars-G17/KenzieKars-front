@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const HomePageBase = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  /* justify-content: center; */
   width: 100vw;
   flex-wrap: wrap;
 

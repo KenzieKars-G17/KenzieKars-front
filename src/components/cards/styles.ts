@@ -5,7 +5,7 @@ export const UlCards = styled.section`
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  
+
   ul {
     list-style: none;
     display: flex;
@@ -15,6 +15,9 @@ export const UlCards = styled.section`
     max-width: 100%;
     flex-wrap: wrap;
     /* height: 375px; */
+    @media (min-width: 768px) {
+      justify-content: flex-start;
+    }
 
     li {
       display: flex;
@@ -32,10 +35,12 @@ export const UlCards = styled.section`
         cursor: pointer;
         height: 152px;
         object-fit: cover;
-      }
-
-      :hover {
         transition: 0.3s;
+
+        :hover {
+          opacity: 0.8;
+          transition: 0.3s;
+        }
       }
     }
     .textContainer {
@@ -46,8 +51,6 @@ export const UlCards = styled.section`
     img {
       width: 100%;
     }
-
-
 
     .km,
     .year {
@@ -60,7 +63,7 @@ export const UlCards = styled.section`
       text-align: center;
     }
 
-    .km{
+    .km {
       width: 500%;
       text-align: center;
     }
@@ -98,10 +101,9 @@ export const UlCards = styled.section`
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-
     }
 
-    .pDescription{
+    .pDescription {
       font-size: 10pt;
       color: gray;
       font-weight: bold;
