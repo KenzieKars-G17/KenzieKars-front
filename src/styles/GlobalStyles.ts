@@ -65,6 +65,7 @@ export default createGlobalStyle`
     background: var(--color-gray-10);
     color: var(--color-gray-2);
     -webkit-font-smoothing: antialiased;
+	overflow-x: hidden;
   }
 	header{
 		display: flex;
