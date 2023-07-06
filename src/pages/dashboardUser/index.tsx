@@ -33,7 +33,7 @@ const DashboardUser = () => {
   const { showFormEditUserInfo, showFormEditUserAddress } =
     useContext(AuthContext);
 
-  const { ShowBanner, showBanner, ShowBannerPicture } = useContext(ProductPageContext);
+  const { ShowBanner, ShowBannerPicture } = useContext(ProductPageContext);
 
   const [pageUser, setPageUser] = useState<IUserReturn>();
 

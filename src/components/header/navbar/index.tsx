@@ -14,7 +14,6 @@ import avatar from "../../../assets/avatar.png";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/auth.context";
 import Hamburger from "hamburger-react";
-import { ProductPageContext } from "../../../contexts/productPage.context";
 
 const Navbar = () => {
   const { user, logout, SetShowFormEditUserInfo, SetShowFormEditUserAddress } =
