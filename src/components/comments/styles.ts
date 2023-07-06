@@ -21,6 +21,7 @@ export const CommentsDiv = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0 10px 0 10px;
     gap: 15px;
     justify-self: flex-end;
     svg {
@@ -120,6 +121,7 @@ export const CommentsForm = styled.form`
     display: flex;
     gap: 5px;
     flex-wrap: wrap;
+    padding: 10px 0px 20px 20px;
 
     li {
       background-color: #e9ecef;
