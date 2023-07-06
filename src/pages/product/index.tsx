@@ -10,10 +10,14 @@ import { ProductPageContext } from "../../contexts/productPage.context";
 import Loader from "../../components/loader";
 import { AdvertisementContext } from "../../contexts/advertisements.context";
 import { useParams } from "react-router-dom";
+import { AuthContext } from "../../contexts/auth.context";
+import FormEditUserInfo from "../../components/forms/formEditUserInfo";
+import FormEditUserAddress from "../../components/forms/formEditUserAddress";
 
 const ProductPage = () => {
   const { loading } = useAuth();
   const { ShowBannerPicture, ShowBanner } = useContext(ProductPageContext);
+  const { showFormEditUserInfo, showFormEditUserAddress } = useContext(AuthContext);
   const { advertisementById, getAdvertisementById } =
     useContext(AdvertisementContext);
   const { id } = useParams();
@@ -49,6 +53,9 @@ const ProductPage = () => {
         {advertisementById && <UserDetails user={advertisementById.user} />}
         <Comments />
       </main>
+      
+      {showFormEditUserInfo && <FormEditUserInfo />}
+      {showFormEditUserAddress && <FormEditUserAddress />}
 
       <Footer />
     </ProductPageBase>
