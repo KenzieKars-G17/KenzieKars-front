@@ -47,26 +47,25 @@ const Cards = ({ arr }: CardsProps) => {
       console.log(error);
     }
   };
+
   const handleNextPage = () => {
-    if (filteredAd.length >= 12) {
+    if (filteredAd.length >= 12 && page !== (page + 1)) {
       setPage(page + 1);
       if (userId) {
         getSellerAdvertisements(+userId);
       }
-
-      getAllAdvertisements();
     }
   };
 
   const handlePrevPage = () => {
-    if (page > 1) {
+    if (page > 1 && page !== (page - 1)) {
       setPage(page - 1);
       if (userId) {
         getSellerAdvertisements(+userId);
       }
-      getAllAdvertisements();
     }
   };
+
   return (
     <UlCards>
       <ul>

@@ -19,7 +19,7 @@ import FormEditUserAddress from "../../components/forms/formEditUserAddress";
 const HomePage = () => {
 
   const { loading, logout } = useAuth();
-  const { filteredAd } = useContext(AdvertisementContext);
+  const { filteredAd, getAllAdvertisements } = useContext(AdvertisementContext);
   const { ShowBanner } = useContext(ProductPageContext);
 
   const isTokenExpired = (token: string) => {
@@ -59,6 +59,7 @@ const HomePage = () => {
   useEffect(() => {
     const condition = true;
     ShowBannerPicture(condition);
+    getAllAdvertisements()
 
     setTimeout(() => {
       updateWidth();
