@@ -38,6 +38,7 @@ export const UlCards = styled.section`
       position: relative;
       transition: 0.3s;
       font-size: 8pt;
+      overflow: hidden;
 
       img {
         cursor: pointer;
