@@ -175,9 +175,9 @@ const Comments = () => {
         )}
         <button type="submit">Comentar</button>
         <ul>
-          <li onClick={() => setSugest("Gostei Muito!")}>Gostei muito!</li>
-          <li onClick={() => setSugest("Incrível!")}>Incrível!</li>
-          <li onClick={() => setSugest(" Recomendarei para meus amigos!")}>
+          <li style={{cursor: "pointer"}} onClick={() => setSugest("Gostei Muito!")}>Gostei muito!</li>
+          <li style={{cursor: "pointer"}} onClick={() => setSugest("Incrível!")}>Incrível!</li>
+          <li style={{cursor: "pointer"}} onClick={() => setSugest(" Recomendarei para meus amigos!")}>
             Recomendarei para meus amigos!
           </li>
         </ul>

@@ -10,6 +10,14 @@ import {
 } from "./styles";
 
 const Footer = () => {
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth" // Adicione essa propriedade para criar uma rolagem suave
+    });
+  };
+
   return (
     <React.Fragment>
       <FooterContainer>
@@ -19,7 +27,7 @@ const Footer = () => {
           </FooterLogoContainer>
           <TradeMark>© 2022 - Todos os direitos reservados.</TradeMark>
           <ToTopButton>
-            <img src={ToTopArrow} alt="Scroll to top" />
+            <img src={ToTopArrow} alt="Scroll to top" onClick={scrollToTop}/>
           </ToTopButton>
         </FooterInnerContainer>
       </FooterContainer>
