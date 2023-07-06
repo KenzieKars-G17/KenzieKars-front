@@ -85,8 +85,13 @@ const HomePage = () => {
       {showButtonFilter === true && currentWidth < 768 ? (
         <button
           onClick={() => {
-            ShowFilterAside();
             handleScrollToTop();
+
+            setTimeout(() => {
+              ShowFilterAside();
+            }, 300);
+
+
           }}
           style={{
             margin: "5px 25vw",
