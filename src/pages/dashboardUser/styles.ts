@@ -32,6 +32,7 @@ export const DashboardUserPageBase = styled.div`
       padding-left: 5%;
       padding-right: 5%;
       display: flex;
+      justify-content: center;
 
       li{
        height: 400px;

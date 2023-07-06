@@ -20,15 +20,13 @@ const Navbar = () => {
   const { user, logout, SetShowFormEditUserInfo, SetShowFormEditUserAddress } =
     useContext(AuthContext);
 
-  const { showBannerPicture, ShowBannerPicture } =
-    useContext(ProductPageContext);
   const [currentWidth, setCurrentWidth] = useState<number>(0);
 
   const updateWidth = (): void => {
     setCurrentWidth(window.innerWidth);
     window.addEventListener("resize", updateWidth);
   };
-  console.log(showBannerPicture);
+  
   useEffect(() => {
     updateWidth();
   }, []);
