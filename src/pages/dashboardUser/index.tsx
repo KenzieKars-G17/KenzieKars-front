@@ -31,11 +31,13 @@ const DashboardUser = () => {
   const { showFormEditUserInfo, showFormEditUserAddress } =
     useContext(AuthContext);
 
-  const { ShowBanner } = useContext(ProductPageContext);
+  const { ShowBanner, showBanner, ShowBannerPicture } = useContext(ProductPageContext);
 
   useEffect(() => {
     ShowBanner(true);
     getSellerAdvertisements(+userId!);
+    const condition = false
+    ShowBannerPicture(condition)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showUpdateAdvertisementForm, page, userId]);
 
