@@ -33,7 +33,6 @@ export const CommentsDiv = styled.div`
   }
 
   p {
-    text-align: center;
     margin: 10px 20px 20px 20px;
   }
   .editInput {

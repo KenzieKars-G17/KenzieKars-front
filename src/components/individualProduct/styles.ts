@@ -92,13 +92,14 @@ export const IndividualProductBase = styled.section`
 
   .description {
     width: 95vw;
-    height: 330px;
+    height: 100%;
     background-color: white;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: center;
+    justify-content: flex-start;
+    padding: 20px 0 0 0;
     gap: 15px;
 
     h2,
